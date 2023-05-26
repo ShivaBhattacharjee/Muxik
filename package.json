@@ -1,7 +1,8 @@
 {
   "name": "music",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "to be decided later",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,8 +11,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-lazy-load-image-component": "^1.5.6",
+    "react-loading-skeleton": "^3.3.1",
+    "react-router-dom": "^6.11.2",
+    "react-toastify": "^9.1.3",
+    "react-top-loading-bar": "^2.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
