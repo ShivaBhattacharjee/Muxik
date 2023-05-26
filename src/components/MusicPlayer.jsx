@@ -8,6 +8,8 @@ const MusicPlayer = () => {
   const [startX, setStartX] = useState(null);
   const [swipeDistance, setSwipeDistance] = useState(0);
   const [loop, setLoop] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const audioElement = audioRef.current;
@@ -25,16 +27,16 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     const handleSwipe = () => {
-        if (swipeDistance !== 0) {
-          const sensitivity = 0.3; // Adjust the sensitivity here (lower value for less sensitivity)
-          const progressBarWidth = document.querySelector('.progress-bar').clientWidth;
-          const maxSwipeDistance = progressBarWidth - 2; // Subtract a small value to avoid reaching the end prematurely
-          const newTime = currentTime + Math.floor((swipeDistance / maxSwipeDistance) * duration * sensitivity);
-          audioRef.current.currentTime = Math.max(0, Math.min(newTime, duration));
-          setSwipeDistance(0);
-        }
-      };
-      
+      if (swipeDistance !== 0) {
+        const sensitivity = 0.3; // Adjust the sensitivity here (lower value for less sensitivity)
+        const progressBarWidth = document.querySelector('.progress-bar').clientWidth;
+        const maxSwipeDistance = progressBarWidth - 2; // Subtract a small value to avoid reaching the end prematurely
+        const newTime = currentTime + Math.floor((swipeDistance / maxSwipeDistance) * duration * sensitivity);
+        audioRef.current.currentTime = Math.max(0, Math.min(newTime, duration));
+        setSwipeDistance(0);
+      }
+    };
+
     handleSwipe();
   }, [swipeDistance, currentTime, duration]);
 
@@ -105,6 +107,20 @@ const MusicPlayer = () => {
     setLoop(!loop);
   };
 
+  const handleVolumeChange = (event) => {
+    const volumeValue = parseFloat(event.target.value);
+    audioRef.current.volume = volumeValue;
+    setVolume(volumeValue);
+  };
+
+  const toggleMute = () => {
+    audioRef.current.muted = !audioRef.current.muted;
+    setIsMuted(audioRef.current.muted);
+  };
+
+
+
+
   useEffect(() => {
     audioRef.current.loop = loop;
   }, [loop]);
@@ -122,6 +138,8 @@ const MusicPlayer = () => {
         skipBackward();
       } else if (event.code === 'ArrowRight') {
         skipForward();
+      } else if (event.code === 'KeyM') {
+        toggleMute();
       }
     };
 
@@ -143,6 +161,15 @@ const MusicPlayer = () => {
       <button onClick={skipBackward}>Skip Backward</button>
       <button onClick={skipForward}>Skip Forward</button>
       <button onClick={toggleLoop}>{loop ? 'Disable Loop' : 'Enable Loop'}</button>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value={volume}
+        onChange={handleVolumeChange}
+      />
+      <button onClick={toggleMute}>{isMuted ? 'Unmute' : 'Mute'}</button>
       <div
         className="progress-bar"
         onMouseDown={handleMouseDown}
@@ -155,11 +182,15 @@ const MusicPlayer = () => {
           className="progress-bar__fill"
           style={{
             width: `${calculateProgress()}%`,
+            cursor: 'pointer'
           }}
         >
           <div
             className="progress-bar__swipe-indicator"
-            style={{ transform: `translateX(${swipeDistance}px)` }}
+            style={{
+              transform: `translateX(${swipeDistance}px)`,
+              cursor: 'pointer'
+            }}
           ></div>
         </div>
       </div>
