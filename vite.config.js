@@ -9,10 +9,10 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "BeatStreet",
-        short_name: "Beatstreet",
+        name: "Muxik",
+        short_name: "Muxik",
         description:
-          "Beatstreet is the ultimate destination for streaming and downloading music for free.",
+          " is the ultimate destination for streaming and downloading music for free.",
         icons: [
           {
             src: "/images/logo-192.png",
