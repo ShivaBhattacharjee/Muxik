@@ -56,7 +56,7 @@ const SingleAlbum = () => {
   return (
     <div
       className={
-        "bg-[#2d1b69] h-screen overflow-hidden " +
+        "bg-[#2d1b69] h-screen overflow-x-hidden " +
         (side_menu_show ? "mr-96 transition-all duration-300 ease-in" : "mr-0")
       }
     >
