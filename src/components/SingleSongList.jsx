@@ -199,7 +199,7 @@ const SingleSongList = ({
               primaryArtistsArr.map((item, index) => {
                 return (
                   <Link
-                    to={`/artist/${primaryArtistsIdArr[index].trim()}`}
+                    to={`/artist/${primaryArtistsIdArr[index]?.trim()}`}
                     key={index}
                   >
                     <ListItemButton
