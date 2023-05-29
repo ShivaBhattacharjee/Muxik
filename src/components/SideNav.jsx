@@ -64,7 +64,7 @@ const SideNav = () => {
         </section>
         <section className="px-7 max-md:px-10 mt-5">
           <button className="absolute bottom-10 left-0 right-0">
-            <GitHubIcon style={{ fontSize: window.innerWidth > 600 ? 32 : 45 }} />
+            <GitHubIcon style={{ fontSize: window.innerWidth > 600 ? 32 : 45 }} onClick={()=>window.open("https://github.com/ShivaBhattacharjee/Muxik")}/>
           </button>
         </section>
       </div>
