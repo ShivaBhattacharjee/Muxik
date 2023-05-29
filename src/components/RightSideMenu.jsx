@@ -2,9 +2,10 @@ import React from "react";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import AudioPlayer from "./AudioPlayer";
 import { usePlayerContext } from "../Context/PlayerContext";
+import AudioPlayerHome from "./AudioPlayerHome";
 
 const RightSideMenu = () => {
-  const { side_menu_show, HandleRightSideMenu } = usePlayerContext();
+  const { side_menu_show, HandleRightSideMenu, current_song } = usePlayerContext();
   return (
     <section
       className={
@@ -18,12 +19,9 @@ const RightSideMenu = () => {
           onClick={HandleRightSideMenu}
         />
       </div>
-      {!side_menu_show && (
-        <div className="w-32 h-10 -left-12 max-md:-left-32 max-md:top-24 bg-lightBlue bg-opacity-50 pl-1  flex items-center float-left  rounded-xl backdrop-blur-xl absolute">
-          <KeyboardDoubleArrowLeftIcon
-            onClick={HandleRightSideMenu}
-            className="text-white cursor-pointer"
-          />
+      {!side_menu_show && current_song.name !== undefined &&  (
+        <div className="fixed max-w-xl m-auto left-0 right-0 bottom-0  rounded-t-xl bg-opacity-50 backdrop-blur-xl  bg-lightBlue h-28 text-white flex">
+          <AudioPlayerHome HandleRightSideMenu={HandleRightSideMenu}/>
         </div>
       )}
       <AudioPlayer />
