@@ -70,12 +70,12 @@ Muxik is built using ReactJs and vanilla Css
 ## Host your own 
 * ## Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FShivaBhattacharjee%2FAnimeTrix)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FShivaBhattacharjee%2FMuxik)
 <br/>
 <br/>
 * ## Render
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ShivaBhattacharjee/AnimeTrix)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ShivaBhattacharjee/Muxik)
 
 ## Contributing
 
