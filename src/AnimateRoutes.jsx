@@ -9,7 +9,6 @@ import {
   ViewAllAlbums,
   Artist,
   TopArtist,
-  CustomizedAccordions,
 } from "./Page";
 import {
   HindiPlaylist,
@@ -38,7 +37,6 @@ const AnimateRoutes = () => {
         <Route path="/topplaylists/Bhojpuri" element={<BhojpuriPlaylist />} />
         <Route path="/topplaylists/English" element={<EnglishPlaylists />} />
         <Route path="/topartist" element={<TopArtist />} />
-        <Route path="/about" element={<CustomizedAccordions />} />
       </Routes>
     </AnimatePresence>
   );

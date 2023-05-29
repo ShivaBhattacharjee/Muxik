@@ -48,6 +48,14 @@ const Music_reducer = (state, action) => {
       single_album_loading: false,
     };
   }
+  
+  if (action.type === GET_SINGLE_ALBUM_ERROR) {
+    // Handle the error case here
+    return {
+      ...state,
+      single_album_loading: false,
+    };
+  }
 
   if (action.type === GET_SINGLE_PLAYLIST_BEGIN) {
     return { ...state, single_album_loading: true };
@@ -114,6 +122,7 @@ const Music_reducer = (state, action) => {
   if (action.type === ALERT_SHOW) {
     return { ...state, alert_show: false };
   }
+
   throw new Error(`No Matching "${action.type}" -action type`);
 };
 

@@ -7,7 +7,6 @@ import ViewAllAlbums from "./ViewAllAlbums";
 import Artist from "./Artist";
 import RecentSongs from "./RecentSongs";
 import TopArtist from "./TopArtist";
-import CustomizedAccordions from "./HelpSupport";
 export {
   Home,
   SingleAlbum,
@@ -18,5 +17,4 @@ export {
   Artist,
   RecentSongs,
   TopArtist,
-  CustomizedAccordions,
 };
