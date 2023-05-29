@@ -50,7 +50,6 @@ const Music_reducer = (state, action) => {
   }
   
   if (action.type === GET_SINGLE_ALBUM_ERROR) {
-    // Handle the error case here
     return {
       ...state,
       single_album_loading: false,
