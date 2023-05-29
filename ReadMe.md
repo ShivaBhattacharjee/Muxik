@@ -1,10 +1,9 @@
 <p align="center">
   <a href="https://github.com/ShivaBhattacharjee/AnimeTrix">
-    <img src="https://user-images.githubusercontent.com/95211406/224316874-4fa09fa0-eae0-4e28-9da8-ca30aaf6d463.gif" alt="Logo" width="120px" height="100px">
+    <img src="https://github.com/ShivaBhattacharjee/Muxik/assets/95211406/b643c403-a4f6-4829-8fbf-37751a03292e" alt="Logo" width="120px" height="100px">
   </a>
 <br/>
   <h3 align="center">Muxik</h3>
-
   <p align="center">
     A go to platform to stream/download your favorite music
     <br/>
