@@ -235,6 +235,13 @@ const AudioPlayer = () => {
 
         <div className="mt-1 max-md:scale-125 max-md:mt-5">
           <IconButton
+            sx={{
+              marginRight: "10px",
+            }}
+            aria-label="favsong"
+          >
+          </IconButton>
+          <IconButton
             aria-label="previous song"
             onClick={HandlePreviousSong}
             sx={{

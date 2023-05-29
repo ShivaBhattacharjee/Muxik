@@ -141,13 +141,13 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
                 <img
                     src={ImageFetch(current_song)}
                     alt="background"
-                    className=" w-28 p-2 rounded-full"
+                    className=" w-28 p-2 rounded-full animate-spin"
                     onClick={HandleRightSideMenu}
                 />
                 <div>
                     <h3
                         className={
-                            "text-lg text-darkTitle mt-4  max-md:text-xl pl-8  w-max whitespace-pre " +
+                            "text-lg text-darkTitle mt-4  max-md:text-xl w-max whitespace-pre " +
                             (shouldAnimate ? "scrolling-text text-right" : " text-center")
                         }
                         ref={songName}
@@ -155,7 +155,10 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
                             __html: `${current_song.name}`,
                         }}
                     />
-                    <div className="mt-1 max-md:scale-90 max-md:mt-0">
+                    <p className=" text-sm max-md:text-base opacity-50 text-center whitespace-nowrap w-40 overflow-hidden text-ellipsis">
+                        {current_song.primaryArtists}
+                    </p>
+                    <div className="max-md:scale-75 max-md:mb-0">
                         <IconButton
                             aria-label="previous song"
                             onClick={HandlePreviousSong}
