@@ -20,7 +20,7 @@ const RightSideMenu = () => {
         />
       </div>
       {!side_menu_show && current_song.name !== undefined &&  (
-        <div className="fixed max-w-xl md:max-w-sm  m-auto left-0 right-0 bottom-0  rounded-t-xl bg-opacity-50 backdrop-blur-xl  bg-lightBlue h-32 text-white flex">
+        <div className="fixed max-w-xl md:max-w-sm  m-auto left-0 right-0 bottom-0  rounded-t-xl bg-opacity-50 backdrop-blur-xl  bg-lightBlue h-28 text-white flex">
           <AudioPlayerHome HandleRightSideMenu={HandleRightSideMenu}/>
         </div>
       )}

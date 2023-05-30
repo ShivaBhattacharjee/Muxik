@@ -13,7 +13,8 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import RepeatOneIcon from "@mui/icons-material/RepeatOne";
 import UpNextSongs from "./UpNextSongs";
 import { AnimatePresence, motion } from "framer-motion";
-import AudioPlayerHome from "./AudioPlayerHome"
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 const AudioPlayer = () => {
   const {
     current_song,
@@ -28,7 +29,7 @@ const AudioPlayer = () => {
   const songNameContainer = useRef(null);
   const [coverRadius, setCoverRadius] = useState(false);
   const songName = useRef(null);
-
+  const [volume, setVolume] = useState(80);
   useEffect(() => {
     const songNameCon = songNameContainer.current;
     const songNamee = songName.current;
@@ -46,7 +47,6 @@ const AudioPlayer = () => {
   const [paused, setPaused] = useState(false);
   const [musicTotalLength, setMusicTotalLength] = useState("00:00");
   const [musicCurrentTime, setMusicCurrentTime] = useState("00:00");
-
   const theme = useTheme();
 
   const handleMusicProgressBar = (e) => {
@@ -97,17 +97,15 @@ const AudioPlayer = () => {
     //input total length of the audio
     let minutes = Math.floor(currentAudio.current.duration / 60);
     let seconds = Math.floor(currentAudio.current.duration % 60);
-    let musicTotalLength = `${minutes < 10 ? `0${minutes}` : minutes}:${
-      seconds < 10 ? `0:${seconds}` : seconds
-    }`;
+    let musicTotalLength = `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0:${seconds}` : seconds
+      }`;
     setMusicTotalLength(musicTotalLength);
 
     //input current time of the audio
     let min = Math.floor(currentAudio.current.currentTime / 60);
     let sec = Math.floor(currentAudio.current.currentTime % 60);
-    let musicCurrent = `${min < 10 ? `0${min}` : min}:${
-      sec < 10 ? `0${sec}` : sec
-    }`;
+    let musicCurrent = `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec
+      }`;
     setMusicCurrentTime(musicCurrent);
 
     //progress bar increase as music play
@@ -135,6 +133,12 @@ const AudioPlayer = () => {
     }
   };
 
+  const handleVolumeChange = (event, newValue) => {
+    setVolume(newValue);
+    currentAudio.current.volume = newValue / 100;
+  };
+
+  const isMuted = volume === 0;
   if (!audio_playing) {
     return null;
   }
@@ -215,11 +219,10 @@ const AudioPlayer = () => {
                 boxShadow: "0 2px 12px 0 rgba(0,0,0,0.4)",
               },
               "&:hover, &.Mui-focusVisible": {
-                boxShadow: `0px 0px 0px 8px ${
-                  theme.palette.mode === "dark"
-                    ? "rgb(255 255 255 / 16%)"
-                    : "rgb(0 0 0 / 16%)"
-                }`,
+                boxShadow: `0px 0px 0px 8px ${theme.palette.mode === "dark"
+                  ? "rgb(255 255 255 / 16%)"
+                  : "rgb(0 0 0 / 16%)"
+                  }`,
               },
               "&.Mui-active": {
                 width: 20,
@@ -293,8 +296,41 @@ const AudioPlayer = () => {
             )}
           </IconButton>
         </div>
-
-        <div className=" w-full flex justify-end max-md:mr-10">
+        <div className=" w-full flex justify-end items-center gap-2 max-md:mr-10">
+          {isMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+          <Slider
+            aria-label="volume-indicator"
+            size="small"
+            value={volume}
+            onChange={handleVolumeChange}
+            sx={{
+              color: theme.palette.mode === 'dark' ? '#fff' : '#007aff',
+              height: 4,
+              width: "120px",
+              padding: 0,
+              '& .MuiSlider-thumb': {
+                width: 8,
+                height: 8,
+                transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+                '&:before': {
+                  boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
+                },
+                '&:hover, &.Mui-focusVisible': {
+                  boxShadow: `0px 0px 0px 8px ${theme.palette.mode === 'dark'
+                    ? 'rgb(255 255 255 / 16%)'
+                    : 'rgb(0 0 0 / 16%)'
+                    }`,
+                },
+                '&.Mui-active': {
+                  width: 20,
+                  height: 20,
+                },
+              },
+              '& .MuiSlider-rail': {
+                opacity: 0.28,
+              },
+            }}
+          />
           <SongDownloader songId={current_song.id} />
         </div>
 
@@ -302,7 +338,7 @@ const AudioPlayer = () => {
           onClick={() => setShowUpNext((prev) => !prev)}
           className="mt-0 max-md:mt-16 max-md:text-xl"
         >
-          up Next
+          View More
         </button>
         {showUpNext && (
           <div

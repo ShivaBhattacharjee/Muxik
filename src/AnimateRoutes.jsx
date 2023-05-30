@@ -9,6 +9,7 @@ import {
   ViewAllAlbums,
   Artist,
   TopArtist,
+  PageNotFound
 } from "./Page";
 import {
   HindiPlaylist,
@@ -37,6 +38,7 @@ const AnimateRoutes = () => {
         <Route path="/topplaylists/Bhojpuri" element={<BhojpuriPlaylist />} />
         <Route path="/topplaylists/English" element={<EnglishPlaylists />} />
         <Route path="/topartist" element={<TopArtist />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>
   );

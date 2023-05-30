@@ -7,6 +7,7 @@ import ViewAllAlbums from "./ViewAllAlbums";
 import Artist from "./Artist";
 import RecentSongs from "./RecentSongs";
 import TopArtist from "./TopArtist";
+import PageNotFound from "./PageNotFound";
 export {
   Home,
   SingleAlbum,
@@ -17,4 +18,5 @@ export {
   Artist,
   RecentSongs,
   TopArtist,
+  PageNotFound
 };
