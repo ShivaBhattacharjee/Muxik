@@ -31,9 +31,14 @@
 * [License](#license)
 * [Authors](#authors)
 
+
+
+
+
 ## About The Project
 
-![Screenshot (675)](https://user-images.githubusercontent.com/95211406/234815538-17642467-574a-42ec-96d1-75c2a67bebd3.png)
+
+![Screenshot (866)](https://github.com/ShivaBhattacharjee/Muxik/assets/95211406/b18a2e53-fc10-439e-af7e-fedd1f24b232)
 
 Muxik is a music streaming / downloading site that offers a vast library for streaming and downloading. With a user-friendly interface, you can easily find your favorite song and stream them in high-definition quality. Our platform is updated regularly with the songs, so you can stay up-to-date with your favorite songs.Muxik is the go-to destination for audiophiles who want to stream or download their favorite music anytime, anywhere.
 
