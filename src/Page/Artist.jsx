@@ -55,7 +55,7 @@ const Artist = () => {
           />
           <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72" alt="" />
 
-          <div className="self-end flex flex-col gap-2 mb-9 max-md:items-center">
+          <div className=" self-center flex justify-center items-center flex-col gap-2 mb-9 max-md:items-center">
             <h2 className="text-white font-medium text-3xl my-2 flex items-center">
               {artist.name}
               {artist.isVerified && (
