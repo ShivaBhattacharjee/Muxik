@@ -93,25 +93,6 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
             setPaused(false);
         }
 
-        //input total length of the audio
-        let minutes = Math.floor(currentAudio.current.duration / 60);
-        let seconds = Math.floor(currentAudio.current.duration % 60);
-        let musicTotalLength = `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0:${seconds}` : seconds
-            }`;
-        setMusicTotalLength(musicTotalLength);
-
-        //input current time of the audio
-        let min = Math.floor(currentAudio.current.currentTime / 60);
-        let sec = Math.floor(currentAudio.current.currentTime % 60);
-        let musicCurrent = `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec
-            }`;
-        setMusicCurrentTime(musicCurrent);
-
-        //progress bar increase as music play
-        const progress = parseInt(
-            (currentAudio.current.currentTime / currentAudio.current.duration) * 100
-        );
-        setAudioProgress(isNaN(progress) ? 0 : progress);
     };
 
     const HandleNextSong = () => {
@@ -137,13 +118,21 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
     }
     return (
         <>
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center  items-center gap-2">
                 <img
                     src={ImageFetch(current_song)}
                     alt="background"
                     className=" w-28 p-2 rounded-full animate-spin"
                     onClick={HandleRightSideMenu}
                 />
+                        <audio
+          src={AudioLinkSelector(current_song)}
+          ref={currentAudio}
+          autoPlay
+          onTimeUpdate={handleAudioUpdate}
+          muted={true}
+          id="myAudio"
+        ></audio>
                 <div>
                     <h3
                         className="truncate w-52 max-w-full text-lg"
@@ -155,7 +144,7 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
                     <p className=" text-sm max-md:text-base opacity-50 whitespace-nowrap w-40 overflow-hidden text-ellipsis">
                         {current_song.primaryArtists}
                     </p>
-                    <div className="max-md:scale-90 max-md:mb-0 ">
+                    <div className="max-md:scale-120 max-md:mb-0 ">
                         <IconButton
                             aria-label="previous song"
                             onClick={HandlePreviousSong}
@@ -166,21 +155,6 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
                             }}
                         >
                             <FastRewindRounded fontSize="2rem" htmlColor="#8e9196" />
-                        </IconButton>
-                        <IconButton
-                            sx={{
-                                ":hover": {
-                                    bgcolor: "#2a2a2abf",
-                                },
-                            }}
-                            aria-label={paused ? "play" : "pause"}
-                            onClick={handleAudioPlay}
-                        >
-                            {paused ? (
-                                <PlayArrowRounded sx={{ fontSize: "3rem" }} htmlColor="#8e9196" />
-                            ) : (
-                                <PauseRounded sx={{ fontSize: "3rem" }} htmlColor="#8e9196" />
-                            )}
                         </IconButton>
                         <IconButton
                             sx={{

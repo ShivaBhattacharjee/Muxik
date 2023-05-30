@@ -31,7 +31,6 @@ import {
 const playerContext = React.createContext();
 
 const initialState = {
-  side_menu_show: false,
   side_navbar_show: false,
   audio_playing: false,
   play_song_loading: false,

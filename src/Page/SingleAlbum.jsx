@@ -9,7 +9,6 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import RippleButton from "ripple-effect-reactjs";
 
 const SingleAlbum = () => {
-  const { side_menu_show } = usePlayerContext();
   const [ImageLoading, SetImageLoading] = useState(true);
   const [alert, setAlert] = useState(false);
   let { id } = useParams();
@@ -56,8 +55,7 @@ const SingleAlbum = () => {
   return (
     <div
       className={
-        "bg-[#2d1b69] h-screen overflow-x-auto pb-56 " +
-        (side_menu_show ? "mr-96 transition-all duration-300 ease-in" : "mr-0")
+        "bg-[#2d1b69] h-screen overflow-x-auto pb-56 "
       }
     >
       <div className="flex flex-col gap-8 relative w-full pt-3 px-16 max-md:px-5 pb-7  bg-[#1b103f]">

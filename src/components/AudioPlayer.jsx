@@ -13,7 +13,7 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import RepeatOneIcon from "@mui/icons-material/RepeatOne";
 import UpNextSongs from "./UpNextSongs";
 import { AnimatePresence, motion } from "framer-motion";
-
+import AudioPlayerHome from "./AudioPlayerHome"
 const AudioPlayer = () => {
   const {
     current_song,
@@ -159,7 +159,6 @@ const AudioPlayer = () => {
           onTimeUpdate={handleAudioUpdate}
           id="myAudio"
         ></audio>
-
         <div
           className={
             "text-container  flex justify-center overflow-hidden items-center " +
