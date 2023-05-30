@@ -9,7 +9,7 @@ const RightSideMenu = () => {
   return (
     <section
       className={
-        "bg-[#2d1b69] text-darkTextColor z-20 fixed  max-md:z-50 max-md:p-0 h-full top-0 py-10 right-0 transition-all duration-300 ease-in  px-10 " +
+        "bg-[#2d1b69] text-darkTextColor z-20 fixed  max-md:z-40 max-md:p-0 h-full top-0 py-10 right-0 transition-all duration-300 ease-in  px-10 " +
         (side_menu_show ? "w-96 max-md:w-full " : "w-0 -right-20")
       }
     >

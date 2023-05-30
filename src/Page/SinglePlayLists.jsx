@@ -55,11 +55,11 @@ const SinglePlayLists = () => {
   return (
     <div
       className={
-        "bg-[#2d1b69] h-screen overflow-x-hidden " +
+        "bg-[#2d1b69] h-screen overflow-x-hidden pb-52 " +
         (side_menu_show ? "mr-96 transition-all duration-300 ease-in" : "mr-0")
       }
     >
-      <div className="bg-[#1b103f] flex flex-col gap-8 w-full pt-3 px-16 max-md:px-5 pb-7  ">
+      <div className="bg-[#1b103f] flex flex-col gap-8 w-full pt-3 px-16 max-md:px-5  ">
         <div className="grid grid-cols-[max-content,auto] mt-7 max-md:grid-cols-1  max-md:place-items-center gap-5">
           {ImageLoading && (
             <Skeleton

@@ -28,7 +28,7 @@ const Mains = () => {
       animate={{ opacity: 1, transition: { ease: "easeInOut" } }}
       exit={{ x: "-100vw", transition: { ease: "easeInOut" } }}
       className={
-        "bg-[#2d1b69] pl-10 pr-4 max-md:pl-4 overflow-hidden " +
+        "bg-[#2d1b69] pl-10 pr-4 max-md:pl-4 overflow-hidden pb-40 " +
         (side_menu_show ? "mr-96 transition-all duration-300 ease-in" : "mr-0")
       }
     >

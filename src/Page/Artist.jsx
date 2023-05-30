@@ -44,7 +44,7 @@ const Artist = () => {
   };
 
   return (
-    <div className="overflow-hidden bg-[#2d1b69] ">
+    <div className="overflow-hidden bg-[#2d1b69] pb-52 ">
       <section>
         <div className="w-full flex gap-6 px-16 pt-7 pb-10 sm:pb-2  max-md:flex-col relative overflow-hidden bg-[#1b103f]">
           <LazyLoadImage

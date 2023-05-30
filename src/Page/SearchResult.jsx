@@ -39,7 +39,7 @@ const SearchResult = () => {
       animate={{ opacity: 1, transition: { ease: "easeInOut" } }}
       exit={{ opacity: 0, transition: { ease: "easeInOut" } }}
       className={
-        "bg-[#2d1b69] h-screen pl-10 max-md:pl-1 pr-4 overflow-x-hidden " +
+        "bg-[#2d1b69] h-screen pl-10 max-md:pl-1 pr-4 overflow-x-hidden pb-30 " +
         (side_menu_show ? "mr-96 transition-all duration-300 ease-in" : "mr-0")
       }
     >

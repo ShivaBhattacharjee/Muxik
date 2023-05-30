@@ -4,7 +4,7 @@ import { SingleArtist } from "../components";
 
 const TopArtist = () => {
   return (
-    <div className="overflow-auto py-6  px-9 max-md:px-1 bg-[#2d1b69]  h-screen">
+    <div className="overflow-auto py-6  px-9 max-md:px-1 bg-[#2d1b69]  h-screen pb-60">
       <h3 className="font-medium text-neutral-300 text-xl ml-9  max-md:ml-5 mb-5">
         Top Artists
       </h3>

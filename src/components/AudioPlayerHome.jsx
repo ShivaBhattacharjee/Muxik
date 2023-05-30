@@ -146,19 +146,16 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
                 />
                 <div>
                     <h3
-                        className={
-                            "text-lg text-darkTitle mt-4  max-md:text-xl w-max whitespace-pre " +
-                            (shouldAnimate ? "scrolling-text text-right" : " text-center")
-                        }
+                        className="truncate w-52 max-w-full text-lg"
                         ref={songName}
                         dangerouslySetInnerHTML={{
                             __html: `${current_song.name}`,
                         }}
                     />
-                    <p className=" text-sm max-md:text-base opacity-50 text-center whitespace-nowrap w-40 overflow-hidden text-ellipsis">
+                    <p className=" text-sm max-md:text-base opacity-50 whitespace-nowrap w-40 overflow-hidden text-ellipsis">
                         {current_song.primaryArtists}
                     </p>
-                    <div className="max-md:scale-75 max-md:mb-0">
+                    <div className="max-md:scale-90 max-md:mb-0 ">
                         <IconButton
                             aria-label="previous song"
                             onClick={HandlePreviousSong}
