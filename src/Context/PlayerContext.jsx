@@ -26,9 +26,6 @@ import {
   PLAYING_CURRENT_ARTIST,
   PLAYING_CURRENT_PLAYLIST,
   PLAYING_VIEWALLSONGS_LISTS,
-  GET_ALL_PLAYLISTS_BEGIN,
-  GET_ALL_PLAYLISTS_SUCCESS,
-  GET_ALL_PLAYLISTS_FAILED,
 } from "../Actions";
 
 const playerContext = React.createContext();
@@ -186,89 +183,11 @@ export const PlayerProvider = ({ children }) => {
         type: PLAYING_VIEWALLSONGS_LISTS,
       });
     }
-    if (current === "RecentSongs") {
-      dispatch({
-        type: PLAYING_RECENT_PLAYED_LISTS,
-      });
-    }
-    if (current === "FavoritesSongs") {
-      dispatch({ type: PLAYING_FAVORITES_LISTS });
-    }
-    if (current === "Userplaylist") {
-      dispatch({ type: PLAYING_USER_PLAYLIST });
-    }
 
     singleSong(id);
   };
 
-  const getRecentSongs = async (id) => {
-    dispatch({ type: GET_RECENT_SONGS_BEGIN });
-    try {
-      const response = await axiosInstance.get(
-        `https://colorful-fly-attire.cyclic.app/beatstreet/api/users/recentsongs/${id}`
-      );
-      const results = response.data.data;
-      const ids = results.join();
-      const getSongs = await axios.get(`https://saavn.me/songs?id=${ids}`);
-      const songs = getSongs.data.data;
-      dispatch({ type: GET_RECENT_SONGS_SUCCESS, payload: songs });
-    } catch (error) {
-      dispatch({ type: GET_RECENT_SONGS_FAILED });
-      console.log(error);
-    }
-  };
-  const getFavoritesSongs = async (id) => {
-    dispatch({ type: GET_FAVORITE_SONGS_BEGIN });
-    try {
-      const response = await axiosInstance.get(
-        `https://colorful-fly-attire.cyclic.app/beatstreet/api/users/favoritesongs/${id}`
-      );
-      const results = response.data.data;
-      const ids = results.join();
-      const getSongs = await axios.get(`https://saavn.me/songs?id=${ids}`);
-      const songs = getSongs.data.data;
-      dispatch({ type: GET_FAVORITE_SONGS_SUCCESS, payload: songs });
-    } catch (error) {
-      dispatch({ type: GET_FAVORITE_SONGS_FAILED });
-      console.log(error);
-    }
-  };
 
-  const getAllPlaylist = async (id) => {
-    dispatch({ type: GET_ALL_PLAYLISTS_BEGIN });
-    try {
-      const response = await axiosInstance.get(
-        `https://colorful-fly-attire.cyclic.app/beatstreet/api/users/allplaylist/${id}`
-      );
-      const results = response.data.data;
-      dispatch({ type: GET_ALL_PLAYLISTS_SUCCESS, payload: results });
-    } catch (error) {
-      dispatch({ type: GET_ALL_PLAYLISTS_FAILED });
-      console.log(error);
-    }
-  };
-
-  const getSinglePlaylist = async (id, data) => {
-    dispatch({ type: GET_USER_SINGLE_PLAYLIST_BEGIN });
-    try {
-      const response = await axiosInstance.post(
-        `https://colorful-fly-attire.cyclic.app/beatstreet/api/users/getsingleplaylist/${id}`,
-        data
-      );
-      const results = response.data.data;
-      let Ids = results.songIds.join();
-      const getSongs = await axios.get(`https://saavn.me/songs?id=${Ids}`);
-      const songs = getSongs.data.data;
-      let playlist = {
-        name: results.name,
-        songs,
-      };
-      dispatch({ type: GET_USER_SINGLE_PLAYLIST_SUCCESS, payload: playlist });
-    } catch (error) {
-      dispatch({ type: GET_USER_SINGLE_PLAYLIST_FAILED });
-      console.log(error);
-    }
-  };
 
   return (
     <playerContext.Provider
@@ -287,10 +206,6 @@ export const PlayerProvider = ({ children }) => {
         AlbumsPageChange,
         HandleNextPageBtn_Albums,
         HandlePlaySong,
-        getRecentSongs,
-        getFavoritesSongs,
-        getAllPlaylist,
-        getSinglePlaylist,
       }}
     >
       {children}

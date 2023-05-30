@@ -17,9 +17,6 @@ import {
   PLAYING_CURRENT_ARTIST,
   PLAYING_CURRENT_PLAYLIST,
   PLAYING_VIEWALLSONGS_LISTS,
-  GET_ALL_PLAYLISTS_BEGIN,
-  GET_ALL_PLAYLISTS_SUCCESS,
-  GET_ALL_PLAYLISTS_FAILED,
 } from "../Actions";
 const Player_Reducer = (state, action) => {
   if (action.type === PLAY_SONG_BEGIN) {
@@ -136,71 +133,6 @@ const Player_Reducer = (state, action) => {
     const data = state.search_songs;
     const id = data.map((song) => song.id);
     return { ...state, current_playing_lists: id };
-  }
-  if (action.type === PLAYING_RECENT_PLAYED_LISTS) {
-    const data = state.recent_songs;
-    const id = data.map((song) => song.id);
-    return { ...state, current_playing_lists: id };
-  }
-  if (action.type === PLAYING_FAVORITES_LISTS) {
-    const data = state.favorites_songs;
-    const id = data.map((song) => song.id);
-    return { ...state, current_playing_lists: id };
-  }
-  if (action.type === PLAYING_USER_PLAYLIST) {
-    const data = state.user_single_playlist.songs;
-    const id = data.map((song) => song.id);
-    return { ...state, current_playing_lists: id };
-  }
-
-  if (action.type === GET_RECENT_SONGS_BEGIN) {
-    return { ...state, recent_song_loading: true };
-  }
-
-  if (action.type === GET_RECENT_SONGS_SUCCESS) {
-    const data = action.payload;
-    return { ...state, recent_song_loading: false, recent_songs: data };
-  }
-
-  if (action.type === GET_RECENT_SONGS_FAILED) {
-    return { ...state, recent_song_loading: false };
-  }
-
-  if (action.type === GET_FAVORITE_SONGS_BEGIN) {
-    return { ...state, favorite_songs_loading: true };
-  }
-
-  if (action.type === GET_FAVORITE_SONGS_SUCCESS) {
-    const data = action.payload;
-    return { ...state, favorite_songs_loading: false, favorites_songs: data };
-  }
-
-  if (action.type === GET_FAVORITE_SONGS_FAILED) {
-    return { ...state, favorite_songs_loading: false };
-  }
-  if (action.type === GET_ALL_PLAYLISTS_BEGIN) {
-    return { ...state, all_playlists_loading: true };
-  }
-  if (action.type === GET_ALL_PLAYLISTS_SUCCESS) {
-    let data = action.payload;
-    return { ...state, all_playlists_loading: false, all_playlists: data };
-  }
-  if (action.type === GET_ALL_PLAYLISTS_FAILED) {
-    return { ...state, all_playlists_loading: false };
-  }
-  if (action.type === GET_USER_SINGLE_PLAYLIST_BEGIN) {
-    return { ...state, user_single_playlist_loading: true };
-  }
-  if (action.type === GET_USER_SINGLE_PLAYLIST_SUCCESS) {
-    let data = action.payload;
-    return {
-      ...state,
-      user_single_playlist_loading: false,
-      user_single_playlist: data,
-    };
-  }
-  if (action.type === GET_USER_SINGLE_PLAYLIST_FAILED) {
-    return { ...state, user_single_playlist_loading: false };
   }
 
   throw new Error(`No Matching "${action.type}" -action type`);
