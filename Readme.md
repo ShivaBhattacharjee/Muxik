@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://github.com/ShivaBhattacharjee/AnimeTrix">
-    <img src="https://github.com/ShivaBhattacharjee/Muxik/assets/95211406/b643c403-a4f6-4829-8fbf-37751a03292e" alt="Logo" width="120px" height="100px">
+  <a href="https://github.com/ShivaBhattacharjee/Muxik">
+    <img src="https://github.com/ShivaBhattacharjee/Muxik/assets/95211406/1e6299f3-3274-460d-b160-060279f3d4ba" alt="Logo" width="120px" height="100px">
   </a>
 <br/>
   <h3 align="center">Muxik</h3>
@@ -15,6 +15,10 @@
     <a href="https://github.com/ShivaBhattacharjee/Muxik/issues">Request Feature</a>
   </p>
 </p>
+
+
+
+
 
 
 
@@ -38,7 +42,7 @@
 ## About The Project
 
 
-![Screenshot (866)](https://github.com/ShivaBhattacharjee/Muxik/assets/95211406/b18a2e53-fc10-439e-af7e-fedd1f24b232)
+![Screenshot (868)](https://github.com/ShivaBhattacharjee/Muxik/assets/95211406/68208fea-ed8c-4063-bad0-4fc9c63c607b)
 
 Muxik is a music streaming / downloading site that offers a vast library for streaming and downloading. With a user-friendly interface, you can easily find your favorite song and stream them in high-definition quality. Our platform is updated regularly with the songs, so you can stay up-to-date with your favorite songs.Muxik is the go-to destination for audiophiles who want to stream or download their favorite music anytime, anywhere.
 
