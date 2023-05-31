@@ -3,15 +3,7 @@ import { usePlayerContext } from "../Context/PlayerContext";
 import ListItemButton from "@mui/material/ListItemButton";
 import { SongDurtionFormat } from "../Utils/Helper";
 import { SongDownloader } from "../components";
-import Popover from "@mui/material/Popover";
 import Skeleton from "@mui/material/Skeleton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import AlbumIcon from "@mui/icons-material/Album";
-import IconButton from "@mui/material/IconButton";
-import PersonIcon from "@mui/icons-material/Person";
-import { motion, AnimatePresence } from "framer-motion";
-import PopoverPlaylist from "./PopoverPlaylist";
-import { Link } from "react-router-dom";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 const SingleSongList = ({
   id,
@@ -26,9 +18,8 @@ const SingleSongList = ({
   CURRENT = null,
   playlistId = null,
 }) => {
-  const { HandlePlaySong, getSinglePlaylist } = usePlayerContext();
-  const [showPlaylist, setShowPlaylist] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const { HandlePlaySong } = usePlayerContext();
+  const [anchorEl] = useState(null);
   const [ImageLoading, SetImageLoading] = useState(true);
   const handleImageLoad = useCallback(() => {
     SetImageLoading(false);

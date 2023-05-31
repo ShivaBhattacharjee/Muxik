@@ -53,10 +53,10 @@ const Artist = () => {
             alt=""
             effect="blur"
           />
-          <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72" alt="" />
+          <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72 flex justify-center items-center" alt="" />
 
-          <div className=" self-center flex justify-center items-center flex-col gap-2 mb-9 max-md:items-center">
-            <h2 className="text-white font-medium text-3xl my-2 flex items-center">
+          <div className=" self-center  flex justify-center items-center flex-col gap-2 mb-9 max-md:items-center">
+            <h2 className="text-white font-medium text-lg lg:text-3xl md:text-2xl my-2 flex items-center">
               {artist.name}
               {artist.isVerified && (
                 <VerifiedIcon color="primary" className="ml-1" />
