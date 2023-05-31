@@ -8,7 +8,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import RippleButton from "ripple-effect-reactjs";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 const Artist = () => {
@@ -53,7 +52,7 @@ const Artist = () => {
             alt=""
             effect="blur"
           />
-          <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72 flex justify-center items-center" alt="" />
+          <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72 flex justify-center items-center m-auto" alt="" />
 
           <div className=" self-center  flex justify-center items-center flex-col gap-2 mb-9 max-md:items-center">
             <h2 className="text-white font-medium text-lg lg:text-3xl md:text-2xl my-2 flex items-center">
