@@ -296,7 +296,7 @@ const AudioPlayer = () => {
             )}
           </IconButton>
         </div>
-        <div className=" w-full flex justify-end items-center gap-2 max-md:mr-10">
+        <div className=" w-full pl-6 lg:pl-0 flex justify-end items-center gap-2 max-md:mr-10">
           {isMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
           <Slider
             aria-label="volume-indicator"
