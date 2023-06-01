@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import AnimateRoutes from "./AnimateRoutes";
+import AnimateRoutes from "./Routes";
 import { SideNav, RightSideMenu, Alert, TopNav } from "./components";
 import { useMusicContext } from "./Context/MusicContext";
 function App() {

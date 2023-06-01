@@ -14,7 +14,7 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
                 <img
                     src={ImageFetch(current_song)}
                     alt="background"
-                    className=" w-28 p-2 rounded-full animate-spin"
+                    className=" w-28 p-2 rounded-full animate-spin cursor-pointer"
                 />
 
                 <div>

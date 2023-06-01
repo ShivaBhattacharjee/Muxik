@@ -4,11 +4,11 @@ import { SingleArtist } from "../components";
 
 const TopArtist = () => {
   return (
-    <div className="overflow-auto py-6  px-9 max-md:px-1 bg-[#2d1b69]  h-screen pb-60">
+    <div className="overflow-auto py-6  px-9 max-md:px-1 bg-[#2d1b69] h-screen pb-60">
       <h3 className="font-medium text-neutral-300 text-xl ml-9  max-md:ml-5 mb-5">
         Top Artists
       </h3>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] max-md:grid-cols-[repeat(auto-fit,minmax(7rem,0fr))] max-md:gap-x-2 max-md:justify-center max-md:px-3 gap-y-6 px-7 bg-[#2d1b69]">
+      <div className="flex flex-wrap overflow-x-hidden gap-2 w-full justify-center items-center lg:justify-start p-2 lg:p-4">
         {TopArtists.map((artist, index) => (
           <SingleArtist {...artist} key={index} />
         ))}
