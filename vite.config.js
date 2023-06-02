@@ -12,7 +12,7 @@ export default defineConfig({
         name: "Muxik",
         short_name: "Muxik",
         description:
-          " is the ultimate destination for streaming and downloading music for free.",
+          "Muxik is the ultimate destination for streaming and downloading music for free.",
         icons: [
           {
             src: "/images/logo-192.png",
