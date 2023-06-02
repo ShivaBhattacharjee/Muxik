@@ -10,17 +10,6 @@ export const ImageFetch = (item) => {
   }
 };
 
-export const SpotifyImageFetch = (item) => {
-  let imageLink = null;
-  if (item) {
-    let arrayLength = item.length;
-    if (arrayLength > 0) {
-      return (imageLink = item[arrayLength - 1].url);
-    } else {
-      return (imageLink = item[0].url);
-    }
-  }
-};
 
 export const AudioLinkSelector = (item) => {
   let audioLink = null;

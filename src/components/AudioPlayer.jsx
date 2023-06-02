@@ -145,7 +145,7 @@ const AudioPlayer = () => {
   return (
     <div
       className={
-        " px-7 py-2 mt-5 relative boss max-md:h-full " +
+        " px-7 py-2 mt-5 relative  max-md:h-full " +
         (side_menu_show ? "opacity-100" : "opacity-0")
       }
     >
