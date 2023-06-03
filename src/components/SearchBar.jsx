@@ -57,7 +57,7 @@ const SearchBar = () => {
   }
 
   return (
-    <section className="flex items-center searchBarContainer gap-4 w-1/2 max-md:w-full">
+    <section className="flex items-center searchBarContainer gap-4 w-1/2 max-md:w-full md:w-full">
       <div className="w-fit hidden max-md:flex" onClick={HandleSideNav}>
           <MenuSharpIcon  className="text-slate-200 cursor-pointer" style={{fontSize:35}}/>
       </div>

@@ -24,7 +24,7 @@ const SinglePlayLists = () => {
 
   if (loading) {
     return (
-      <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 ">
+      <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 md:translate-x-1/4 md:pr-48 lg:tranm">
         <LoadingSpinner size={80} />
       </div>
     );
@@ -80,7 +80,7 @@ const SinglePlayLists = () => {
           />
 
           <div className="flex place-content-end max-md:place-items-center flex-col ">
-            <h2 className="font-bold text-4xl max-md:text-2xl max-md:text-center text-white tracking-wider">
+            <h2 className="font-bold text-4xl max-md:text-2xl max-md:text-center text-white tracking-wider md:tracking-tighter">
               {currentPlaylists.name}
             </h2>
             <div className="flex max-md:flex-col items-center gap-3 my-2 max-md:mt-4">
@@ -109,7 +109,7 @@ const SinglePlayLists = () => {
           </div>
         </div>
       </div>
-      <section className="mx-12 mt-6 max-md:mx-2 mb-14 bg-[#1b103f]">
+      <section className="mx-12 mt-6 md:mx-1.5  mb-14 bg-[#1b103f]">
         {currentPlaylists.songs && (
           <SongsList songs={currentPlaylists.songs} current={"Playlist"} />
         )}

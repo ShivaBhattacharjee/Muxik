@@ -18,7 +18,7 @@ const SingleSongList = ({
   CURRENT = null,
   playlistId = null,
 }) => {
-  const { HandlePlaySong } = usePlayerContext();
+  const { HandlePlaySong,side_menu_show } = usePlayerContext();
   const [anchorEl] = useState(null);
   const [ImageLoading, SetImageLoading] = useState(true);
   const handleImageLoad = useCallback(() => {
@@ -86,7 +86,7 @@ const SingleSongList = ({
             onLoad={handleImageLoad}
             alt={name}
           />
-          <div className="ml-4 overflow-hidden max-md:w-1/2 max-xxs:w-1/3">
+          <div className="ml-4 overflow-x-hidden md:w-screen max-md:w-1/2 max-xxs:w-1/3">
             <h3
               className="text-slate-200 max-md:font-medium text-sm  whitespace-nowrap text-ellipsis overflow-hidden w-[90%] max-xxs:w-2/4"
               dangerouslySetInnerHTML={{
@@ -111,7 +111,10 @@ const SingleSongList = ({
           </div>
         </ListItemButton>
 
-        <div className="absolute right-4 max-md:right-0 top-3 z-10 flex items-center gap-3 ">
+        <div className={
+          "absolute flex justify-center items-center right-4 top-0"+
+          (side_menu_show ? "fixed -right-60" : "")
+        }>
           <SongDownloader songId={id} />
         </div>
       </div>

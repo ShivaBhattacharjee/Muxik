@@ -29,7 +29,7 @@ const AudioPlayer = () => {
   const songNameContainer = useRef(null);
   const [coverRadius, setCoverRadius] = useState(false);
   const songName = useRef(null);
-  const [volume, setVolume] = useState(80);
+  const [volume, setVolume] = useState(60);
   useEffect(() => {
     const songNameCon = songNameContainer.current;
     const songNamee = songName.current;
@@ -190,7 +190,7 @@ const AudioPlayer = () => {
           onClick={() => setCoverRadius((prev) => !prev)}
           className={
             "h-32 w-32  max-md:h-full max-md:w-72  transition-all ease-linear duration-500 cursor-pointer object-cover mt-4 " +
-            (coverRadius ? "rounded-[15%]" : " rounded-[100%]")
+            (coverRadius ? "rounded-[100%]" : " rounded-[15%]")
           }
         />
         <div className="flex justify-between w-full mb-2 max-md:mb-0 max-md:mt-6  ">

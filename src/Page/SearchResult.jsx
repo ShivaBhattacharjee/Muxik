@@ -26,7 +26,7 @@ const SearchResult = () => {
             : "mr-0")
         }
       >
-        <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 ">
+        <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 md:translate-x-1/4 md:pr-48  lg:translate-x-0">
           <LoadingSpinner size={80} />
         </div>
       </div>

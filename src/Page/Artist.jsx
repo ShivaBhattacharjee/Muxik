@@ -29,7 +29,7 @@ const Artist = () => {
 
   if (loading) {
     return (
-      <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 ">
+      <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 md:translate-x-1/4 md:pr-48 lg:translate-x-0 ">
         <LoadingSpinner size={80} />
       </div>
     );
@@ -45,14 +45,14 @@ const Artist = () => {
   return (
     <div className="overflow-hidden bg-[#2d1b69] pb-52 ">
       <section>
-        <div className="w-full flex gap-6 px-16 pt-7 pb-10 sm:pb-2  max-md:flex-col relative overflow-hidden bg-[#1b103f]">
+        <div className="w-full md:grid lg:flex flex gap-6 px-16 pt-7 pb-10 sm:pb-2  max-md:flex-col relative overflow-hidden bg-[#1b103f]">
           <LazyLoadImage
             src={ImageFetch(artist)}
             className="rounded-xl absolute inset-0 -z-20 w-full blur-md h-full object-contain"
             alt=""
             effect="blur"
           />
-          <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72 flex justify-center items-center m-auto" alt="" />
+          <LazyLoadImage effect="blur" src={ImageFetch(artist)} className="rounded-xl h-72 , flex justify-center items-center m-auto" alt="" />
 
           <div className=" self-center  flex justify-center items-center flex-col gap-2 mb-9 max-md:items-center">
             <h2 className="text-white font-medium text-lg lg:text-3xl md:text-2xl my-2 flex items-center">
