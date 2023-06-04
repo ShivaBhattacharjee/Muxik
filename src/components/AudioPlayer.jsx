@@ -189,7 +189,7 @@ const AudioPlayer = () => {
           alt="song Avatar"
           onClick={() => setCoverRadius((prev) => !prev)}
           className={
-            "max-h-48 w-48 max-md:h-full max-md:w-72  transition-all ease-linear duration-500 cursor-pointer object-cover mt-4 " +
+            "h-32 w-32 md:h-48 md:w-48 max-md:h-full max-md:w-72  transition-all ease-linear duration-500 cursor-pointer object-cover mt-4 " +
             (coverRadius ? "rounded-[100%]" : " rounded-[15%]")
           }
         />
