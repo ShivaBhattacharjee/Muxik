@@ -76,8 +76,9 @@ git clone https://github.com/ShivaBhattacharjee/Muxik.git
   npm install
   ```
   ```
-  npm run dev // server will run at localhost:5173/
+  npm run dev 
 ```
+ server will run at http://localhost:5173/
 
 ## Host your own 
 * ## Vercel
