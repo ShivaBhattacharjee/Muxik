@@ -67,12 +67,15 @@ Muxik is built using ReactJs and vanilla Css
 
 ### Installation
 ```sh
-  git clone https://github.com/ShivaBhattacharjee/Muxik.git
-  
+git clone https://github.com/ShivaBhattacharjee/Muxik.git
+  ```
+  ```
   cd Muxik
-  
+  ```
+  ```
   npm install
-  
+  ```
+  ```
   npm run dev // server will run at localhost:5173/
 ```
 
