@@ -44,7 +44,7 @@ const Music_reducer = (state, action) => {
       single_album_loading: false,
     };
   }
-  
+
   if (action.type === GET_SINGLE_ALBUM_ERROR) {
     return {
       ...state,

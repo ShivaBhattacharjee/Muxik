@@ -22,6 +22,7 @@ import {
   GET_ARTIST_ALBUMS_SUCESS,
   GET_ARTIST_ALBUMS_ERROR,
 } from "../Actions";
+import { useHomeReducer } from "../Reducers";
 
 const initialState = {
   homeData_loading: false,
@@ -46,18 +47,7 @@ const MusicContext = React.createContext();
 
 export const MusicProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const homePageMusic = async () => {
-    dispatch({ type: GET_HOME_DATA_BEGIN });
-    try {
-      const response = await axios.get(
-        "https://saavn.me/modules?language=hindi,english,Bhojpuri"
-      );
-      let result = response.data.data;
-      dispatch({ type: GET_HOME_DATA_SUCESS, payload: result });
-    } catch (error) {
-      dispatch({ type: GET_HOMEDATA_ERROR });
-    }
-  };
+  const homeState = useHomeReducer();
 
   const singleAlbums = async (id) => {
     dispatch({ type: GET_SINGLE_ALBUM_BEGIN });
@@ -122,10 +112,6 @@ export const MusicProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    homePageMusic();
-  }, []);
-
   const HandleAlert = () => {
     dispatch({ type: ALERT_SHOW });
   };
@@ -140,6 +126,7 @@ export const MusicProvider = ({ children }) => {
         SingleArtist,
         ArtistSongs,
         ArtistAlbums,
+        ...homeState,
       }}
     >
       {children}

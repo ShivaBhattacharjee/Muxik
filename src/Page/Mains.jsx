@@ -12,7 +12,7 @@ import {
 } from "../components";
 
 const Mains = () => {
-  const { homeData_loading: loading } = useMusicContext();
+  const { homeDataLoading: loading } = useMusicContext();
   if (loading) {
     return (
       <div className="text-2xl font-bold fixed inset-0 w-full h-full flex place-items-center justify-center bg-[#2d1b69] -z-20 max-md:pr-0 pr-32 md:translate-x-1/4 md:pr-48 lg:translate-x-0">
@@ -26,9 +26,7 @@ const Mains = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { ease: "easeInOut" } }}
       exit={{ x: "-100vw", transition: { ease: "easeInOut" } }}
-      className={
-        "bg-[#2d1b69] pl-10 pr-4 max-md:pl-4 overflow-y-hidden pb-24 "
-      }
+      className={"bg-[#2d1b69] pl-10 pr-4 max-md:pl-4 overflow-y-hidden pb-24 "}
     >
       <section className="w-full my-6 ">
         <h1 className="font-bold text-3xl  w-fit text-darkTitle my-4">
