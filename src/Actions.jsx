@@ -1,3 +1,4 @@
+export const GET_HOME_DATA = "GET_HOME_DATA";
 export const GET_HOME_DATA_BEGIN = "GET_HOME_DATA_BEGIN";
 export const GET_HOME_DATA_SUCESS = "GET_HOME_DATA_SUCESS";
 export const GET_HOMEDATA_ERROR = "GET_HOME_DATA_ERROR";
@@ -43,3 +44,11 @@ export const PLAYING_VIEWALLSONGS_LISTS = "PLAYING_VIEWALLSONGS_LISTS";
 export const GET_ALL_PLAYLISTS_BEGIN = "GET_ALL_PLAYLISTS_BEGIN";
 export const GET_ALL_PLAYLISTS_SUCCESS = "GET_ALL_PLAYLISTS_SUCCESS";
 export const GET_ALL_PLAYLISTS_FAILED = "GET_ALL_PLAYLISTS_FAILED";
+
+export const _onSuccess = (type) => {
+  return type + "_SUCCESS";
+};
+
+export const _onError = (type) => {
+  return type + "_ERROR";
+};
