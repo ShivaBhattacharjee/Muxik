@@ -8,6 +8,9 @@ import Artist from "./Artist";
 import RecentSongs from "./RecentSongs";
 import TopArtist from "./TopArtist";
 import PageNotFound from "./PageNotFound";
+import Login from "./Login"
+import SignUp from "./SignUp";
+import ForgotPassword from "./ForgotPassword";
 export {
   Home,
   SingleAlbum,
@@ -18,5 +21,8 @@ export {
   Artist,
   RecentSongs,
   TopArtist,
-  PageNotFound
+  PageNotFound,
+  Login,
+  SignUp,
+  ForgotPassword
 };

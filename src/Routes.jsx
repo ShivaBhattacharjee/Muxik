@@ -9,13 +9,17 @@ import {
   ViewAllAlbums,
   Artist,
   TopArtist,
-  PageNotFound
+  PageNotFound,
+  Login,
+  SignUp,
+  ForgotPassword
 } from "./Page";
 import {
   HindiPlaylist,
   BhojpuriPlaylist,
   EnglishPlaylists,
 } from "./components";
+
 
 
 const AnimateRoutes = () => {
@@ -36,6 +40,9 @@ const AnimateRoutes = () => {
         <Route path="/topplaylists/Bhojpuri" element={<BhojpuriPlaylist />} />
         <Route path="/topplaylists/English" element={<EnglishPlaylists />} />
         <Route path="/topartist" element={<TopArtist />} />
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/sign-up" element={<SignUp/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
   );
