@@ -1,11 +1,7 @@
-import { useEffect, useReducer } from "react";
-import DefaultReducer from "../DefaultReducer";
+import { useEffect } from "react";
 import { GET_HOME_DATA, _onError, _onSuccess } from "../../Actions";
 import { SaavanService } from "../../services";
-
-const homeReducer = (state, action) => {
-  return DefaultReducer(state, action, GET_HOME_DATA);
-};
+import useHooksReducer from "./useHooksReducer";
 
 const initialState = {
   albums: [],
@@ -17,7 +13,7 @@ const initialState = {
 };
 
 const useHomeReducer = () => {
-  const [state, dispatch] = useReducer(homeReducer, initialState);
+  const [state, dispatch] = useHooksReducer(GET_HOME_DATA, initialState);
 
   const homePageMusic = async () => {
     dispatch({ type: GET_HOME_DATA });

@@ -1,11 +1,6 @@
-import { useReducer } from "react";
-import DefaultReducer from "../DefaultReducer";
 import { GET_SINGLE_PLAYLIST, _onError, _onSuccess } from "../../Actions";
 import { SaavanService } from "../../services";
-
-const singlePlaylistReducer = (state, action) => {
-  return DefaultReducer(state, action, GET_SINGLE_PLAYLIST);
-};
+import useHooksReducer from "./useHooksReducer";
 
 const initialState = {
   data: [],
@@ -13,7 +8,7 @@ const initialState = {
 };
 
 const useSinglePlaylistReducer = () => {
-  const [state, dispatch] = useReducer(singlePlaylistReducer, initialState);
+  const [state, dispatch] = useHooksReducer(GET_SINGLE_PLAYLIST, initialState);
 
   const getSinglePlaylist = async (id) => {
     dispatch({ type: GET_SINGLE_PLAYLIST });

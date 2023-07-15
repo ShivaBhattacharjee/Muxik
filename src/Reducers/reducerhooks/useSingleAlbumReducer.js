@@ -1,11 +1,6 @@
-import { useReducer } from "react";
-import DefaultReducer from "../DefaultReducer";
 import { GET_SINGLE_ALBUM, _onError, _onSuccess } from "../../Actions";
 import { SaavanService } from "../../services";
-
-const singleAlbumReducer = (state, action) => {
-  return DefaultReducer(state, action, GET_SINGLE_ALBUM);
-};
+import useHooksReducer from "./useHooksReducer";
 
 const initialState = {
   data: [],
@@ -13,7 +8,7 @@ const initialState = {
 };
 
 const useCurrentAlbumReducer = () => {
-  const [state, dispatch] = useReducer(singleAlbumReducer, initialState);
+  const [state, dispatch] = useHooksReducer(GET_SINGLE_ALBUM, initialState);
 
   const singleAlbums = async (id) => {
     dispatch({ type: GET_SINGLE_ALBUM });

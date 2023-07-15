@@ -2,9 +2,6 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 import reducer from "../Reducers/MusicReducer";
 import {
   ALERT_SHOW,
-  GET_ARTIST_DETAILS_BEGIN,
-  GET_ARTIST_DETAILS_SUCESS,
-  GET_ARTIST_DETAILS_ERROR,
   GET_ARTIST_SONGS_BEGIN,
   GET_ARTIST_SONGS_SUCESS,
   GET_ARTIST_SONGS_ERROR,
@@ -46,17 +43,6 @@ export const MusicProvider = ({ children }) => {
   const singleAlbum = useSingleAlbumReducer();
   const singlePlaylist = useSinglePlaylistReducer();
 
-  const SingleArtist = async (id) => {
-    dispatch({ type: GET_ARTIST_DETAILS_BEGIN });
-    try {
-      const response = await SaavanService.getArtists(id);
-      const result = response.data.data;
-      dispatch({ type: GET_ARTIST_DETAILS_SUCESS, payload: result });
-    } catch (error) {
-      dispatch({ type: GET_ARTIST_DETAILS_ERROR });
-    }
-  };
-
   const ArtistSongs = async (id) => {
     dispatch({ type: GET_ARTIST_SONGS_BEGIN });
     try {
@@ -90,7 +76,6 @@ export const MusicProvider = ({ children }) => {
       value={{
         ...state,
         HandleAlert,
-        SingleArtist,
         ArtistSongs,
         ArtistAlbums,
         ...homeState,
