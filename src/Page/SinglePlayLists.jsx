@@ -109,7 +109,7 @@ const SinglePlayLists = () => {
           </div>
         </div>
       </div>
-      <section className="mx-12 mt-6 md:mx-1.5  mb-14 bg-[#1b103f]">
+      <section className="mx-3 lg:mx-12 mt-6 md:mx-1.5  mb-14 bg-[#1b103f]">
         {currentPlaylists.songs && (
           <SongsList songs={currentPlaylists.songs} current={"Playlist"} />
         )}
