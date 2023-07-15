@@ -1,1 +1,1 @@
-export { default as useHomeReducer } from "./useHomeReducer";
+export * from "./reducerhooks";

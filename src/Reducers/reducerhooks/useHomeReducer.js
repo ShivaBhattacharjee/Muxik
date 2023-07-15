@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
-import DefaultReducer from "./DefaultReducer";
-import { GET_HOME_DATA, _onError, _onSuccess } from "../Actions";
-import { SaavanService } from "../services";
+import DefaultReducer from "../DefaultReducer";
+import { GET_HOME_DATA, _onError, _onSuccess } from "../../Actions";
+import { SaavanService } from "../../services";
 
 const homeReducer = (state, action) => {
   return DefaultReducer(state, action, GET_HOME_DATA);
