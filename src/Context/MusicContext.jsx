@@ -23,6 +23,7 @@ import {
   GET_ARTIST_ALBUMS_ERROR,
 } from "../Actions";
 import { useHomeReducer } from "../Reducers";
+import { SaavanService } from "../services";
 
 const initialState = {
   homeData_loading: false,
@@ -52,7 +53,7 @@ export const MusicProvider = ({ children }) => {
   const singleAlbums = async (id) => {
     dispatch({ type: GET_SINGLE_ALBUM_BEGIN });
     try {
-      const response = await axios.get(`https://saavn.me/albums?id=${id}`);
+      const response = await SaavanService.getAlbums(id);
       const result = response.data.data;
 
       dispatch({ type: GET_SINGLE_ALBUM_SUCESS, payload: result });
@@ -64,7 +65,7 @@ export const MusicProvider = ({ children }) => {
   const SinglePlaylist = async (id) => {
     dispatch({ type: GET_SINGLE_PLAYLIST_BEGIN });
     try {
-      const response = await axios.get(`https://saavn.me/playlists?id=${id}`);
+      const response = await SaavanService.getPlaylists(id);
       const result = response.data.data;
       dispatch({ type: GET_SINGLE_PLAYLIST_SUCESS, payload: result });
     } catch (error) {
@@ -75,7 +76,7 @@ export const MusicProvider = ({ children }) => {
   const SingleArtist = async (id) => {
     dispatch({ type: GET_ARTIST_DETAILS_BEGIN });
     try {
-      const response = await axios.get(`https://saavn.me/artists?id=${id}`);
+      const response = await SaavanService.getArtists(id);
       const result = response.data.data;
       dispatch({ type: GET_ARTIST_DETAILS_SUCESS, payload: result });
     } catch (error) {
@@ -86,10 +87,7 @@ export const MusicProvider = ({ children }) => {
   const ArtistSongs = async (id) => {
     dispatch({ type: GET_ARTIST_SONGS_BEGIN });
     try {
-      const [res, res2] = await Promise.all([
-        axios.get(`https://saavn.me/artists/${id}/songs?page=1`),
-        axios.get(`https://saavn.me/artists/${id}/songs?page=2`),
-      ]);
+      const [res, res2] = await SaavanService.getArtistsSongs(id, 1, 2);
       const data1 = res.data.data.results;
       const data2 = res2.data.data.results;
       const data = [...data1, ...data2];
@@ -102,9 +100,7 @@ export const MusicProvider = ({ children }) => {
   const ArtistAlbums = async (id) => {
     dispatch({ type: GET_ARTIST_ALBUMS_BEGIN });
     try {
-      const res = await axios.get(
-        `https://saavn.me/artists/${id}/albums?page=1`
-      );
+      const res = await SaavanService.getArtistsAlbums(id);
       const data = res.data.data.results;
       dispatch({ type: GET_ARTIST_ALBUMS_SUCESS, payload: data });
     } catch (error) {

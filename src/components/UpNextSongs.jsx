@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { usePlayerContext } from "../Context/PlayerContext";
 import ListItemButton from "@mui/material/ListItemButton";
 import { SongDurtionFormat } from "../Utils/Helper";
 import ClipLoader from "react-spinners/ClipLoader";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { SaavanService } from "../services";
 
 const UpNextSongs = ({ current_song }) => {
   const { current_playing_lists, HandlePlaySong } = usePlayerContext();
@@ -16,7 +16,7 @@ const UpNextSongs = ({ current_song }) => {
     let Ids = data.join();
     setLoading(true);
     try {
-      const getSongs = await axios.get(`https://saavn.me/songs?id=${Ids}`);
+      const getSongs = await SaavanService.getSongs(Ids);
       const songs = getSongs.data.data;
       setSongsarr(songs);
       setLoading(false);

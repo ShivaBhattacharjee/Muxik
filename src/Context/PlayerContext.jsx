@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  useReducer,
-  useState,
-  useRef,
-} from "react";
+import React, { useContext, useReducer, useState, useRef } from "react";
 import axios from "axios";
 import reducer from "../Reducers/PlayerReducer";
 import {
@@ -59,6 +54,7 @@ const initialState = {
 };
 
 import { useMusicContext } from "../Context/MusicContext";
+import { SaavanService } from "../services";
 
 const axiosInstance = axios.create({ withCredentials: true });
 
@@ -74,7 +70,7 @@ export const PlayerProvider = ({ children }) => {
   const singleSong = async (id) => {
     dispatch({ type: PLAY_SONG_BEGIN });
     try {
-      const res = await axios.get(`https://saavn.me/songs?id=${id}`);
+      const res = await SaavanService.getSongs(id);
       const result = res.data.data[0];
       dispatch({ type: PLAY_SONG_SUCESS, payload: result });
     } catch (error) {
@@ -185,8 +181,6 @@ export const PlayerProvider = ({ children }) => {
 
     singleSong(id);
   };
-
-
 
   return (
     <playerContext.Provider

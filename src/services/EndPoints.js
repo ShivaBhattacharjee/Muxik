@@ -1,5 +1,11 @@
 const EndPoints = {
-  modules: "/modules",
+  modules: (language) => `/modules/?language=${language}`,
+  songs: (id) => `/songs?id=${id}`,
+  albums: (id) => `/albums?id=${id}`,
+  playlists: (id) => `/playlists?id=${id}`,
+  artists: (id) => `/artists?id=${id}`,
+  artistsSongs: (id, page) => `/artists/${id}/songs?page=${page}`,
+  artistsAlbums: (id, page) => `/artists/${id}/albums?page=${page}`,
 };
 
 export default EndPoints;
