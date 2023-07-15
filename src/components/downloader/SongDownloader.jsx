@@ -3,6 +3,7 @@ import DownloadProgressBar from "./DownloadProgressBar";
 import DownloadProgress from "./DownloadProgress";
 import axios from "axios";
 import { AudioLinkSelector } from "../../Utils/Helper";
+import { SaavanService } from "../../services";
 
 const SongDownloader = ({ songId }) => {
   const [downloading, setDownloading] = useState(false);
@@ -15,8 +16,7 @@ const SongDownloader = ({ songId }) => {
   const [offsetValue, setOffsetValue] = useState(132);
 
   useEffect(() => {
-    axios
-      .get(`https://saavn.me/songs?id=${songId}`)
+    SaavanService.getSongs(songId)
       .then((response) => {
         let result = response.data.data[0];
         setDownloadLink({
