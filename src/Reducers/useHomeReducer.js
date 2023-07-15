@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import DefaultReducer from "./DefaultReducer";
 import { GET_HOME_DATA, _onError, _onSuccess } from "../Actions";
-import axios from "axios";
+import { SaavanService } from "../services";
 
 const homeReducer = (state, action) => {
   return DefaultReducer(state, action, GET_HOME_DATA);
@@ -16,15 +16,13 @@ const initialState = {
   loading: false,
 };
 
-const SAVAN_URL = "https://saavn.me/modules?language=hindi,english,Bhojpuri";
-
 const useHomeReducer = () => {
   const [state, dispatch] = useReducer(homeReducer, initialState);
 
   const homePageMusic = async () => {
     dispatch({ type: GET_HOME_DATA });
     try {
-      const response = await axios.get(SAVAN_URL);
+      const response = await SaavanService.getHomeData();
       let result = response.data.data;
       dispatch({
         type: _onSuccess(GET_HOME_DATA),
