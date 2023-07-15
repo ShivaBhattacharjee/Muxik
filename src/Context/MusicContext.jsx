@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import axios from "axios";
 import reducer from "../Reducers/MusicReducer";
 import {
   GET_HOME_DATA_BEGIN,

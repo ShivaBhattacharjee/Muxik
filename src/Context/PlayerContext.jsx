@@ -81,7 +81,7 @@ export const PlayerProvider = ({ children }) => {
   const SearchAll = async (text) => {
     dispatch({ type: NEW_SEARCH_BEGIN });
     try {
-      const res = await axios.get(`https://saavn.me/search/all?query=${text}`);
+      const res = await SaavanService.searchAll(text);
       const result = res.data.data;
       dispatch({ type: SEARCH_SUCESS, payload: result });
     } catch (error) {
@@ -93,9 +93,7 @@ export const PlayerProvider = ({ children }) => {
   const SearchSongs = async (keyword) => {
     dispatch({ type: NEW_SEARCH_BEGIN });
     try {
-      const res = await axios.get(
-        `https://saavn.me/search/songs?query=${keyword}}&page=1`
-      );
+      const res = await SaavanService.searchSongs(keyword);
 
       const result = res.data.data.results;
       dispatch({ type: SEARCH_SONGS_SUCESS, payload: result });
@@ -107,10 +105,7 @@ export const PlayerProvider = ({ children }) => {
   const SearchAlbums = async (keyword) => {
     dispatch({ type: NEW_SEARCH_BEGIN });
     try {
-      const res = await axios.get(
-        `https://saavn.me/search/albums?query=${keyword}}&page=1`
-      );
-
+      const res = await SaavanService.searchAlbums(keyword);
       const result = res.data.data.results;
       dispatch({ type: SEARCH_ALBUMS_SUCESS, payload: result });
     } catch (error) {
@@ -120,9 +115,7 @@ export const PlayerProvider = ({ children }) => {
 
   const PageChange = async (text, page) => {
     try {
-      const res = await axios.get(
-        `https://saavn.me/search/songs?query=${text}&page=${page}`
-      );
+      const res = await SaavanService.searchSongs(text, page);
       const result = res.data.data.results;
       dispatch({ type: NEXT_SEARCHED_ARRAY, payload: result });
     } catch (error) {
@@ -132,9 +125,7 @@ export const PlayerProvider = ({ children }) => {
 
   const AlbumsPageChange = async (text, page) => {
     try {
-      const res = await axios.get(
-        `https://saavn.me/search/albums?query=${text}&page=${page}`
-      );
+      const res = await SaavanService.searchAlbums(text, page);
       const result = res.data.data.results;
       dispatch({ type: NEXT_SEARCHED_ALBUMS, payload: result });
     } catch (error) {

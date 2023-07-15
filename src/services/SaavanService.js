@@ -5,36 +5,52 @@ const SAVAN_BASE_URL = "https://saavn.me";
 
 const api = axios.create({ baseURL: SAVAN_BASE_URL });
 
+const search = axios.create({ baseURL: SAVAN_BASE_URL + EndPoints.search });
+
 class SaavanService {
-  static getHomeData() {
+  getHomeData() {
     const languages = ["hindi", "english", "Bhojpuri"].join(",");
     return api.get(EndPoints.modules(languages));
   }
 
-  static getSongs(id) {
+  getSongs(id) {
     return api.get(EndPoints.songs(id));
   }
 
-  static getAlbums(id) {
+  getAlbums(id) {
     return api.get(EndPoints.albums(id));
   }
 
-  static getPlaylists(id) {
+  getPlaylists(id) {
     return api.get(EndPoints.playlists(id));
   }
 
-  static getArtists(id) {
+  getArtists(id) {
     return api.get(EndPoints.artists(id));
   }
 
-  static getArtistsSongs(id, ...pages) {
+  getArtistsSongs(id, ...pages) {
     const get = (page) => api.get(EndPoints.artistsSongs(id, page));
     return Promise.all(pages.map(get));
   }
 
-  static getArtistsAlbums(id) {
+  getArtistsAlbums(id) {
     return api.get(EndPoints.artistsAlbums(id, 1));
+  }
+
+  searchAll(query) {
+    return search.get(EndPoints.all(query));
+  }
+
+  searchSongs(query, page = 1) {
+    return search.get(EndPoints.searchSongs(query, page));
+  }
+
+  searchAlbums(query) {
+    return search.get(EndPoints.searchAlbums(query, 1));
   }
 }
 
-export default SaavanService;
+const SaavanInstance = new SaavanService();
+
+export default SaavanInstance;
