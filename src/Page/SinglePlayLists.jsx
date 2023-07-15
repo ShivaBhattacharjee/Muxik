@@ -13,13 +13,13 @@ const SinglePlayLists = () => {
   const [ImageLoading, SetImageLoading] = useState(true);
   const [alert, setAlert] = useState(false);
   const {
-    SinglePlaylist,
+    getSinglePlaylist,
     currentPlaylists,
     single_album_loading: loading,
   } = useMusicContext();
   let { id } = useParams();
   useEffect(() => {
-    SinglePlaylist(id);
+    getSinglePlaylist(id);
   }, [id]);
 
   if (loading) {
@@ -104,7 +104,6 @@ const SinglePlayLists = () => {
                   />
                 </RippleButton>
               </div>
-
             </div>
           </div>
         </div>

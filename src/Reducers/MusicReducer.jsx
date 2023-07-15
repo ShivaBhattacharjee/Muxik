@@ -1,7 +1,5 @@
 import {
   ALERT_SHOW,
-  GET_SINGLE_PLAYLIST_BEGIN,
-  GET_SINGLE_PLAYLIST_SUCESS,
   GET_ARTIST_DETAILS_BEGIN,
   GET_ARTIST_DETAILS_SUCESS,
   GET_ARTIST_DETAILS_ERROR,
@@ -12,19 +10,6 @@ import {
 } from "../Actions";
 
 const Music_reducer = (state, action) => {
-  if (action.type === GET_SINGLE_PLAYLIST_BEGIN) {
-    return { ...state, single_album_loading: true };
-  }
-
-  if (action.type === GET_SINGLE_PLAYLIST_SUCESS) {
-    const data = action.payload;
-    return {
-      ...state,
-      currentPlaylists: data,
-      single_album_loading: false,
-    };
-  }
-
   if (action.type === GET_ARTIST_DETAILS_BEGIN) {
     return { ...state, single_artist_loading: true };
   }
