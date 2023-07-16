@@ -2,16 +2,15 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 import reducer from "../Reducers/MusicReducer";
 import {
   ALERT_SHOW,
-  GET_ARTIST_SONGS_BEGIN,
-  GET_ARTIST_SONGS_SUCESS,
-  GET_ARTIST_SONGS_ERROR,
   GET_ARTIST_ALBUMS_BEGIN,
   GET_ARTIST_ALBUMS_SUCESS,
   GET_ARTIST_ALBUMS_ERROR,
 } from "../Actions";
 import {
+  useArtistsSongReducer,
   useHomeReducer,
   useSingleAlbumReducer,
+  useSingleArtistReducer,
   useSinglePlaylistReducer,
 } from "../Reducers";
 import { SaavanService } from "../services";
@@ -42,19 +41,8 @@ export const MusicProvider = ({ children }) => {
   const homeState = useHomeReducer();
   const singleAlbum = useSingleAlbumReducer();
   const singlePlaylist = useSinglePlaylistReducer();
-
-  const ArtistSongs = async (id) => {
-    dispatch({ type: GET_ARTIST_SONGS_BEGIN });
-    try {
-      const [res, res2] = await SaavanService.getArtistsSongs(id, 1, 2);
-      const data1 = res.data.data.results;
-      const data2 = res2.data.data.results;
-      const data = [...data1, ...data2];
-      dispatch({ type: GET_ARTIST_SONGS_SUCESS, payload: data });
-    } catch (error) {
-      dispatch({ type: GET_ARTIST_SONGS_ERROR });
-    }
-  };
+  const singleArtist = useSingleArtistReducer();
+  const artistsSongs = useArtistsSongReducer();
 
   const ArtistAlbums = async (id) => {
     dispatch({ type: GET_ARTIST_ALBUMS_BEGIN });
@@ -76,11 +64,12 @@ export const MusicProvider = ({ children }) => {
       value={{
         ...state,
         HandleAlert,
-        ArtistSongs,
         ArtistAlbums,
         ...homeState,
         ...singleAlbum,
         ...singlePlaylist,
+        ...singleArtist,
+        ...artistsSongs,
       }}
     >
       {children}

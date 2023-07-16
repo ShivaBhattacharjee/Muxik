@@ -16,7 +16,7 @@ const Artist = () => {
     getSingleArtist,
     single_artist_details: artist,
     single_artist_loading: loading,
-    ArtistSongs,
+    getArtistSongs,
     single_artist_songs,
     ArtistAlbums,
     single_artist_albums,
@@ -24,7 +24,7 @@ const Artist = () => {
 
   useEffect(() => {
     getSingleArtist(id);
-    ArtistSongs(id);
+    getArtistSongs(id);
     ArtistAlbums(id);
   }, [id]);
 

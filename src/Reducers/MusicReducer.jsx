@@ -1,28 +1,10 @@
 import {
   ALERT_SHOW,
-  GET_ARTIST_SONGS_BEGIN,
-  GET_ARTIST_SONGS_SUCESS,
   GET_ARTIST_ALBUMS_BEGIN,
   GET_ARTIST_ALBUMS_SUCESS,
 } from "../Actions";
 
 const Music_reducer = (state, action) => {
-  if (action.type === GET_ARTIST_SONGS_BEGIN) {
-    return {
-      ...state,
-      single_artist_songs_loading: true,
-    };
-  }
-
-  if (action.type === GET_ARTIST_SONGS_SUCESS) {
-    let data = action.payload;
-    return {
-      ...state,
-      single_artist_songs: data,
-      single_artist_songs_loading: false,
-    };
-  }
-
   if (action.type === GET_ARTIST_ALBUMS_BEGIN) {
     return {
       ...state,
