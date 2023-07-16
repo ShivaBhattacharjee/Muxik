@@ -18,14 +18,14 @@ const Artist = () => {
     single_artist_loading: loading,
     getArtistSongs,
     single_artist_songs,
-    ArtistAlbums,
+    getArtistAlbums,
     single_artist_albums,
   } = useMusicContext();
 
   useEffect(() => {
     getSingleArtist(id);
     getArtistSongs(id);
-    ArtistAlbums(id);
+    getArtistAlbums(id);
   }, [id]);
 
   if (loading) {
