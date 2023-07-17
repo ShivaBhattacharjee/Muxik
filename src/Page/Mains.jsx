@@ -1,7 +1,8 @@
 import React from "react";
 import { useMusicContext } from "../Context/MusicContext";
 import slider from "../assets/slider.webp"
-
+import { TopArtists } from "../Utils/topplaylist";
+import { SingleArtist } from "../components";
 import { motion } from "framer-motion";
 import {
   LoadingSpinner,
@@ -37,32 +38,57 @@ const Mains = () => {
           <span className="text-sm font-normal mb-2 lg:mt-2 opacity-80">Unveil the allure of our handpicked melodies - Dive into our popular playlists! </span>
           <button className="bg-[#302c77] text-white outline-none border-none w-32 text-lg p-2 rounded-lg text-center">
             <Link to={"/topplaylists/Hindi"}>
-            Listen Now
+              Listen Now
             </Link></button>
         </div>
       </div>
       <section className="w-full my-6 ">
-        <h1 className="font-bold text-3xl  w-fit text-darkTitle my-4">
-          Trending
-        </h1>
+        <div className="flex justify-between  items-center">
+          <h1 className="font-bold text-3xl  w-fit text-darkTitle my-4">
+            Trending
+          </h1>
+          <h1 className="text-sm  w-fit text-darkTitle my-4 opacity-80">Load more</h1>
+        </div>
         <TrendingAlbums />
       </section>
+
+      <section className="w-full my-6 ">
+        <div className="flex justify-between  items-center">
+          <h1 className="font-bold text-3xl  w-fit text-darkTitle my-4">
+            You May like
+          </h1>
+        </div>
+        <div className="flex gap-4 overflow-y-auto">
+          {TopArtists.map((artist, index) => (
+            <SingleArtist {...artist} key={index} />
+          ))}
+        </div>
+      </section>
       <section className="w-full my-6">
-        <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
-          Latest Releases
-        </h1>
+        <div className="flex justify-between  items-center">
+          <h1 className="font-bold text-3xl  w-fit text-darkTitle my-4">
+            Latest Releases
+          </h1>
+          <h1 className="text-sm  w-fit text-darkTitle my-4 opacity-80">Load more</h1>
+        </div>
         <Albums />
       </section>
       <section>
-        <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
-          Top Charts
-        </h1>
+        <div className="flex justify-between  items-center">
+          <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
+            Top Charts
+          </h1>
+          <h1 className="text-sm  w-fit text-darkTitle my-4 opacity-80">Load more</h1>
+        </div>
         <TopCharts />
       </section>
       <section>
-        <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
-          Top Playlist
-        </h1>
+        <div className="flex justify-between  items-center">
+          <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
+            Top Playlist
+          </h1>
+          <h1 className="text-sm  w-fit text-darkTitle my-4 opacity-80">Load more</h1>
+        </div>
         <TopPlaylists />
       </section>
     </motion.div>

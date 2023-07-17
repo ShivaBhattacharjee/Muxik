@@ -5,7 +5,6 @@ const MusicCard = ({ image, id, name }) => {
   return (
     <div>
       <div className="relative w-28 h-36 group rounded-lg">
-        <div className=" ">
         <img
           src={image[1].link}
           alt=""
@@ -23,7 +22,6 @@ const MusicCard = ({ image, id, name }) => {
           __html: `${name}`,
         }}
       />
-            </div>
       </div>
     </div>
   );
