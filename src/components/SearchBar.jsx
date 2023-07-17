@@ -5,7 +5,7 @@ import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
-import { Link } from "react-router-dom";
+
 const SearchBar = () => {
   const navigate = useNavigate();
   const {
@@ -89,9 +89,6 @@ const SearchBar = () => {
           <SearchIcon/>
         </div>
       </div>
-      <Link to="/login">
-      <button className="text-white bg-[#2d1b69] p-2 w-20 text-lg rounded-sm font-semibold">Login</button>
-      </Link>
     </section>
   );
 };

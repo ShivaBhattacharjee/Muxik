@@ -2,17 +2,21 @@ import React from "react";
 import ExploreIcon from "@mui/icons-material/Explore";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { usePlayerContext } from "../Context/PlayerContext";
 import LogoText from "./assets/LogoText";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HistoryIcon from '@mui/icons-material/History';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 const SideNav = () => {
   const { HandleSideNav, side_navbar_show } = usePlayerContext();
   return (
     <div className={"float-left w-52 h-[26rem] max-md:w-0 select-none"}>
       <div
         className={
-          "bg-[#1b103f] text-darkTextColor top-0  w-52 transition-all duration-200 ease-linear  fixed z-50 h-full  py-10 " +
+          "bg-[#1b103f] border-r-2 border-solid border-gray-700 text-darkTextColor top-0  w-52 transition-all duration-200 ease-linear  fixed z-50 h-full  py-10 " +
           (side_navbar_show ? "max-md:w-64 left-0" : "max-md:-left-52")
         }
       >
@@ -57,15 +61,50 @@ const SideNav = () => {
                 <AssessmentIcon />
                 Top Playlists
               </NavLink>
+              <hr className="bg-white" />
+              <h3 className="uppercase font-Rubik font-medium tracking-wider max-md:text-lg text-sm">
+                Collection
+              </h3>
+              <NavLink
+                onClick={HandleSideNav}
+                to={"/liked-songs"}
+                className="flex items-center gap-4 text-sm max-md:text-base font-medium"
+              >
+                <ThumbUpIcon />
+                Liked Songs
+              </NavLink>
+
+              <NavLink
+                onClick={HandleSideNav}
+                to={"/favourite/songs"}
+                className="flex items-center gap-4 text-sm max-md:text-base font-medium"
+              >
+                <FavoriteIcon />
+                Favourite 
+              </NavLink>
+
+              <NavLink
+                onClick={HandleSideNav}
+                to={"/history"}
+                className="flex items-center gap-4 text-sm max-md:text-base font-medium"
+              >
+                <HistoryIcon />
+                History
+              </NavLink>
+              <hr className="bg-white" />
+              <Link
+                onClick={HandleSideNav}
+                to={"/login"}
+                className="bg-blue-500 text-white p-3 flex gap-2  text-lg items-center rounded-lg justify-center"
+              >
+                <LockOpenIcon />
+                Login
+              </Link>
             </ul>
           </section>
+
           <section>
           </section>
-        </section>
-        <section className="px-7 max-md:px-10 mt-5 absolute bottom-10 left-10 right-0">
-          <button className="">
-            <GitHubIcon style={{ fontSize: window.innerWidth > 600 ? 32 : 45 }} onClick={()=>window.open("https://github.com/ShivaBhattacharjee/Muxik")}/>
-          </button>
         </section>
       </div>
       <div

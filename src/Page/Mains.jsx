@@ -1,6 +1,6 @@
 import React from "react";
 import { useMusicContext } from "../Context/MusicContext";
-import { usePlayerContext } from "../Context/PlayerContext";
+import slider from "../assets/slider.webp"
 
 import { motion } from "framer-motion";
 import {
@@ -10,6 +10,7 @@ import {
   TopCharts,
   TopPlaylists,
 } from "../components";
+import { Link } from "react-router-dom";
 
 const Mains = () => {
   const { homeDataLoading: loading } = useMusicContext();
@@ -28,6 +29,18 @@ const Mains = () => {
       exit={{ x: "-100vw", transition: { ease: "easeInOut" } }}
       className={"bg-[#2d1b69] pl-10 pr-4 max-md:pl-4 overflow-y-hidden pb-24 "}
     >
+      <div className="relative my-6 ">
+        <img src={slider} alt="slider-image" className="rounded-lg h-64 w-full" />
+
+        <div className=" absolute lg:bottom-5 bottom-10 p-4 flex gap-2 flex-col text-white font-semibold lg:pl-7 lg:text-7xl text-3xl">
+          <h1 className=" lg:mb-2">Amazing Playlists</h1>
+          <span className="text-sm font-normal mb-2 lg:mt-2 opacity-80">Unveil the allure of our handpicked melodies - Dive into our popular playlists! </span>
+          <button className="bg-[#302c77] text-white outline-none border-none w-32 text-lg p-2 rounded-lg text-center">
+            <Link to={"/topplaylists/Hindi"}>
+            Listen Now
+            </Link></button>
+        </div>
+      </div>
       <section className="w-full my-6 ">
         <h1 className="font-bold text-3xl  w-fit text-darkTitle my-4">
           Trending

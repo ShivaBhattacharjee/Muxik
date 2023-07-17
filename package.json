@@ -1,7 +1,7 @@
 {
-  "name": "Muxik",
+  "name": "muxik",
   "private": false,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "Muxik is the ultimate destination for streaming and downloading music for free. Enjoy unlimited access to a vast collection of songs, playlists, and albums, all available with a single click.",
   "scripts": {
