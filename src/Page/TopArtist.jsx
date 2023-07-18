@@ -8,7 +8,7 @@ const TopArtist = () => {
       <h3 className=" text-neutral-300 text-3xl font-bold ml-9  max-md:ml-5 mb-5">
         Top Artists
       </h3>
-      <div className="flex flex-wrap overflow-x-hidden gap-2 w-full justify-center items-center lg:justify-start p-2 lg:p-4">
+      <div className=" flex flex-wrap justify-center items-center gap-2">
         {TopArtists.map((artist, index) => (
           <SingleArtist {...artist} key={index} />
         ))}
