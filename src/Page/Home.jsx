@@ -58,7 +58,7 @@ const Mains = () => {
             You May like
           </h1>
         </div>
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-4 overflow-x-scroll">
           {TopArtists?.slice(0,10)?.map((artist, index) => (
             <SingleArtist {...artist} key={index} />
           ))}
