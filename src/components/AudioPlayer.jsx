@@ -147,7 +147,7 @@ const AudioPlayer = () => {
   return (
     <div
       className={
-        " px-7 py-2 mt-5 relative  max-md:h-full " +
+        " px-7 py-2 mt-0 lg:mt-0 relative  max-md:h-full " +
         (side_menu_show ? "opacity-100" : "opacity-0")
       }
     >
@@ -186,6 +186,7 @@ const AudioPlayer = () => {
         <p className="text-xs max-md:text-base opacity-90 text-center whitespace-nowrap w-40 overflow-hidden text-ellipsis">
           {current_song.primaryArtists}
         </p>
+        <button className=" bg-transparent border-2 border-solid border-gray-700 p-2 rounded-full text-sm w-28 mt-2 ">Lyrics</button>
         <img
           src={ImageFetch(current_song)}
           alt="song Avatar"
@@ -339,7 +340,7 @@ const AudioPlayer = () => {
 
         <button
           onClick={() => setShowUpNext((prev) => !prev)}
-          className="mt-0 max-md:mt-16 max-md:text-xl"
+          className="mt-0  top-0 max-md:mt-16 max-md:text-xl"
         >
           View More
         </button>
