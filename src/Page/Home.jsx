@@ -74,12 +74,9 @@ const Mains = () => {
         <Albums />
       </section>
       <section>
-        <div className="flex justify-between  items-center">
-          <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
+      <h1 className="font-bold text-3xl w-fit text-darkTitle my-4">
             Top Charts
           </h1>
-          <h1 className="text-sm  w-fit text-darkTitle my-4 opacity-80">Load more</h1>
-        </div>
         <TopCharts />
       </section>
       <section>

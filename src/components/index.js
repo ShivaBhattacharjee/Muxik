@@ -31,6 +31,7 @@ import BhojpuriPlaylist from "./playlists/BhojpuriPlaylist";
 import EnglishPlaylists from "./playlists/EnglishPlaylists";
 import SpotifyIcon from "./assets/SpotifyIcon";
 import SinglePlaylistCard from "./SinglePlaylistCard";
+import ChartsDisplay from "./ChartsDisplay";
 
 export {
   AudiPlayer,
@@ -66,4 +67,5 @@ export {
   EnglishPlaylists,
   SpotifyIcon,
   SinglePlaylistCard,
+  ChartsDisplay
 };

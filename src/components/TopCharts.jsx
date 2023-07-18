@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import { SingleChart } from "../components";
+import { ChartsDisplay } from "../components";
 import { useMusicContext } from "../Context/MusicContext";
 
 const TopCharts = () => {
@@ -44,13 +44,13 @@ const TopCharts = () => {
   }, []);
   const { charts } = useMusicContext();
   return (
-    <div className="flex gap-8 max-md:gap-3 overflow-scroll h-full"
+    <div className="flex flex-col gap-8 max-md:gap-3 overflow-scroll h-full text-white lg:grid-cols-3 md:grid md:grid-cols-2"
     onMouseDown={handleMouseDown}
     onMouseMove={handleMouseMove}
     onMouseUp={handleMouseUp}
     ref={containerRef}>
       {charts.map((item, index) => {
-        return <SingleChart {...item} key={index} />;
+        return <ChartsDisplay {...item} key={index} />;
       })}
     </div>
   );
