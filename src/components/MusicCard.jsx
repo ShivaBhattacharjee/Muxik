@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const MusicCard = ({ image, id, name }) => {
   return (
     <div>
-      <div className="relative w-28 h-36 group rounded-lg">
+      <div className="relative w-28  group rounded-lg">
         <img
           src={image[1].link}
           alt=""
