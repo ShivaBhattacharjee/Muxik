@@ -12,7 +12,10 @@ import {
   PageNotFound,
   Login,
   SignUp,
-  ForgotPassword
+  ForgotPassword,
+  LikedSongs,
+  Favourites,
+  History
 } from "./Page";
 import {
   HindiPlaylist,
@@ -43,6 +46,9 @@ const AnimateRoutes = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path="/liked-songs" element={<LikedSongs/>}/>
+        <Route path="/favourites" element={<Favourites/>}/>
+        <Route path="/history" element={<History/>}/>
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
   );

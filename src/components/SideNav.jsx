@@ -76,7 +76,7 @@ const SideNav = () => {
 
               <NavLink
                 onClick={HandleSideNav}
-                to={"/favourite/songs"}
+                to={"/favourites"}
                 className="flex items-center gap-4 text-sm max-md:text-base font-medium"
               >
                 <FavoriteIcon />

@@ -1,4 +1,4 @@
-import Home from "./Mains";
+import Home from "./Home";
 import SingleAlbum from "./SingleAlbum";
 import SearchResult from "./SearchResult";
 import SinglePlayLists from "./SinglePlayLists";
@@ -11,6 +11,9 @@ import PageNotFound from "./PageNotFound";
 import Login from "./Login"
 import SignUp from "./SignUp";
 import ForgotPassword from "./ForgotPassword";
+import LikedSongs from "./LikedSongs";
+import Favourites from "./Favourites";
+import  History  from "./History";
 export {
   Home,
   SingleAlbum,
@@ -24,5 +27,8 @@ export {
   PageNotFound,
   Login,
   SignUp,
-  ForgotPassword
+  ForgotPassword,
+  LikedSongs,
+  Favourites,
+  History
 };
