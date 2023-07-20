@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { SongsList, LoadingSpinner } from "../components";
-import { Logo, LogoText } from "../components";
+import {  LogoText } from "../components";
 import { usePlayerContext } from "../Context/PlayerContext";
 
 const RecentSongs = () => {
@@ -27,7 +27,7 @@ const RecentSongs = () => {
     <div>
       <section className=" flex justify-center items-center py-20  rounded-b-2xl mb-16 relative h-48">
         <div className=" absolute inset-0 flex justify-end viewall rounded-b-2xl">
-          <Logo />
+          {/* <Logo /> */}
         </div>
         <div className="ml-3 max-lg:ml-11 ">
           <LogoText />

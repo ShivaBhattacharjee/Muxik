@@ -6,7 +6,6 @@ import { SideNav, RightSideMenu, TopNav } from "./components";
 function App() {
   return (
     <BrowserRouter>
-      {/* <div className="grid grid-cols-[max-content,auto,max-content]"> */}
       <TopNav />
       <SideNav />
       <AnimateRoutes />

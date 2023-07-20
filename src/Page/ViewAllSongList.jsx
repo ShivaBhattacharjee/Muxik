@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { SongsList } from "../components";
 import { usePlayerContext } from "../Context/PlayerContext";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Logo, LogoText } from "../components";
 import ClipLoader from "react-spinners/ClipLoader";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import RippleButton from "ripple-effect-reactjs";

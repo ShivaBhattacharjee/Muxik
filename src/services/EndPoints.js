@@ -10,6 +10,7 @@ const EndPoints = {
   all: (query) => `/all?query=${query}`,
   searchSongs: (query, page) => `/songs?page=${page}&query=${query}`,
   searchAlbums: (query, page) => `/albums?page=${page}&query=${query}`,
+  login : "/login"
 };
 
 export default EndPoints;

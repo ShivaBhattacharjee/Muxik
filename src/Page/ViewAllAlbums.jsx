@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { usePlayerContext } from "../Context/PlayerContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ListItemButton from "@mui/material/ListItemButton";
-import { Logo, LogoText } from "../components";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const ViewAllAlbums = () => {

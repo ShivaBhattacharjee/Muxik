@@ -2,7 +2,7 @@ import React from "react";
 import ExploreIcon from "@mui/icons-material/Explore";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { usePlayerContext } from "../Context/PlayerContext";
 import LogoText from "./assets/LogoText";
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -10,8 +10,15 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HistoryIcon from '@mui/icons-material/History';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { useLoginContext } from "../Context/LoginContext";
+
 const SideNav = () => {
   const { HandleSideNav, side_navbar_show } = usePlayerContext();
+  const {loggedIn , logout} = useLoginContext()
+  const handleLogout = () => {
+    logout(); // Call the logout function to log out the user
+  };
+  
   return (
     <div className={"float-left w-52 h-[26rem] max-md:w-0 select-none"}>
       <div
@@ -80,7 +87,7 @@ const SideNav = () => {
                 className="flex items-center gap-4 text-sm max-md:text-base font-medium"
               >
                 <FavoriteIcon />
-                Favourite 
+                Favourite
               </NavLink>
 
               <NavLink
@@ -92,7 +99,15 @@ const SideNav = () => {
                 History
               </NavLink>
               <hr className="bg-white" />
-              <Link
+              {loggedIn ? (
+                <div onClick={handleLogout}
+                className="bg-blue-500 cursor-pointer text-white p-3 flex gap-2  text-lg items-center rounded-lg justify-center"
+              >
+                <LockOpenIcon />
+                  Logout
+              </div>
+              ):(
+                <Link
                 onClick={HandleSideNav}
                 to={"/login"}
                 className="bg-blue-500 text-white p-3 flex gap-2  text-lg items-center rounded-lg justify-center"
@@ -100,6 +115,7 @@ const SideNav = () => {
                 <LockOpenIcon />
                 Login
               </Link>
+              )}
             </ul>
           </section>
 

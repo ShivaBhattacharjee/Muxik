@@ -12,7 +12,6 @@ import {
   TopPlaylists,
 } from "../components";
 import { Link } from "react-router-dom";
-
 const Mains = () => {
   const { homeDataLoading: loading } = useMusicContext();
   if (loading) {
