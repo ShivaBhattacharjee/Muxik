@@ -15,8 +15,7 @@ import UpNextSongs from "./UpNextSongs";
 import { AnimatePresence, motion } from "framer-motion";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 const AudioPlayer = () => {
   const {
     current_song,
@@ -245,7 +244,7 @@ const AudioPlayer = () => {
             }}
             aria-label="favsong"
           >
-            <FavoriteBorderIcon fontSize="2rem" htmlColor="#8e9196" />
+            <ThumbUpIcon fontSize="2rem" htmlColor="#8e9196" />
           </IconButton>
           <IconButton
             aria-label="previous song"

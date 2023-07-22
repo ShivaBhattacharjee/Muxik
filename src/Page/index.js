@@ -12,7 +12,6 @@ import Login from "./Login"
 import SignUp from "./SignUp";
 import ForgotPassword from "./ForgotPassword";
 import LikedSongs from "./LikedSongs";
-import Favourites from "./Favourites";
 import  History  from "./History";
 export {
   Home,
@@ -29,6 +28,5 @@ export {
   SignUp,
   ForgotPassword,
   LikedSongs,
-  Favourites,
   History
 };

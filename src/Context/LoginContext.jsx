@@ -1,6 +1,7 @@
+// LoginContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import BackEndService from '../services/BackEndService';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 
 const LoginContext = createContext();
 
@@ -8,7 +9,7 @@ export const LoginProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState('');
   const [token, setToken] = useState(null);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [username, setUsername] = useState(null);
 
   const login = async (username, password) => {
     try {
@@ -21,8 +22,10 @@ export const LoginProvider = ({ children }) => {
         setLoggedIn(true);
         setError('');
         setToken(response.data.token);
-        const expiration = rememberMe ? { expires: 7 } : { expires: 1 };
-        Cookies.set('token', response.data.token, expiration);
+        setUsername(username);
+        const expiration = 7; // Set the cookie expiration in days
+        Cookies.set('token', response.data.token, { expires: expiration });
+        Cookies.set('username', username, { expires: expiration }); // Store the username in a cookie
       } else {
         throw new Error('Login failed. Please check your credentials.');
       }
@@ -35,7 +38,9 @@ export const LoginProvider = ({ children }) => {
   const logout = () => {
     setLoggedIn(false);
     setToken(null);
-    Cookies.remove('token'); 
+    setUsername(null);
+    Cookies.remove('token');
+    Cookies.remove('username'); // Remove the username cookie on logout
   };
 
   useEffect(() => {
@@ -43,6 +48,10 @@ export const LoginProvider = ({ children }) => {
     if (storedToken) {
       setToken(storedToken);
       setLoggedIn(true);
+    }
+    const storedUsername = Cookies.get('username'); // Get the username from the cookie
+    if (storedUsername) {
+      setUsername(storedUsername); // Set the username from the cookie
     }
   }, []);
 
@@ -52,9 +61,8 @@ export const LoginProvider = ({ children }) => {
     login,
     logout,
     token,
+    username,
     axiosInstance: BackEndService,
-    rememberMe,
-    setRememberMe
   };
 
   return (

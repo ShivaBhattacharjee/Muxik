@@ -14,7 +14,6 @@ import {
   SignUp,
   ForgotPassword,
   LikedSongs,
-  Favourites,
   History
 } from "./Page";
 import {
@@ -47,7 +46,6 @@ const AnimateRoutes = () => {
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/liked-songs" element={<LikedSongs/>}/>
-        <Route path="/favourites" element={<Favourites/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/*" element={<PageNotFound />} />
       </Routes>

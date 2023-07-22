@@ -81,14 +81,6 @@ const SideNav = () => {
                 Liked Songs
               </NavLink>
 
-              <NavLink
-                onClick={HandleSideNav}
-                to={"/favourites"}
-                className="flex items-center gap-4 text-sm max-md:text-base font-medium"
-              >
-                <FavoriteIcon />
-                Favourite
-              </NavLink>
 
               <NavLink
                 onClick={HandleSideNav}
