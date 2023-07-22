@@ -16,6 +16,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { useLikedSongs } from "../Context/LikedSongsContext";
+import { useLoginContext } from "../Context/LoginContext"
+import {useHistoryContext} from "../Context/HistoryContext"
 const AudioPlayer = () => {
   const {
     current_song,
@@ -24,6 +27,10 @@ const AudioPlayer = () => {
     current_playing_lists,
     singleSong,
   } = usePlayerContext();
+  const { likedSongs, addSongToLikedSongs,deleteLikedSong } = useLikedSongs()
+  const { username, loggedIn } = useLoginContext();
+  const { addSongToHistory } = useHistoryContext();
+
   const [repeatOne, setRepeatOne] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const [showUpNext, setShowUpNext] = useState(false);
@@ -31,18 +38,35 @@ const AudioPlayer = () => {
   const [coverRadius, setCoverRadius] = useState(false);
   const songName = useRef(null);
   const [volume, setVolume] = useState(60);
+  const [isLiked, setIsLiked] = useState(false);
+
   useEffect(() => {
     const songNameCon = songNameContainer.current;
     const songNamee = songName.current;
     if (songNameCon && songNamee) {
       if (songNamee.clientWidth > 200) {
-        setShouldAnimate(true);
+        setShouldAnimate(false);
       } else {
         setShouldAnimate(false);
       }
+      const addToHistory = async () => {
+        if (loggedIn && username) {
+          try {
+            addSongToHistory(current_song.id, current_song.name, ImageFetch(current_song));
+          } catch (error) {
+            console.error("Error adding song to history:", error);
+          }
+        }
+      };
+      addToHistory();
     }
-  }, [audio_playing, current_song]);
+  }, [audio_playing, current_song, loggedIn, username, addSongToHistory]);
 
+  useEffect(() => {
+    // Check if the current song is liked and update the isLiked state
+    setIsLiked(likedSongs.some((song) => song.songId === current_song.id));
+  }, [likedSongs, current_song]);
+  
 
   const [audioProgress, setAudioProgress] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -68,6 +92,29 @@ const AudioPlayer = () => {
     }
   };
 
+  // function to add or delelte liked songs
+  const handleThumbsUpClick = () => {
+    if (!loggedIn) {
+      // Show an alert if the user is not logged in
+      alert("Please log in first to like the song.");
+      return;
+    }
+  
+    // Check if the song is already in the liked songs list
+    const isSongLiked = likedSongs.some((song) => song.songId === current_song.id);
+  
+    if (isSongLiked) {
+      setIsLiked(false);
+  
+      // Make a DELETE request to remove the song from the liked songs in the backend
+      deleteLikedSong(current_song.id);
+    } else {
+      // The song is not liked, so add it to the liked songs list
+      addSongToLikedSongs(current_song.id, current_song.name, ImageFetch(current_song), username);
+      setIsLiked(true);
+    }
+  };
+  
   const handleAudioUpdate = () => {
     if (currentAudio.current.currentTime === currentAudio.current.duration) {
       if (repeatOne) {
@@ -243,8 +290,12 @@ const AudioPlayer = () => {
               marginRight: "10px",
             }}
             aria-label="favsong"
+            onClick={handleThumbsUpClick} // Add the click handler to the thumbs-up icon
           >
-            <ThumbUpIcon fontSize="2rem" htmlColor="#8e9196" />
+            <ThumbUpIcon
+              fontSize="2rem"
+              htmlColor={isLiked ? "blue" : "#8e9196"} // Change the icon color based on whether the song is liked or not
+            />
           </IconButton>
           <IconButton
             aria-label="previous song"

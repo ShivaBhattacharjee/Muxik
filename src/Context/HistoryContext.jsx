@@ -28,8 +28,23 @@ const HistoryProvider = ({ children }) => {
     }
   }, [loggedIn, username]);
 
+  const addSongToHistory = async (songId, songName, banner) => {
+    try {
+      const response = await BackEndService.post("/add-song-history", {
+        username: username,
+        songId: songId,
+        songName: songName,
+        banner: banner,
+      });
+      // console.log("Song added to history:", response.data);
+    } catch (error) {
+      console.error("Error adding song to history:", error);
+    }
+  };
+  
+
   return (
-    <HistoryContext.Provider value={{ songHistory, loading, error }}>
+    <HistoryContext.Provider value={{ songHistory, loading, error, addSongToHistory }}>
       {children}
     </HistoryContext.Provider>
   );

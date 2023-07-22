@@ -1,4 +1,3 @@
-// LikedSongsContext.js
 import { createContext, useContext, useState, useEffect } from 'react';
 import BackEndService from '../services/BackEndService'; // Update the path accordingly
 import { useLoginContext } from './LoginContext';
@@ -12,10 +11,10 @@ export const useLikedSongs = () => {
 export const LikedSongsProvider = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState([]);
   const [error, setError] = useState('');
-  const { username,loggedIn } = useLoginContext();
+  const { username, loggedIn } = useLoginContext();
 
   useEffect(() => {
-    if (username!==null && loggedIn) {
+    if (username !== null && loggedIn) {
       fetchLikedSongs(username);
     }
   }, [username]);
@@ -32,9 +31,43 @@ export const LikedSongsProvider = ({ children }) => {
     }
   };
 
+  // Function to add a song to the liked songs
+  const addSongToLikedSongs = async (songId, songName, banner) => {
+    try {
+      const response = await BackEndService.post("/add-liked-songs", {
+        username,
+        songId,
+        songName,
+        banner,
+      });
+      const data = response?.data;
+      console.log("Song added to liked songs:", data);
+      // Optionally, you can fetch the updated liked songs after adding the song
+      // fetchLikedSongs(username);
+    } catch (error) {
+      console.error("Error adding song to liked songs:", error);
+      throw new Error("Failed to add song to liked songs" + error);
+    }
+  }
+
+  // Function to delete a song from the liked songs
+  const deleteLikedSong = async (songId) => {
+    try {
+      await BackEndService.delete(`/delete-liked-songs/${username}/${songId}`);
+      console.log("Song deleted from liked songs:", songId);
+      // Optionally, you can fetch the updated liked songs after deleting the song
+      // fetchLikedSongs(username);
+    } catch (error) {
+      console.error("Error deleting song from liked songs:", error);
+      throw new Error("Failed to delete song from liked songs" + error);
+    }
+  }
+
   const contextValue = {
     likedSongs: likedSongs,
     error: error,
+    addSongToLikedSongs: addSongToLikedSongs,
+    deleteLikedSong: deleteLikedSong, // Expose the deleteLikedSong function in the context
   };
 
   return (

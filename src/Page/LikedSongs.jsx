@@ -1,34 +1,47 @@
 import React from 'react';
 import { useLikedSongs } from '../Context/LikedSongsContext';
 import { useLoginContext } from "../Context/LoginContext";
-
+import { usePlayerContext } from '../Context/PlayerContext';
 const LikedSongs = () => {
   const { likedSongs, error, loading } = useLikedSongs();
   const { loggedIn } = useLoginContext();
-
+  const { HandlePlaySong } = usePlayerContext();
   return (
     <div className='text-white bg-[#2d1b69] h-screen'>
       <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>Liked Songs</h1>
-      {loggedIn ? (
-        loading ? (
-          <h1>Loading</h1>
-        ) : error ? (
-          <p>Error fetching liked songs: {error}</p>
-        ) : (
-          likedSongs.length === 0 ? (
-            <p>No liked songs</p>
-          ) : (
-            likedSongs.slice().reverse().map((song) => (
-              <div key={song?._id}>
-                <h3>{song?.songName}</h3>
-                <h1>{song?.banner}</h1>
-              </div>
-            ))
-          )
-        )
-      ) : (
-        <p>Sorry, this feature is only for logged-in users</p>
+      {loggedIn &&(
+      <p className='text-center'>Liked songs {likedSongs.length}</p>
       )}
+      <div className={`lg:flex  ${loggedIn?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
+        {loggedIn ? (
+          loading ? (
+            <h1>Loading</h1>
+          ) : error ? (
+            <p>Error fetching liked songs: {error}</p>
+          ) : (
+            likedSongs.length === 0 ? (
+              <p>No liked songs</p>
+            ) : (
+              likedSongs.slice().reverse().map((song) => (
+                <div key={song?._id} className=''>
+                  <div className='p-2'>
+                    <img src={song?.banner} alt={song?.songName} className='w-28 cursor-pointer hover:scale-105 duration-75 rounded-lg lg:w-36' onClick={()=>HandlePlaySong(song?.songId)} />
+                    <h4
+                      className="whitespace-nowrap overflow-hidden text-ellipsis w-28 text-darkSongname text-sm mt-2 px-1"
+                      title={song?.songName}
+                      dangerouslySetInnerHTML={{
+                        __html: `${song?.songName}`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))
+            )
+          )
+        ) : (
+          <p>Sorry, this feature is only for logged-in users</p>
+        )}
+      </div>
     </div>
   );
 };
