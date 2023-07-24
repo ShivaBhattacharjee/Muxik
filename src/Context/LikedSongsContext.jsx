@@ -42,8 +42,7 @@ export const LikedSongsProvider = ({ children }) => {
       });
       const data = response?.data;
       console.log("Song added to liked songs:", data);
-      // Optionally, you can fetch the updated liked songs after adding the song
-      // fetchLikedSongs(username);
+      fetchLikedSongs(username);
     } catch (error) {
       console.error("Error adding song to liked songs:", error);
       throw new Error("Failed to add song to liked songs" + error);
@@ -55,8 +54,7 @@ export const LikedSongsProvider = ({ children }) => {
     try {
       await BackEndService.delete(`/delete-liked-songs/${username}/${songId}`);
       console.log("Song deleted from liked songs:", songId);
-      // Optionally, you can fetch the updated liked songs after deleting the song
-      // fetchLikedSongs(username);
+      fetchLikedSongs(username);
     } catch (error) {
       console.error("Error deleting song from liked songs:", error);
       throw new Error("Failed to delete song from liked songs" + error);
