@@ -2206,6 +2206,25 @@ export const topEnglishPlaylist = [
 
 export const TopArtists = [
   {
+    id: "12269054",
+    name: "Dilshad Ahmed",
+    url: "https://www.jiosaavn.com/artist/dilshad-ahmed-songs/QXYL,9EczhM_",
+    image: [
+      {
+        quality: "50x50",
+        link: "https://c.saavncdn.com/artists/Dilshad_Ahmed_000_20220218101546_50x50.jpg",
+      },
+      {
+        quality: "150x150",
+        link: "https://c.saavncdn.com/artists/Dilshad_Ahmed_000_20220218101546_150x150.jpg",
+      },
+      {
+        quality: "500x500",
+        link: "https://c.saavncdn.com/artists/Dilshad_Ahmed_000_20220218101546_500x500.jpg",
+      },
+    ],
+  },
+  {
     id: "568707",
     name: "Sia",
     url: "https://www.jiosaavn.com/artist/sia-/C4hxFiXrHws_",

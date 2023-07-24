@@ -1,12 +1,11 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import BackEndService from '../services/BackEndService'; // Update the path accordingly
-import { useLoginContext } from './LoginContext';
+// HistoryContext.js
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useLoginContext } from '../Context/LoginContext';
+import BackEndService from '../services/BackEndService';
 
 const HistoryContext = createContext();
 
-export const useHistoryContext = () => useContext(HistoryContext);
-
-export const HistoryProvider = ({ children }) => {
+const HistoryProvider = ({ children }) => {
   const { loggedIn, username } = useLoginContext();
   const [songHistory, setSongHistory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,11 +13,11 @@ export const HistoryProvider = ({ children }) => {
 
   useEffect(() => {
     if (loggedIn && username) {
-      fetchSongHistory();
+      fetchSongHistory(username);
     }
-  }, [loggedIn, username]);
+  }, [username, loggedIn]);
 
-  const fetchSongHistory = async () => {
+  const fetchSongHistory = async (username) => {
     try {
       setLoading(true);
       setError('');
@@ -35,28 +34,26 @@ export const HistoryProvider = ({ children }) => {
   const addSongToHistory = async (songId, songName, banner) => {
     try {
       const response = await BackEndService.post("/add-song-history", {
-        username,
-        songId,
-        songName,
-        banner,
+        username: username,
+        songId: songId,
+        songName: songName,
+        banner: banner,
       });
       console.log("Song added to history:", response.data);
+      // fetchSongHistory(username)
     } catch (error) {
       console.error("Error adding song to history:", error);
-      throw new Error("Failed to add song to history" + error);
     }
   };
 
-  const contextValue = {
-    songHistory: songHistory,
-    loading: loading,
-    error: error,
-    addSongToHistory: addSongToHistory,
-  };
 
   return (
-    <HistoryContext.Provider value={contextValue}>
+    <HistoryContext.Provider value={{ songHistory, loading, error, addSongToHistory }}>
       {children}
     </HistoryContext.Provider>
   );
 };
+
+const useHistoryContext = () => useContext(HistoryContext);
+
+export { HistoryProvider, useHistoryContext };

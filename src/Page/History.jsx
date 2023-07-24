@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLoginContext } from '../Context/LoginContext';
 import { useHistoryContext } from '../Context/HistoryContext';
 import { usePlayerContext } from '../Context/PlayerContext';
@@ -41,7 +42,12 @@ const History = () => {
             )
           )
         ) : (
-          <p className='w-full'>Sorry, this feature is only for logged-in users</p>
+          <div className='w-full flex justify-center items-center flex-col gap-3 h-[60vh] lg:h-[80vh]'>
+          <p className='font-semibold text-xl'>Login To Use This feature 👉👈</p>
+          <Link to="/login">
+          <button className='bg-blue-500 p-2  rounded-lg w-32 font-semibold text-xl m-2'>Login</button>
+          </Link>
+          </div>
         )}
       </div>
     </div>
