@@ -40,8 +40,8 @@ const LikedSongs = () => {
             )
           )
         ) : (
-          <div className='w-full flex justify-center items-center flex-col gap-3 h-[60vh] lg:h-[80vh]'>
-          <p className='font-semibold text-xl'>Login To Use This feature 👉👈</p>
+          <div className='w-full flex justify-center text-center items-center flex-col gap-3 h-[70vh] lg:h-[80vh]'>
+          <p className='font-semibold text-2xl'>Please , Login To Use This feature 👉👈</p>
           <Link to="/login">
           <button className='bg-blue-500 p-2  rounded-lg w-32 font-semibold text-xl m-2'>Login</button>
           </Link>

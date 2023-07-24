@@ -232,7 +232,7 @@ const AudioPlayer = () => {
         <p className="text-xs max-md:text-base opacity-90 text-center whitespace-nowrap w-40 overflow-hidden text-ellipsis">
           {current_song.primaryArtists}
         </p>
-        <button className=" bg-transparent border-2 border-solid border-gray-700 p-2 rounded-full text-sm w-28 mt-2 ">Lyrics</button>
+        {/* <button className=" bg-transparent border-2 border-solid border-gray-700 p-2 rounded-full text-sm w-28 mt-2 ">Lyrics</button> */}
         <img
           src={ImageFetch(current_song)}
           alt="song Avatar"
@@ -290,11 +290,11 @@ const AudioPlayer = () => {
               marginRight: "10px",
             }}
             aria-label="favsong"
-            onClick={handleThumbsUpClick} // Add the click handler to the thumbs-up icon
+            onClick={handleThumbsUpClick} 
           >
             <ThumbUpIcon
               fontSize="2rem"
-              htmlColor={isLiked ? "blue" : "#8e9196"} // Change the icon color based on whether the song is liked or not
+              htmlColor={isLiked ? "#3B82F6" : "#8e9196"} // Change the icon color based on whether the song is liked or not
             />
           </IconButton>
           <IconButton
