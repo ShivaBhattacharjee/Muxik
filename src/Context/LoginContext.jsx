@@ -10,6 +10,8 @@ export const LoginProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);
+  const [rememberMe , setRememberMe] = useState(true)
+  
 
   const login = async (username, password) => {
     try {
@@ -23,7 +25,7 @@ export const LoginProvider = ({ children }) => {
         setError('');
         setToken(response.data.token);
         setUsername(username);
-        const expiration = 7; // Set the cookie expiration in days
+        const expiration = rememberMe ? 7 : 1; // Set the cookie expiration in days
         Cookies.set('token', response.data.token, { expires: expiration });
         Cookies.set('username', username, { expires: expiration }); // Store the username in a cookie
       } else {
@@ -63,6 +65,7 @@ export const LoginProvider = ({ children }) => {
     token,
     username,
     axiosInstance: BackEndService,
+    setRememberMe
   };
 
   return (
