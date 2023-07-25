@@ -3,6 +3,7 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useLoginContext } from '../Context/LoginContext';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const { loggedIn, error, login, rememberMe, setRememberMe } = useLoginContext();
 
@@ -21,7 +22,7 @@ const Login = () => {
   })
   return (
     <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
-      <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-4">
+      <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
         {loggedIn && <p className=" text-center font-bold text-blue-800 text-2xl">Login successful!</p>}
         {error && <p className="text-red-500 text-center text-sm font-bold">{error}</p>}
         <h3 className="mb text-md text-[#1A2421]/80 font-semibold">Login In!</h3>
@@ -66,7 +67,9 @@ const Login = () => {
         <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleLogin}>Continue</button>
 
         <div className="form-footer mt-6 text-center">
-          <p className='text-sm font-semibold text-white'>Create an account</p>
+          <Link to="/sign-up">
+          <p className='text-sm font-semibold text-white'>Create and account</p>
+          </Link>
         </div>
       </form>
     </div>

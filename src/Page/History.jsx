@@ -15,15 +15,15 @@ const History = () => {
           <p className='text-center p-4 text-xl font-bold'>Total :  {songHistory?.songs?.length} songs</p>
         )
       }
-      <div className={`lg:flex ${loggedIn?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
+      <div className={`lg:flex ${loggedIn && songHistory?.songs?.length !== 0 ?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
         {loggedIn ? (
           loading ? (
             <h1>Loading</h1>
           ) : error ? (
             <p>Error fetching liked songs: {error}</p>
           ) : (
-            songHistory.length === 0 ? (
-              <p>No songs in history</p>
+            songHistory?.songs?.length === 0 ? (
+              <p className='text-center w-full text-2xl font-bold flex h-[60vh] justify-center items-center'>No songs in history</p>
             ) : (
               songHistory?.songs?.map((song) => (
                 <div key={song?._id} className=''>

@@ -13,7 +13,7 @@ const LikedSongs = () => {
       {loggedIn &&(
       <p className='text-center'>Liked songs {likedSongs.length}</p>
       )}
-      <div className={`lg:flex  ${loggedIn?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
+      <div className={`lg:flex  ${loggedIn &&      likedSongs.length !== 0 ?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
         {loggedIn ? (
           loading ? (
             <h1>Loading</h1>
@@ -21,7 +21,7 @@ const LikedSongs = () => {
             <p>Error fetching liked songs: {error}</p>
           ) : (
             likedSongs.length === 0 ? (
-              <p>No liked songs</p>
+              <p className='text-center w-full text-2xl font-bold flex h-[60vh] justify-center items-center'>No liked songs</p>
             ) : (
               likedSongs.slice().reverse().map((song) => (
                 <div key={song?._id} className=''>

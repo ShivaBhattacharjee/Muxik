@@ -7,9 +7,11 @@ import { PlayerProvider } from "./Context/PlayerContext";
 import { LoginProvider } from "./Context/LoginContext";
 import { LikedSongsProvider } from "./Context/LikedSongsContext";
 import { HistoryProvider } from "./Context/HistoryContext";
+import { RegisterProvider } from "./Context/RegisterContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <RegisterProvider>
     <LoginProvider>
       <MusicProvider>
         <HistoryProvider>
@@ -21,5 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </HistoryProvider>
       </MusicProvider>
     </LoginProvider>
+    </RegisterProvider>
   </React.StrictMode>
 );
