@@ -8,46 +8,49 @@ export function useRegisterContext() {
 }
 
 export function RegisterProvider({ children }) {
-    const [userDetails, setUserDetails] = useState(null);
-  
-    const registerUser = async (userData) => {
-      try {
-        const response = await BackEndService.post('/register', userData);
-        const user = response.data;
-        setUserDetails(user);
-        console.log('User registered:', user); 
-      } catch (error) {
-        console.error('Error registering user:', error);
-      }
-    };
-  
-    const verifyUser = async (email, verificationCode) => {
-      try {
-        const queryParam = `?email=${email}&verification_code=${verificationCode}`;
-        const response = await BackEndService.post('/verify-register' + queryParam);
-    
-        if (response.data && response.data.isVerified) {
-          setUserDetails((prevUser) => ({
-            ...prevUser,
-            isVerified: true,
-          }));
-          console.log('User verified successfully');
-        } else {
-          console.log('User verification failed');
-        }
-      } catch (error) {
-        console.error('Error verifying user:', error);
-        if (error.response) {
-          console.log('Error response data:', error.response.data);
-        }
-      }
-    };
-    
-  
-    return (
-      <RegisterContext.Provider value={{ userDetails, registerUser, verifyUser }}>
-        {children}
-      </RegisterContext.Provider>
-    );
+  const [userDetails, setUserDetails] = useState(null);
+  const [error , setError] = useState([])
+  const registerUser = async (userData) => {
+    try {
+      const response = await BackEndService.post('/register', userData);
+      const user = response.data;
+      setUserDetails(user);
+      console.log('User registered:', user);
+      setError(null); // Clear any previous errors
+    } catch (error) {
+      console.error('Error registering user:', error?.response?.data?.message);
+      setError(error?.response?.data?.message || 'An error occurred during registration try again later');
+    }
   }
+  const verifyUser = async (email, verificationCode) => {
+    try {
+      const queryParam = `?email=${email}&verificationCode=${verificationCode}`;
+      const response = await BackEndService.post('/verify-register' + queryParam);
+      console.log('Verification response:', response.data);
   
+      if (response.data && response.data.isVerified) {
+        console.log('User verified successfully');
+        setUserDetails((prevUser) => ({
+          ...prevUser,
+          isVerified: true,
+        }));
+      } else {
+        console.log('User verification failed');
+      }
+    } catch (error) {
+      console.error('Error verifying user:', error);
+      if (error.response) {
+        console.log('Error response data:', error.response.data);
+      }
+    }
+  };
+  
+
+
+  return (
+    <RegisterContext.Provider value={{ userDetails, registerUser, verifyUser, error }}>
+      {children}
+    </RegisterContext.Provider>
+  );
+}
+
