@@ -9,10 +9,10 @@ const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('')
-  const { registerUser, verifyUser, userDetails, error, errorVerify } = useRegisterContext();
+  const { registerUser, verifyUser, userDetails, error, errorVerify,emailSentTo } = useRegisterContext();
   const [verificationCode, setverificationCode] = useState("")
   const [loading, setLoading] = useState(false);
-  const [registerLoading , setRegisterLoading] = useState(false)
+  const [registerLoading, setRegisterLoading] = useState(false)
   const [otpSent, setOtpSent] = useState(false)
   const { loggedIn, login } = useLoginContext();
   const navigate = useNavigate()
@@ -41,8 +41,8 @@ const SignUp = () => {
       setLoading(false); // Stop loading animation (whether success or error)
     }
   };
-  
-  
+
+
 
 
   const handleSignUp = async (e) => {
@@ -50,11 +50,13 @@ const SignUp = () => {
     setRegisterLoading(true)
     try {
       await verifyUser(email, verificationCode);
+      if(!errorVerify){
       await login(username, password);
+      // navigate('/')
+      }
       localStorage.removeItem('tempUsername');
       localStorage.removeItem('tempPassword');
       localStorage.removeItem("email")
-      navigate('/')
     } catch (error) {
       setLoading(false)
       console.error('Error verifying user:', error);
@@ -65,7 +67,7 @@ const SignUp = () => {
     if (loggedIn) {
       navigate("/");
     }
-  
+
     // Check if username and password are stored in local storage
     const storedUsername = localStorage.getItem('tempUsername');
     const storedPassword = localStorage.getItem('tempPassword');
@@ -80,9 +82,22 @@ const SignUp = () => {
     <>
       <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
         <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
-          {error && <h1>{error}</h1>}
-          {otpSent && <h1>OTP sent to the email address</h1>}
-          {errorVerify && <h1>{errorVerify}</h1>}
+        {userDetails?.isVerified && (
+            <h1 className="text-red-500">You are already registered and verified. Please log in.</h1>
+          )}
+
+          {emailSentTo && (
+            <h1 className="text-red-500">OTP sent to the email address. Please check your email.</h1>
+          )}
+
+          {error && (
+            <h1 className="text-red-500">{error}</h1>
+          )}
+          {
+            errorVerify&&(
+              <h1 className="text-red-500">Verification failed</h1>
+            )
+          }
 
           <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>
           <p className="mb-6 text-sm text-[#1A2421]/90 text-opacity-50">Let's embark on a musical journey together by registering with us!</p>

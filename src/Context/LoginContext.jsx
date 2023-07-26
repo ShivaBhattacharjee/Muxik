@@ -34,8 +34,8 @@ export const LoginProvider = ({ children }) => {
         throw new Error('Login failed. Please check your credentials.');
       }
     } catch (error) {
-      setError('Reset krle ya account bna le bsdk');
-      console.error(error);
+      setError('Login failed check your credentials');
+      console.error(error?.data?.message || "bro no idea what went wrong");
     }
     finally {
       setLoading(false); 
