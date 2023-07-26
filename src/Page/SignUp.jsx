@@ -14,7 +14,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [registerLoading , setRegisterLoading] = useState(false)
   const [otpSent, setOtpSent] = useState(false)
-  const { loggedIn } = useLoginContext();
+  const { loggedIn, login } = useLoginContext();
   const navigate = useNavigate()
 
   const handleGetOtp = async (e) => {
@@ -50,9 +50,11 @@ const SignUp = () => {
     setRegisterLoading(true)
     try {
       await verifyUser(email, verificationCode);
+      await login(username, password);
       localStorage.removeItem('tempUsername');
       localStorage.removeItem('tempPassword');
       localStorage.removeItem("email")
+      navigate('/')
     } catch (error) {
       setLoading(false)
       console.error('Error verifying user:', error);
@@ -81,7 +83,6 @@ const SignUp = () => {
           {error && <h1>{error}</h1>}
           {otpSent && <h1>OTP sent to the email address</h1>}
           {errorVerify && <h1>{errorVerify}</h1>}
-          {userDetails && userDetails?.isVerified && <h1>Registration successful</h1>}
 
           <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>
           <p className="mb-6 text-sm text-[#1A2421]/90 text-opacity-50">Let's embark on a musical journey together by registering with us!</p>
