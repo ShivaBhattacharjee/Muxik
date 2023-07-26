@@ -4,32 +4,57 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterContext } from '../Context/RegisterContext';
 import { useLoginContext } from '../Context/LoginContext';
+import ClipLoader from "react-spinners/ClipLoader";
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('')
-  const { registerUser, verifyUser, userDetails } = useRegisterContext();
+  const { registerUser, verifyUser, userDetails, error, errorVerify } = useRegisterContext();
   const [verificationCode, setverificationCode] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [registerLoading , setRegisterLoading] = useState(false)
+  const [otpSent, setOtpSent] = useState(false)
   const { loggedIn } = useLoginContext();
   const navigate = useNavigate()
-  const handleGetOtp = (e) => {
+
+  const handleGetOtp = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const userData = {
       username: username,
       password: password,
       email: email,
       profile: 'thisIsImage',
     };
-    registerUser(userData);
+    try {
+      await registerUser(userData);
+      setOtpSent(true); // Set otpSent to true only when registration is successful
+      console.log(userData);
+
+      localStorage.setItem('tempUsername', username);
+      localStorage.setItem('tempPassword', password);
+      localStorage.setItem("email", email)
+    } catch (error) {
+      console.error('Error registering user:', error?.response?.data?.message);
+      setOtpSent(false); // Set otpSent to false if there is an error during registration
+    } finally {
+      setLoading(false); // Stop loading animation (whether success or error)
+    }
   };
+  
+  
 
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setRegisterLoading(true)
     try {
       await verifyUser(email, verificationCode);
-
+      localStorage.removeItem('tempUsername');
+      localStorage.removeItem('tempPassword');
+      localStorage.removeItem("email")
     } catch (error) {
+      setLoading(false)
       console.error('Error verifying user:', error);
     }
   };
@@ -38,72 +63,95 @@ const SignUp = () => {
     if (loggedIn) {
       navigate("/");
     }
-  })
+  
+    // Check if username and password are stored in local storage
+    const storedUsername = localStorage.getItem('tempUsername');
+    const storedPassword = localStorage.getItem('tempPassword');
+    const storedEmail = localStorage.getItem('email')
+    if (storedUsername && storedPassword && storedEmail) {
+      setUsername(storedUsername);
+      setPassword(storedPassword);
+      setEmail(storedEmail)
+    }
+  }, [loggedIn, navigate]);
   return (
-    <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
-      <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
-      {userDetails && userDetails.isVerified && (
-      <h1 className='text-3xl text-center text-red-500'>User is verified</h1>
-      )}
-        <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>
-        <p className="mb-6 text-sm text-[#1A2421]/90 text-opacity-50">Let's embark on a musical journey together by registering with us!</p>
+    <>
+      <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
+        <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
+          {error && <h1>{error}</h1>}
+          {otpSent && <h1>OTP sent to the email address</h1>}
+          {errorVerify && <h1>{errorVerify}</h1>}
+          {userDetails && userDetails?.isVerified && <h1>Registration successful</h1>}
 
-        <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
-          <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
-          <input
-            className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
-            type="text"
-            name="username"
-            autoComplete='false'
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
-          <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
-          <input
-            className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
-            type="email"
-            name="email"
-            autoComplete='false'
-            placeholder="Enter your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+          <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>
+          <p className="mb-6 text-sm text-[#1A2421]/90 text-opacity-50">Let's embark on a musical journey together by registering with us!</p>
 
-        <label htmlFor="password" className="form-label relative text-black/50 focus-within:text-black block mb-4">
-          <VpnKeyIcon className='pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
-          <input
-            className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
-            type="password"
-            name="password"
-            placeholder="Password"
-            autoComplete='false'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+          <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
+            <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
+            <input
+              className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
+              type="text"
+              name="username"
+              autoComplete='false'
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
+            <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
+            <input
+              className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
+              type="email"
+              name="email"
+              autoComplete='false'
+              placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
 
-        <label htmlFor="password" className="form-label relative text-black/50 focus-within:text-black block mb-4">
-          <div className="flex justify-between">
+          <label htmlFor="password" className="form-label relative text-black/50 focus-within:text-black block mb-4">
             <VpnKeyIcon className='pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
-            <input type="number" placeholder='otp'
-              className="block w-[60%] rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900" onChange={(e) => setverificationCode(e.target.value)} />
-            <button className=' bg-blue-800 hover:bg-blue-700 duration-100 p-2 w-24 text-white rounded-lg' onClick={handleGetOtp}>Get Otp</button>
+            <input
+              className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete='false'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+
+          <label htmlFor="password" className="form-label relative text-black/50 focus-within:text-black block mb-4">
+            <div className="flex justify-between">
+              <VpnKeyIcon className='pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
+              <input type="number" placeholder='otp'
+                className="block w-[60%] rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900" onChange={(e) => setverificationCode(e.target.value)}
+                required />
+              <button className='bg-blue-800 hover:bg-blue-700 duration-100 p-2 w-24 text-white rounded-lg' onClick={handleGetOtp}
+                disabled={!username || !email} >
+                {loading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Get OTP'}
+              </button>
+            </div>
+          </label>
+
+          <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleSignUp}
+
+            disabled={!username || !email || !verificationCode}>{registerLoading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}</button>
+
+          <div className="form-footer mt-6 text-center">
+            <Link to="/login">
+              <p className='text-sm font-semibold text-white'>Login</p>
+            </Link>
           </div>
-        </label>
-
-        <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleSignUp}>Continue</button>
-
-        <div className="form-footer mt-6 text-center">
-          <Link to="/login">
-            <p className='text-sm font-semibold text-white'>Login</p>
-          </Link>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   )
 }
 

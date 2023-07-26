@@ -9,7 +9,8 @@ export function useRegisterContext() {
 
 export function RegisterProvider({ children }) {
   const [userDetails, setUserDetails] = useState(null);
-  const [error , setError] = useState([])
+  const [error , setError] = useState(null)
+  const [errorVerify , setErrorVerify] = useState(null)
   const registerUser = async (userData) => {
     try {
       const response = await BackEndService.post('/register', userData);
@@ -34,21 +35,21 @@ export function RegisterProvider({ children }) {
           ...prevUser,
           isVerified: true,
         }));
+        setErrorVerify(null)
       } else {
         console.log('User verification failed');
+        setErrorVerify("User verification failed")
       }
     } catch (error) {
       console.error('Error verifying user:', error);
-      if (error.response) {
-        console.log('Error response data:', error.response.data);
-      }
+      setErrorVerify(error?.data?.message || 'An error occurred during verifying user');
     }
   };
   
 
 
   return (
-    <RegisterContext.Provider value={{ userDetails, registerUser, verifyUser, error }}>
+    <RegisterContext.Provider value={{ userDetails, registerUser, verifyUser, error, errorVerify }}>
       {children}
     </RegisterContext.Provider>
   );

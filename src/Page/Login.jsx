@@ -4,8 +4,9 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useLoginContext } from '../Context/LoginContext';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 const Login = () => {
-  const { loggedIn, error, login, rememberMe, setRememberMe } = useLoginContext();
+  const { loggedIn, error, login, rememberMe, setRememberMe, loading } = useLoginContext();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -62,9 +63,13 @@ const Login = () => {
               onChange={(e) => setRememberMe(e.target.checked)}
               className='w-4 h-4 checked:bg-blue-500 checked:text-white' />Remember
           </div>
+          <Link to={"/forgot-password"}>
           <span>Forgot password</span>
+          </Link>
         </div>
-        <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleLogin}>Continue</button>
+        <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleLogin} disabled={loading}>
+        {loading ?  <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}
+        </button>
 
         <div className="form-footer mt-6 text-center">
           <Link to="/sign-up">

@@ -11,10 +11,12 @@ export const LoginProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);
   const [rememberMe , setRememberMe] = useState(true)
+  const [loading, setLoading] = useState(false); 
   
 
   const login = async (username, password) => {
     try {
+      setLoading(true);
       const response = await BackEndService.post('/login', {
         username,
         password,
@@ -34,6 +36,9 @@ export const LoginProvider = ({ children }) => {
     } catch (error) {
       setError('Reset krle ya account bna le bsdk');
       console.error(error);
+    }
+    finally {
+      setLoading(false); 
     }
   };
 
@@ -65,7 +70,8 @@ export const LoginProvider = ({ children }) => {
     token,
     username,
     axiosInstance: BackEndService,
-    setRememberMe
+    setRememberMe,
+    loading,
   };
 
   return (
