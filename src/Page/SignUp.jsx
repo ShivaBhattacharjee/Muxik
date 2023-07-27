@@ -5,15 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterContext } from '../Context/RegisterContext';
 import { useLoginContext } from '../Context/LoginContext';
 import ClipLoader from "react-spinners/ClipLoader";
+import { ErrorNotify, SuccessNotify } from '../Utils/toast';
+
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('')
-  const { registerUser, verifyUser, userDetails, error, errorVerify,emailSentTo } = useRegisterContext();
+  const { registerUser, verifyUser, userDetails, error, errorVerify, emailSentTo, verifyLoading } = useRegisterContext();
   const [verificationCode, setverificationCode] = useState("")
   const [loading, setLoading] = useState(false);
-  const [registerLoading, setRegisterLoading] = useState(false)
-  const [otpSent, setOtpSent] = useState(false)
   const { loggedIn, login } = useLoginContext();
   const navigate = useNavigate()
 
@@ -28,47 +28,39 @@ const SignUp = () => {
     };
     try {
       await registerUser(userData);
-      setOtpSent(true); // Set otpSent to true only when registration is successful
       console.log(userData);
 
       localStorage.setItem('tempUsername', username);
       localStorage.setItem('tempPassword', password);
-      localStorage.setItem("email", email)
+      localStorage.setItem("email", email);
+
     } catch (error) {
       console.error('Error registering user:', error?.response?.data?.message);
-      setOtpSent(false); // Set otpSent to false if there is an error during registration
     } finally {
-      setLoading(false); // Stop loading animation (whether success or error)
+      setLoading(false); 
     }
   };
-
-
-
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setRegisterLoading(true)
     try {
       await verifyUser(email, verificationCode);
-      if(!errorVerify){
       await login(username, password);
-      // navigate('/')
-      }
       localStorage.removeItem('tempUsername');
       localStorage.removeItem('tempPassword');
-      localStorage.removeItem("email")
+      localStorage.removeItem("email");
     } catch (error) {
-      setLoading(false)
+      setLoading(false); 
       console.error('Error verifying user:', error);
     }
   };
+
 
   useEffect(() => {
     if (loggedIn) {
       navigate("/");
     }
 
-    // Check if username and password are stored in local storage
     const storedUsername = localStorage.getItem('tempUsername');
     const storedPassword = localStorage.getItem('tempPassword');
     const storedEmail = localStorage.getItem('email')
@@ -82,22 +74,21 @@ const SignUp = () => {
     <>
       <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
         <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
-        {userDetails?.isVerified && (
-            <h1 className="text-red-500">You are already registered and verified. Please log in.</h1>
+          {userDetails?.isVerified && (
+            <ErrorNotify message={"You are already registered and verified. Please log in."}/>
           )}
 
           {emailSentTo && (
-            <h1 className="text-red-500">OTP sent to the email address. Please check your email.</h1>
+            <SuccessNotify message={"OTP sent to the email address. Please check your email."} />
           )}
 
           {error && (
-            <h1 className="text-red-500">{error}</h1>
+            <ErrorNotify message={error}/>
           )}
-          {
-            errorVerify&&(
-              <h1 className="text-red-500">Verification failed</h1>
-            )
-          }
+
+          {errorVerify && (
+            <ErrorNotify message={"Verification failed"}/>
+          )}
 
           <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>
           <p className="mb-6 text-sm text-[#1A2421]/90 text-opacity-50">Let's embark on a musical journey together by registering with us!</p>
@@ -158,7 +149,7 @@ const SignUp = () => {
 
           <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleSignUp}
 
-            disabled={!username || !email || !verificationCode}>{registerLoading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}</button>
+            disabled={!username || !email || !verificationCode}>{verifyLoading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}</button>
 
           <div className="form-footer mt-6 text-center">
             <Link to="/login">

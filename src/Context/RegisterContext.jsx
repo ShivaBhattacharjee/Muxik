@@ -13,6 +13,7 @@ export function RegisterProvider({ children }) {
   const [errorVerify, setErrorVerify] = useState(null);
   const [errorUserExists, setErrorUserExists] = useState(false); // State variable for "user already registered" error
   const [emailSentTo, setEmailSentTo] = useState(null);
+  const [verifyLoading, setVerifyLoading] = useState(false); // State variable for loading animation during verification process
 
   const registerUser = async (userData) => {
     try {
@@ -38,6 +39,7 @@ export function RegisterProvider({ children }) {
   };
 
   const verifyUser = async (email, verificationCode) => {
+    setVerifyLoading(true); // Start loading animation during verification process
     try {
       const queryParam = `?email=${email}&verificationCode=${verificationCode}`;
       const response = await BackEndService.post('/verify-register' + queryParam);
@@ -57,12 +59,14 @@ export function RegisterProvider({ children }) {
     } catch (error) {
       console.error('Error verifying user:', error);
       setErrorVerify(error?.data?.message || 'An error occurred during verifying user.');
+    } finally {
+      setVerifyLoading(false); // Stop loading animation (whether success or error) after verification process
     }
   };
 
   return (
     <RegisterContext.Provider
-      value={{ userDetails, registerUser, verifyUser, error, errorVerify, errorUserExists, emailSentTo }} // Add errorUserExists to the context value
+      value={{ userDetails, registerUser, verifyUser, error, errorVerify, errorUserExists, emailSentTo, verifyLoading }} // Use verifyLoading in the context value
     >
       {children}
     </RegisterContext.Provider>
