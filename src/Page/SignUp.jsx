@@ -17,6 +17,7 @@ const SignUp = () => {
   const { loggedIn, login } = useLoginContext();
   const navigate = useNavigate()
 
+
   const handleGetOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,19 +28,20 @@ const SignUp = () => {
       profile: 'thisIsImage',
     };
     try {
-      await registerUser(userData);
-      console.log(userData);
-
+      const response = await registerUser(userData);
+      console.log('User registered:', response);
       localStorage.setItem('tempUsername', username);
       localStorage.setItem('tempPassword', password);
-      localStorage.setItem("email", email);
-
+      localStorage.setItem('email', email);
     } catch (error) {
       console.error('Error registering user:', error?.response?.data?.message);
+      showErrorToast(error?.response?.data?.message);
     } finally {
       setLoading(false); 
     }
   };
+  
+  
 
   const handleSignUp = async (e) => {
     e.preventDefault();

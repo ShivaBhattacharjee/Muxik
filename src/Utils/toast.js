@@ -1,8 +1,10 @@
 // ErrorNotify.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 
 const ErrorNotify = ({ message }) => {
+  const toastIdRef = useRef(null);
+
   useEffect(() => {
     const toastId = toast.error(message, {
       style: {
@@ -11,10 +13,13 @@ const ErrorNotify = ({ message }) => {
         color: '#fff',
       },
       duration: 2000,
+      id: new Date().getTime().toString(), // Unique key based on timestamp
     });
 
+    toastIdRef.current = toastId;
+
     return () => {
-      toast.dismiss(toastId);
+      toast.dismiss(toastIdRef.current);
     };
   }, [message]);
 
@@ -25,6 +30,8 @@ export { ErrorNotify };
 
 // SuccessNotify.jsx
 const SuccessNotify = ({ message }) => {
+  const toastIdRef = useRef(null);
+
   useEffect(() => {
     const toastId = toast.success(message, {
       style: {
@@ -33,10 +40,13 @@ const SuccessNotify = ({ message }) => {
         color: '#fff',
       },
       duration: 2000,
+      id: new Date().getTime().toString(), // Unique key based on timestamp
     });
 
+    toastIdRef.current = toastId;
+
     return () => {
-      toast.dismiss(toastId);
+      toast.dismiss(toastIdRef.current);
     };
   }, [message]);
 
