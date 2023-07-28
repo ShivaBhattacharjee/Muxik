@@ -5,6 +5,7 @@ import { useLoginContext } from '../Context/LoginContext';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
+import { ErrorNotify } from '../Utils/toast';
 const Login = () => {
   const { loggedIn, error, login, rememberMe, setRememberMe, loading } = useLoginContext();
 
@@ -24,8 +25,7 @@ const Login = () => {
   return (
     <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
       <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
-        {loggedIn && <p className=" text-center font-bold text-blue-800 text-2xl">Login successful!</p>}
-        {error && <p className="text-red-500 text-center text-sm font-bold">{error}</p>}
+        {error && <ErrorNotify message = {error}/>}
         <h3 className="mb text-md text-[#1A2421]/80 font-semibold">Login In!</h3>
         <h1 className="mb-3 uppercase font-bold text-xl md:text-2xl lg:text-2xl">Welcome back 👋</h1>
         <p className="mb-6 text-sm text-[#1A2421]/90 text-opacity-50">Enter your valid id password to access your account</p>

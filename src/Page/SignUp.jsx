@@ -11,7 +11,7 @@ const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('')
-  const { registerUser, verifyUser, userDetails, error, errorVerify, emailSentTo, verifyLoading } = useRegisterContext();
+  const { registerUser, verifyUser, userDetails, error,  emailSentTo, verifyLoading } = useRegisterContext();
   const [verificationCode, setverificationCode] = useState("")
   const [loading, setLoading] = useState(false);
   const { loggedIn, login } = useLoginContext();
@@ -84,10 +84,6 @@ const SignUp = () => {
 
           {error && (
             <ErrorNotify message={error}/>
-          )}
-
-          {errorVerify && (
-            <ErrorNotify message={"Verification failed"}/>
           )}
 
           <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>

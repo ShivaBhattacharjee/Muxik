@@ -9,11 +9,9 @@ export function useRegisterContext() {
 
 export function RegisterProvider({ children }) {
   const [userDetails, setUserDetails] = useState(null);
-  const [error, setError] = useState(null);
-  const [errorVerify, setErrorVerify] = useState(null);
-  const [errorUserExists, setErrorUserExists] = useState(false); // State variable for "user already registered" error
+  const [error, setError] = useState(null); 
   const [emailSentTo, setEmailSentTo] = useState(null);
-  const [verifyLoading, setVerifyLoading] = useState(false); // State variable for loading animation during verification process
+  const [verifyLoading, setVerifyLoading] = useState(false);
 
   const registerUser = async (userData) => {
     try {
@@ -23,23 +21,17 @@ export function RegisterProvider({ children }) {
       console.log('User registered:', user);
       setEmailSentTo(user?.otpStatus)
       console.log(user?.otpStatus)
-      setError(null); // Clear any previous errors
-      setErrorUserExists(false); // Clear "user already registered" error
+      setError(null); 
+      setErrorUserExists(false); 
     } catch (error) {
       console.error('Error registering user:', error?.response?.data?.message);
       setError(error?.response?.data?.message || 'An error occurred during registration. Please try again later.');
 
-      // Check if the error message indicates that the user is already registered
-      if (error?.response?.data?.message === 'An account with this email already exists') {
-        setErrorUserExists(true);
-      } else {
-        setErrorUserExists(false);
-      }
     }
   };
 
   const verifyUser = async (email, verificationCode) => {
-    setVerifyLoading(true); // Start loading animation during verification process
+    setVerifyLoading(true); 
     try {
       const queryParam = `?email=${email}&verificationCode=${verificationCode}`;
       const response = await BackEndService.post('/verify-register' + queryParam);
@@ -51,22 +43,21 @@ export function RegisterProvider({ children }) {
           ...prevUser,
           isVerified: true,
         }));
-        setErrorVerify(null); // Clear any previous verification errors
       } else {
         console.log('User verification failed');
-        setErrorVerify("User verification failed");
+        setError("User verification failed");
       }
     } catch (error) {
       console.error('Error verifying user:', error);
-      setErrorVerify(error?.data?.message || 'An error occurred during verifying user.');
+      setError(error?.data?.message || 'An error occurred during verifying user.');
     } finally {
-      setVerifyLoading(false); // Stop loading animation (whether success or error) after verification process
+      setVerifyLoading(false); 
     }
   };
 
   return (
     <RegisterContext.Provider
-      value={{ userDetails, registerUser, verifyUser, error, errorVerify, errorUserExists, emailSentTo, verifyLoading }} // Use verifyLoading in the context value
+      value={{ userDetails, registerUser, verifyUser, error,  emailSentTo, verifyLoading }} 
     >
       {children}
     </RegisterContext.Provider>

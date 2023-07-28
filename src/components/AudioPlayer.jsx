@@ -19,6 +19,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useLikedSongs } from "../Context/LikedSongsContext";
 import { useLoginContext } from "../Context/LoginContext"
 import {useHistoryContext} from "../Context/HistoryContext"
+import { ErrorNotify } from "../Utils/toast";
 const AudioPlayer = () => {
   const {
     current_song,
@@ -96,7 +97,7 @@ const AudioPlayer = () => {
   const handleThumbsUpClick = () => {
     if (!loggedIn) {
       // Show an alert if the user is not logged in
-      alert("Please log in first to like the song.");
+      <ErrorNotify message={"Please log in first to like the song."}/>
       return;
     }
   
