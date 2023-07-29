@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import BackEndService from '../services/BackEndService'; // Update the path to your axios instance
+import BackEndService from '../services/BackEndService';
 
 const RegisterContext = createContext();
 
@@ -22,7 +22,6 @@ export function RegisterProvider({ children }) {
       setEmailSentTo(user?.otpStatus)
       console.log(user?.otpStatus)
       setError(null); 
-      setErrorUserExists(false); 
     } catch (error) {
       console.error('Error registering user:', error?.response?.data?.message);
       setError(error?.response?.data?.message || 'An error occurred during registration. Please try again later.');
@@ -48,16 +47,28 @@ export function RegisterProvider({ children }) {
         setError("User verification failed");
       }
     } catch (error) {
-      console.error('Error verifying user:', error);
+      console.error('Error verifying user:', error.response);
       setError(error?.data?.message || 'An error occurred during verifying user.');
     } finally {
       setVerifyLoading(false); 
     }
   };
 
+  const resendVerificationOTP = async (email) => {
+    try {
+      const queryParam = `?email=${email}`;
+      const response = await BackEndService.post('/resend-email' + queryParam);
+      console.log('Resend OTP response:', response.data);
+      setEmailSentTo("Resend email sent successfully");
+    } catch (error) {
+      console.error('Error resending verification OTP:', error);
+      setError(error?.response?.data?.message || 'An error occurred during OTP resend.');
+    }
+  };
+  
   return (
     <RegisterContext.Provider
-      value={{ userDetails, registerUser, verifyUser, error,  emailSentTo, verifyLoading }} 
+      value={{ userDetails, registerUser, verifyUser,resendVerificationOTP, error,  emailSentTo, verifyLoading }} 
     >
       {children}
     </RegisterContext.Provider>

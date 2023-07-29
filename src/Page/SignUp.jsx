@@ -10,17 +10,20 @@ import { ErrorNotify, SuccessNotify } from '../Utils/toast';
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('')
-  const { registerUser, verifyUser, userDetails, error,  emailSentTo, verifyLoading } = useRegisterContext();
-  const [verificationCode, setverificationCode] = useState("")
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const { registerUser, verifyUser, userDetails, error, emailSentTo, verifyLoading, resendVerificationOTP } = useRegisterContext();
+  const [verificationCode, setVerificationCode] = useState("");
   const { loggedIn, login } = useLoginContext();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const [otpSent, setOtpSent] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(0);
+  const [getOTPLoading, setGetOTPLoading] = useState(false); // New state for "Get OTP" button loading
+  const [resendOTPLoading, setResendOTPLoading] = useState(false); // New state for "Resend OTP" button loading
 
   const handleGetOtp = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setGetOTPLoading(true); // Set the loading state for "Get OTP" button to true
     const userData = {
       username: username,
       password: password,
@@ -33,15 +36,17 @@ const SignUp = () => {
       localStorage.setItem('tempUsername', username);
       localStorage.setItem('tempPassword', password);
       localStorage.setItem('email', email);
+      setOtpSent(true);
+      setCooldown(true);
+      setRemainingTime(30);
+      startCountdownTimer();
     } catch (error) {
       console.error('Error registering user:', error?.response?.data?.message);
       showErrorToast(error?.response?.data?.message);
     } finally {
-      setLoading(false); 
+      setGetOTPLoading(false); // Set the loading state for "Get OTP" button to false after the registration process is complete
     }
   };
-  
-  
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -52,11 +57,41 @@ const SignUp = () => {
       localStorage.removeItem('tempPassword');
       localStorage.removeItem("email");
     } catch (error) {
-      setLoading(false); 
       console.error('Error verifying user:', error);
     }
   };
 
+  const handleResendOTP = async (e) => {
+    e.preventDefault();
+    try {
+      const userEmail = localStorage.getItem('email');
+      if (userEmail) {
+        setResendOTPLoading(true); // Set the loading state for "Resend OTP" button to true
+        // Set otpSent to false before resending the OTP
+        setOtpSent(false);
+        await resendVerificationOTP(userEmail);
+        setCooldown(true);
+        setRemainingTime(30);
+        startCountdownTimer();
+      }
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+      showErrorToast('Failed to resend OTP. Please try again later.');
+    } finally {
+      setResendOTPLoading(false); // Set the loading state for "Resend OTP" button to false after resending the OTP
+    }
+  };
+
+  const startCountdownTimer = () => {
+    const interval = setInterval(() => {
+      setRemainingTime((prevTime) => prevTime - 1);
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      setCooldown(false);
+    }, 30 * 1000);
+  };
 
   useEffect(() => {
     if (loggedIn) {
@@ -65,19 +100,20 @@ const SignUp = () => {
 
     const storedUsername = localStorage.getItem('tempUsername');
     const storedPassword = localStorage.getItem('tempPassword');
-    const storedEmail = localStorage.getItem('email')
+    const storedEmail = localStorage.getItem('email');
     if (storedUsername && storedPassword && storedEmail) {
       setUsername(storedUsername);
       setPassword(storedPassword);
-      setEmail(storedEmail)
+      setEmail(storedEmail);
     }
   }, [loggedIn, navigate]);
+
   return (
     <>
       <div className="p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen">
         <form autoComplete='false' className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10">
           {userDetails?.isVerified && (
-            <ErrorNotify message={"You are already registered and verified. Please log in."}/>
+            <ErrorNotify message={"You are already registered and verified. Please log in."} />
           )}
 
           {emailSentTo && (
@@ -85,7 +121,7 @@ const SignUp = () => {
           )}
 
           {error && (
-            <ErrorNotify message={error}/>
+            <ErrorNotify message={error} />
           )}
 
           <h3 className="mb text-xl text-[#1A2421] font-semibold">Register</h3>
@@ -136,18 +172,33 @@ const SignUp = () => {
             <div className="flex justify-between">
               <VpnKeyIcon className='pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
               <input type="number" placeholder='otp'
-                className="block w-[60%] rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900" onChange={(e) => setverificationCode(e.target.value)}
+                className="block w-[60%] rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900" onChange={(e) => setVerificationCode(e.target.value)}
                 required />
-              <button className='bg-blue-800 hover:bg-blue-700 duration-100 p-2 w-24 text-white rounded-lg' onClick={handleGetOtp}
-                disabled={!username || !email} >
-                {loading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Get OTP'}
+              <button
+                className={`bg-blue-800 hover:bg-blue-700 duration-100 p-2 w-24 text-white rounded-lg ${
+                  otpSent && cooldown ? "pointer-events-none" : ""
+                }`}
+                onClick={otpSent ? handleResendOTP : handleGetOtp}
+                disabled={!username || !email || cooldown || getOTPLoading}
+              >
+                {getOTPLoading ? (
+                  <ClipLoader size={20} color="#fff" speedMultiplier={3} />
+                ) : otpSent ? (
+                  cooldown ? `${remainingTime}s` : (resendOTPLoading ? 'Resending...' : 'Resend')
+                ) : (
+                  'Get OTP'
+                )}
               </button>
             </div>
           </label>
 
-          <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleSignUp}
-
-            disabled={!username || !email || !verificationCode}>{verifyLoading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}</button>
+          <button
+            className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700"
+            onClick={handleSignUp}
+            disabled={!username || !email || !verificationCode || verifyLoading}
+          >
+            {verifyLoading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}
+          </button>
 
           <div className="form-footer mt-6 text-center">
             <Link to="/login">
@@ -160,4 +211,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignUp;

@@ -12,7 +12,7 @@ const ErrorNotify = ({ message }) => {
         background: '#333',
         color: '#fff',
       },
-      duration: 2000,
+      duration: 7000,
       id: new Date().getTime().toString(), // Unique key based on timestamp
     });
 
@@ -39,7 +39,7 @@ const SuccessNotify = ({ message }) => {
         background: '#333',
         color: '#fff',
       },
-      duration: 2000,
+      duration: 7000,
       id: new Date().getTime().toString(), // Unique key based on timestamp
     });
 
