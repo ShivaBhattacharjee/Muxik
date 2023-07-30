@@ -1,12 +1,18 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useLoginContext } from '../Context/LoginContext';
 import { useHistoryContext } from '../Context/HistoryContext';
 import { usePlayerContext } from '../Context/PlayerContext';
 const History = () => {
-  const { loggedIn } = useLoginContext();
-  const { songHistory, loading, error } = useHistoryContext();
+  const { loggedIn, username } = useLoginContext();
+  const { songHistory, loading, error,fetchSongHistory,addSongToHistory } = useHistoryContext();
   const { HandlePlaySong } = usePlayerContext();
+  useEffect(() => {
+    if (loggedIn && username && addSongToHistory) {
+      fetchSongHistory(username);
+    }
+  }, [username, loggedIn]);
+  
   return (
     <div className='text-white bg-[#2d1b69] h-screen'>
       <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>Songs History</h1>

@@ -9,21 +9,23 @@ import { LikedSongsProvider } from "./Context/LikedSongsContext";
 import { HistoryProvider } from "./Context/HistoryContext";
 import { RegisterProvider } from "./Context/RegisterContext";
 import { ForgotPasswordProvider } from "./Context/ResetPasswordContext";
-
+import { ProfileProvider } from "./Context/UserDetailsContext"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RegisterProvider>
       <ForgotPasswordProvider>
         <LoginProvider>
-          <MusicProvider>
-            <HistoryProvider>
-              <PlayerProvider>
-                <LikedSongsProvider>
-                  <App />
-                </LikedSongsProvider>
-              </PlayerProvider>
-            </HistoryProvider>
-          </MusicProvider>
+          <ProfileProvider>
+            <MusicProvider>
+              <HistoryProvider>
+                <PlayerProvider>
+                  <LikedSongsProvider>
+                    <App />
+                  </LikedSongsProvider>
+                </PlayerProvider>
+              </HistoryProvider>
+            </MusicProvider>
+            </ProfileProvider>
         </LoginProvider>
       </ForgotPasswordProvider>
     </RegisterProvider>

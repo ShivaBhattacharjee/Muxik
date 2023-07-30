@@ -11,11 +11,7 @@ const HistoryProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (loggedIn && username) {
-      fetchSongHistory(username);
-    }
-  }, [username, loggedIn]);
+
 
   const fetchSongHistory = async (username) => {
     try {
@@ -39,7 +35,6 @@ const HistoryProvider = ({ children }) => {
         songName: songName,
         banner: banner,
       });
-      console.log("Song added to history:", response.data);
       // fetchSongHistory(username)
     } catch (error) {
       console.error("Error adding song to history:", error);
@@ -48,7 +43,7 @@ const HistoryProvider = ({ children }) => {
 
 
   return (
-    <HistoryContext.Provider value={{ songHistory, loading, error, addSongToHistory }}>
+    <HistoryContext.Provider value={{ songHistory, loading, error, addSongToHistory,fetchSongHistory }}>
       {children}
     </HistoryContext.Provider>
   );

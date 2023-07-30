@@ -1,13 +1,18 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useLikedSongs } from '../Context/LikedSongsContext';
 import { useLoginContext } from "../Context/LoginContext";
 import { usePlayerContext } from '../Context/PlayerContext';
 import { LoadingSpinner } from '../components';
 const LikedSongs = () => {
-  const { likedSongs, error, loading } = useLikedSongs();
-  const { loggedIn } = useLoginContext();
+  const { likedSongs, error, loading, fetchLikedSongs } = useLikedSongs();
+  const { loggedIn, username } = useLoginContext();
   const { HandlePlaySong } = usePlayerContext();
+  useEffect(() => {
+    if (username !== null && loggedIn) {
+      fetchLikedSongs(username);
+    }
+  }, [username]);
   return (
     <div className='text-white bg-[#2d1b69] h-screen'>
       <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>Liked Songs</h1>

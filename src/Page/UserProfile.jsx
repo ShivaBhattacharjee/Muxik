@@ -7,8 +7,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {ProfilePicture} from '../Utils/ProfilePicture';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useUserDetailsContext } from '../Context/UserDetailsContext';
+
 const UserProfile = () => {
   const { username, loggedIn, logout } = useLoginContext()
+  const{data} = useUserDetailsContext()
   const navigate = useNavigate()
   const [openModel, setOpenModel] = useState(false)
   const modelRef = useRef(); 
@@ -34,10 +37,10 @@ const UserProfile = () => {
     <div className='p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen'>
       <div className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10 relative" ref={modelRef}>
         <div className='w-32 h-32 border-solid border-2 border-blue-200 hover:grayscale duration-200  cursor-pointer rounded-full absolute -top-20 translate-x-1/2'>
-          <img src="https://cdn.discordapp.com/attachments/1079039236302446705/1135194990935552110/images.jpeg" alt={`${username}-profile`} className='rounded-full' onClick={()=> setOpenModel(true)} />
+          <LazyLoadImage src={data?.profile} alt={`${username}-profile`} className='rounded-full' onClick={()=> setOpenModel(true)} effect='blur' />
         </div>
           <div className={`duration-120 w-full  transition-all ${openModel?"h-52":"h-0"}  overflow-y-scroll bg-black/80 backdrop-blur-3xl rounded-lg absolute left-0 -top-20 text-white`}>
-           <div className='p-2 flex justify-end cursor-pointer sticky top-0'>
+           <div className='p-2 flex justify-end cursor-pointer sticky top-0 '>
            <CloseIcon onClick={()=>setOpenModel(false)}/>
            </div>
            <div className='flex flex-wrap justify-center gap-3 p-3 overflow-y-scroll'>
@@ -61,7 +64,7 @@ const UserProfile = () => {
             name="username"
             autoComplete='false'
             placeholder="Username"
-          // value={username}
+          value={data?.username}
           />
         </label>
 
@@ -73,6 +76,7 @@ const UserProfile = () => {
             name="username"
             autoComplete='false'
             placeholder="Email"
+            value={data?.email}
           />
         </label>
 

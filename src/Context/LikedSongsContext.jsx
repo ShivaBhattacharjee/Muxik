@@ -11,13 +11,9 @@ export const useLikedSongs = () => {
 export const LikedSongsProvider = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState([]);
   const [error, setError] = useState('');
-  const { username, loggedIn } = useLoginContext();
+  const { username } = useLoginContext();
 
-  useEffect(() => {
-    if (username !== null && loggedIn) {
-      fetchLikedSongs(username);
-    }
-  }, [username]);
+
 
   const fetchLikedSongs = async (username) => {
     try {
@@ -62,6 +58,7 @@ export const LikedSongsProvider = ({ children }) => {
   }
 
   const contextValue = {
+    fetchLikedSongs : fetchLikedSongs,
     likedSongs: likedSongs,
     error: error,
     addSongToLikedSongs: addSongToLikedSongs,
