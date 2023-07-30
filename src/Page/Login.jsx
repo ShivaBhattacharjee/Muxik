@@ -40,6 +40,7 @@ const Login = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </label>
 
@@ -53,6 +54,7 @@ const Login = () => {
             autoComplete='false'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </label>
         <div className='flex justify-between mb-3 items-center'>
@@ -66,7 +68,7 @@ const Login = () => {
           <span>Forgot password</span>
           </Link>
         </div>
-        <button className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleLogin} disabled={loading}>
+        <button type='submit' className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700" onClick={handleLogin} disabled={loading || !password || !username}>
         {loading ?  <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : 'Continue'}
         </button>
 

@@ -43,7 +43,7 @@ const SignUp = () => {
       console.error('Error registering user:', error?.response?.data?.message);
       showErrorToast(error?.response?.data?.message);
     } finally {
-      setGetOTPLoading(false); // Set the loading state for "Get OTP" button to false after the registration process is complete
+      setGetOTPLoading(false); 
     }
   };
 

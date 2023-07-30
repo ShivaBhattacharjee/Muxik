@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import CloseIcon from '@mui/icons-material/Close';
 import LogoutIcon from '@mui/icons-material/Logout';
+import {ProfilePicture} from '../Utils/ProfilePicture';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 const UserProfile = () => {
   const { username, loggedIn, logout } = useLoginContext()
   const navigate = useNavigate()
@@ -33,13 +36,21 @@ const UserProfile = () => {
         <div className='w-32 h-32 border-solid border-2 border-blue-200 hover:grayscale duration-200  cursor-pointer rounded-full absolute -top-20 translate-x-1/2'>
           <img src="https://cdn.discordapp.com/attachments/1079039236302446705/1135194990935552110/images.jpeg" alt={`${username}-profile`} className='rounded-full' onClick={()=> setOpenModel(true)} />
         </div>
-          <div className={`duration-120 w-full  transition-all ${openModel?"h-52":"h-0"}  overflow-y-scroll bg-gray-900 rounded-lg absolute left-0 -top-20 text-white`}>
-           <div className='p-2 flex justify-end cursor-pointer'>
+          <div className={`duration-120 w-full  transition-all ${openModel?"h-52":"h-0"}  overflow-y-scroll bg-black/80 backdrop-blur-3xl rounded-lg absolute left-0 -top-20 text-white`}>
+           <div className='p-2 flex justify-end cursor-pointer sticky top-0'>
            <CloseIcon onClick={()=>setOpenModel(false)}/>
            </div>
-           <h1 className='text-center p-3 mt-4'>
-            profile update  under development
-           </h1>
+           <div className='flex flex-wrap justify-center gap-3 p-3 overflow-y-scroll'>
+            {
+              ProfilePicture?.map((profile)=>{
+                return(
+                  <div key={profile?.title} className='w-20'>
+                    <LazyLoadImage src={profile?.picture} effect='blur' alt='profile-images' className=' rounded-full cursor-pointer  duration-150'/>
+                  </div>
+                )
+                })
+            }
+           </div>
           </div>
         <h1 className='font-bold text-gray text-xl mb-4 mt-7 text-center'>Hello,{username}</h1>
         <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
