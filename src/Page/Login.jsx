@@ -55,7 +55,6 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-
         <div className='flex justify-between mb-3 items-center'>
           <div className='flex items-center gap-2'>
             <input type="checkbox"

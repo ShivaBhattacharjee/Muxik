@@ -19,7 +19,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useLikedSongs } from "../Context/LikedSongsContext";
 import { useLoginContext } from "../Context/LoginContext"
 import {useHistoryContext} from "../Context/HistoryContext"
-import { ErrorNotify } from "../Utils/toast";
+import { toast } from "react-hot-toast";
 const AudioPlayer = () => {
   const {
     current_song,
@@ -97,7 +97,14 @@ const AudioPlayer = () => {
   const handleThumbsUpClick = () => {
     if (!loggedIn) {
       // Show an alert if the user is not logged in
-      <ErrorNotify message={"Please log in first to like the song."}/>
+      toast.error("Please login first",{
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+        duration: 4000,
+      })
       return;
     }
   
@@ -194,7 +201,7 @@ const AudioPlayer = () => {
   return (
     <div
       className={
-        " px-7 py-2 mt-0 lg:mt-0 relative  max-md:h-full " +
+        " px-7 py-2 mt-0 lg:mt-0  max-md:h-full " +
         (side_menu_show ? "opacity-100" : "opacity-0")
       }
     >

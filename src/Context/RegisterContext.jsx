@@ -68,7 +68,7 @@ export function RegisterProvider({ children }) {
   
   return (
     <RegisterContext.Provider
-      value={{ userDetails, registerUser, verifyUser,resendVerificationOTP, error,  emailSentTo, verifyLoading }} 
+      value={{ userDetails, registerUser, verifyUser,resendVerificationOTP, error,  emailSentTo, verifyLoading,setError }} 
     >
       {children}
     </RegisterContext.Provider>

@@ -18,12 +18,12 @@ const SignUp = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [cooldown, setCooldown] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
-  const [getOTPLoading, setGetOTPLoading] = useState(false); // New state for "Get OTP" button loading
-  const [resendOTPLoading, setResendOTPLoading] = useState(false); // New state for "Resend OTP" button loading
+  const [getOTPLoading, setGetOTPLoading] = useState(false); 
+  const [resendOTPLoading, setResendOTPLoading] = useState(false); 
 
   const handleGetOtp = async (e) => {
     e.preventDefault();
-    setGetOTPLoading(true); // Set the loading state for "Get OTP" button to true
+    setGetOTPLoading(true); 
     const userData = {
       username: username,
       password: password,
@@ -31,8 +31,7 @@ const SignUp = () => {
       profile: 'thisIsImage',
     };
     try {
-      const response = await registerUser(userData);
-      console.log('User registered:', response);
+      await registerUser(userData);
       localStorage.setItem('tempUsername', username);
       localStorage.setItem('tempPassword', password);
       localStorage.setItem('email', email);
@@ -66,8 +65,7 @@ const SignUp = () => {
     try {
       const userEmail = localStorage.getItem('email');
       if (userEmail) {
-        setResendOTPLoading(true); // Set the loading state for "Resend OTP" button to true
-        // Set otpSent to false before resending the OTP
+        setResendOTPLoading(true); 
         setOtpSent(false);
         await resendVerificationOTP(userEmail);
         setCooldown(true);

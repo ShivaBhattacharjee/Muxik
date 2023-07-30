@@ -8,21 +8,24 @@ import { LoginProvider } from "./Context/LoginContext";
 import { LikedSongsProvider } from "./Context/LikedSongsContext";
 import { HistoryProvider } from "./Context/HistoryContext";
 import { RegisterProvider } from "./Context/RegisterContext";
+import { ForgotPasswordProvider } from "./Context/ResetPasswordContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RegisterProvider>
-    <LoginProvider>
-      <MusicProvider>
-        <HistoryProvider>
-        <PlayerProvider>
-          <LikedSongsProvider>
-            <App />
-          </LikedSongsProvider>
-        </PlayerProvider>
-        </HistoryProvider>
-      </MusicProvider>
-    </LoginProvider>
+      <ForgotPasswordProvider>
+        <LoginProvider>
+          <MusicProvider>
+            <HistoryProvider>
+              <PlayerProvider>
+                <LikedSongsProvider>
+                  <App />
+                </LikedSongsProvider>
+              </PlayerProvider>
+            </HistoryProvider>
+          </MusicProvider>
+        </LoginProvider>
+      </ForgotPasswordProvider>
     </RegisterProvider>
   </React.StrictMode>
 );

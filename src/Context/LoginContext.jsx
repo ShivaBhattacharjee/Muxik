@@ -70,7 +70,7 @@ export const LoginProvider = ({ children }) => {
     token,
     username,
     axiosInstance: BackEndService,
-    setRememberMe,
+    rememberMe,
     loading,
   };
 

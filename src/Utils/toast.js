@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 
-const ErrorNotify = ({ message }) => {
+const ErrorNotify = ({ message, key }) => { // Added key prop
   const toastIdRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const ErrorNotify = ({ message }) => {
         color: '#fff',
       },
       duration: 7000,
-      id: new Date().getTime().toString(), // Unique key based on timestamp
+      id: key || new Date().getTime().toString(), // Use the provided key or generate one based on timestamp
     });
 
     toastIdRef.current = toastId;
@@ -21,7 +21,7 @@ const ErrorNotify = ({ message }) => {
     return () => {
       toast.dismiss(toastIdRef.current);
     };
-  }, [message]);
+  }, [message, key]); // Added key to the dependencies array
 
   return null;
 };
@@ -29,7 +29,7 @@ const ErrorNotify = ({ message }) => {
 export { ErrorNotify };
 
 // SuccessNotify.jsx
-const SuccessNotify = ({ message }) => {
+const SuccessNotify = ({ message, key }) => { // Added key prop
   const toastIdRef = useRef(null);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const SuccessNotify = ({ message }) => {
         color: '#fff',
       },
       duration: 7000,
-      id: new Date().getTime().toString(), // Unique key based on timestamp
+      id: key || new Date().getTime().toString(), // Use the provided key or generate one based on timestamp
     });
 
     toastIdRef.current = toastId;
@@ -48,7 +48,7 @@ const SuccessNotify = ({ message }) => {
     return () => {
       toast.dismiss(toastIdRef.current);
     };
-  }, [message]);
+  }, [message, key]); // Added key to the dependencies array
 
   return null;
 };
