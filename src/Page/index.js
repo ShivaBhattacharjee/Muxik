@@ -13,6 +13,7 @@ import SignUp from "./SignUp";
 import ForgotPassword from "./ForgotPassword";
 import LikedSongs from "./LikedSongs";
 import  History  from "./History";
+import UserProfile from "./UserProfile"
 export {
   Home,
   SingleAlbum,
@@ -28,5 +29,6 @@ export {
   SignUp,
   ForgotPassword,
   LikedSongs,
-  History
+  History,
+  UserProfile
 };

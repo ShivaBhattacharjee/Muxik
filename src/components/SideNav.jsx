@@ -94,7 +94,8 @@ const SideNav = () => {
               <hr className="bg-white" />
               {loggedIn ? (
                 <div
-                className="bg-blue-500 cursor-pointer text-white p-3  gap-2  text-lg  rounded-full drop-shadow-2xl hover:-translate-y-2 duration-150 transition-all "
+                className="bg-blue-500 cursor-pointer text-white p-3  gap-2  text-lg  rounded-full drop-shadow-2xl hover:translate-x-2 duration-150 transition-all "
+                onClick={HandleSideNav}
               >
                 <Link to={"/profile"} className="flex items-center justify-center gap-2 ">
                <AccountCircleIcon/>

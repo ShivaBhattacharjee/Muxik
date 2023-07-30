@@ -9,7 +9,7 @@ const AudioPlayerHome = ({ HandleRightSideMenu }) => {
         <>
             <div className="flex justify-center items-center gap-2 " onClick={HandleRightSideMenu}>
             <div className="absolute top-2">
-            <div className="bg-neutral-400 w-24 h-0.5 relative translate-x-2/3 rounded-xl mx-auto mb-1 cursor-pointer"></div>
+            <div className="bg-neutral-400 w-24 h-0.5 relative translate-x-1/2 rounded-xl mx-auto mb-1 cursor-pointer"></div>
                 </div>
                 <img
                     src={ImageFetch(current_song)}

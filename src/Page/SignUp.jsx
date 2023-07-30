@@ -28,7 +28,7 @@ const SignUp = () => {
       username: username,
       password: password,
       email: email,
-      profile: 'thisIsImage',
+      profile: 'https://cdn.discordapp.com/attachments/1079039236302446705/1135194990935552110/images.jpeg',
     };
     try {
       await registerUser(userData);

@@ -20,7 +20,6 @@ import { useLikedSongs } from "../Context/LikedSongsContext";
 import { useLoginContext } from "../Context/LoginContext"
 import {useHistoryContext} from "../Context/HistoryContext"
 import { toast } from "react-hot-toast";
-import {ErrorNotify} from "../Utils/toast"
 const AudioPlayer = () => {
   const {
     current_song,
@@ -165,14 +164,14 @@ const AudioPlayer = () => {
       }`;
     setMusicTotalLength(musicTotalLength);
 
-    //input current time of the audio
+
     let min = Math.floor(currentAudio.current.currentTime / 60);
     let sec = Math.floor(currentAudio.current.currentTime % 60);
     let musicCurrent = `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec
       }`;
     setMusicCurrentTime(musicCurrent);
 
-    //progress bar increase as music play
+
     const progress = parseInt(
       (currentAudio.current.currentTime / currentAudio.current.duration) * 100
     );
@@ -310,7 +309,7 @@ const AudioPlayer = () => {
           >
             <ThumbUpIcon
               fontSize="2rem"
-              htmlColor={isLiked ? "#3B82F6" : "#8e9196"} // Change the icon color based on whether the song is liked or not
+              htmlColor={isLiked ? "#3B82F6" : "#8e9196"} 
             />
           </IconButton>
           <IconButton
