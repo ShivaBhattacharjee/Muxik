@@ -11,10 +11,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import HistoryIcon from '@mui/icons-material/History';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useLoginContext } from "../Context/LoginContext";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 const SideNav = () => {
   const { HandleSideNav, side_navbar_show } = usePlayerContext();
-  const {loggedIn , logout} = useLoginContext()
+  const {loggedIn , logout, username} = useLoginContext()
   const handleLogout = () => {
     logout(); // Call the logout function to log out the user
   };
@@ -92,11 +93,14 @@ const SideNav = () => {
               </NavLink>
               <hr className="bg-white" />
               {loggedIn ? (
-                <div onClick={handleLogout}
-                className="bg-blue-500 cursor-pointer text-white p-3 flex gap-2  text-lg items-center rounded-lg justify-center"
+                <div
+                className="bg-blue-500 cursor-pointer text-white p-3  gap-2  text-lg  rounded-full drop-shadow-2xl hover:-translate-y-2 duration-150 transition-all "
               >
-                <LockOpenIcon />
-                  Logout
+                <Link to={"/profile"} className="flex items-center justify-center gap-2 ">
+               <AccountCircleIcon/>
+                {username}
+                <ArrowOutwardIcon/>
+                </Link>
               </div>
               ):(
                 <Link

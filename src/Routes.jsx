@@ -47,6 +47,7 @@ const AnimateRoutes = () => {
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/liked-songs" element={<LikedSongs/>}/>
         <Route path="/history" element={<History/>}/>
+        <Route path="/profile" element={<PageNotFound/>}/>
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
   );

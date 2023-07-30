@@ -10,10 +10,10 @@ const History = () => {
   return (
     <div className='text-white bg-[#2d1b69] h-screen'>
       <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>Songs History</h1>
-      <p className=' text-sm text-center mt-2 opacity-80'>Refresh the page if history doesnt show</p>
+      <p className=' text-sm text-center mt-2 opacity-80'>Refresh the page if history doesnt load</p>
       {
         loggedIn&&(
-          <p className='text-center p-4 text-xl font-bold'>Total :  {songHistory?.songs?.length} songs</p>
+          <p className='text-center p-4 text-xl font-bold'>Total :  {songHistory?.songs?.length}</p>
         )
       }
       <div className={`lg:flex ${loggedIn && songHistory?.songs?.length !== 0 ?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>

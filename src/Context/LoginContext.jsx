@@ -27,7 +27,7 @@ export const LoginProvider = ({ children }) => {
         setError('');
         setToken(response.data.token);
         setUsername(username);
-        const expiration = rememberMe ? 7 : 1; 
+        const expiration = setRememberMe ? 7 : 1; 
         Cookies.set('token', response.data.token, { expires: expiration });
         Cookies.set('username', username, { expires: expiration }); 
       } else {

@@ -20,6 +20,7 @@ import { useLikedSongs } from "../Context/LikedSongsContext";
 import { useLoginContext } from "../Context/LoginContext"
 import {useHistoryContext} from "../Context/HistoryContext"
 import { toast } from "react-hot-toast";
+import {ErrorNotify} from "../Utils/toast"
 const AudioPlayer = () => {
   const {
     current_song,
@@ -28,7 +29,7 @@ const AudioPlayer = () => {
     current_playing_lists,
     singleSong,
   } = usePlayerContext();
-  const { likedSongs, addSongToLikedSongs,deleteLikedSong } = useLikedSongs()
+  const { likedSongs, addSongToLikedSongs,deleteLikedSong,error } = useLikedSongs()
   const { username, loggedIn } = useLoginContext();
   const { addSongToHistory } = useHistoryContext();
 
@@ -108,18 +109,25 @@ const AudioPlayer = () => {
       return;
     }
   
-    // Check if the song is already in the liked songs list
     const isSongLiked = likedSongs.some((song) => song.songId === current_song.id);
   
     if (isSongLiked) {
       setIsLiked(false);
-  
-      // Make a DELETE request to remove the song from the liked songs in the backend
       deleteLikedSong(current_song.id);
     } else {
-      // The song is not liked, so add it to the liked songs list
+      if(!error){
       addSongToLikedSongs(current_song.id, current_song.name, ImageFetch(current_song), username);
       setIsLiked(true);
+      }else{
+        toast.error("Error adding songs in liked",{
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+          duration: 4000,
+        })
+      }
     }
   };
   
