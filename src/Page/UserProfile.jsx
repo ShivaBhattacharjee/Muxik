@@ -9,20 +9,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useUserDetailsContext } from '../Context/UserDetailsContext';
 import { ErrorNotify, SuccessNotify } from '../Utils/toast';
+import { toast } from 'react-hot-toast';
 
 const UserProfile = () => {
   const { username, loggedIn, logout } = useLoginContext()
-  const { data, UpdateUserProfile,error,profileData } = useUserDetailsContext()
+  const { data, UpdateUserProfile, error, profileData,fetchUserDetails } = useUserDetailsContext()
   const navigate = useNavigate()
   const [profilepicture, setprofilepicture] = useState("")
   const [openModel, setOpenModel] = useState(false)
+  const [newUsername, setNewUsername] = useState("")
+  // const [newPassword, setNewPassword] = useState("")
   const modelRef = useRef();
 
-  useEffect(() => {
-    if (!loggedIn) {
-      navigate("/");
-    }
-  }, [loggedIn, navigate])
+
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -43,12 +42,38 @@ const UserProfile = () => {
     const profile = {
       profile: profilepicture
     }
-    await UpdateUserProfile(profile)
+    if (ProfilePicture !== "") {
+      await UpdateUserProfile(profile)
+
+    } else {
+      toast.error("Something went wrong")
+    }
   }
 
-  if (profileData?.message === "Records updated") {
-    window.location.reload()
+  const handleUserNameChange = async()=>{
+    const profile = {
+      username : newUsername
+    }
+    const change = await UpdateUserProfile(profile)
+    if(change){
+      logout()
+      useEffect(()=>{
+        navigate("/login")
+      })
+    }
   }
+    useEffect(()=>{
+      if (profileData?.message === "Records updated") {
+      fetchUserDetails(username)
+    }
+    },[profileData])
+
+
+  useEffect(() => {
+    if (!loggedIn) {
+      navigate("/");
+    }
+  })
 
   return (
     <div className='p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen'>
@@ -58,7 +83,7 @@ const UserProfile = () => {
         <div className='w-32 h-32 border-solid border-2 border-blue-200 hover:grayscale duration-200  cursor-pointer rounded-full absolute -top-20 translate-x-1/2' onClick={() => setOpenModel(true)}>
           <LazyLoadImage src={data?.profile} alt={`${username}-profile`} className='rounded-full' effect='blur' />
         </div>
-        <div className={`duration-120 w-full  transition-all ${openModel ? "h-52" : "h-0"}  overflow-y-scroll bg-black/90  rounded-lg absolute left-0 -top-20 text-white`}>
+        <div className={`duration-120 w-full  transition-all ${openModel ? "h-48" : "h-0"}  overflow-y-scroll bg-black  rounded-lg absolute left-0 -top-20 text-white`}>
           <div className='p-2 flex justify-end cursor-pointer sticky top-0 '>
             <CloseIcon onClick={() => setOpenModel(false)} />
           </div>
@@ -67,11 +92,11 @@ const UserProfile = () => {
               ProfilePicture?.map((profile) => {
                 return (
                   <div key={profile?.title} className='w-24 lg:w-20'>
-                    <LazyLoadImage src={profile?.picture} alt='profile-images' className=' rounded-full cursor-pointer' 
-                    onClick={() => {
-                      setprofilepicture(profile?.picture);
-                      handleProfileChange(profilepicture);
-                    }}
+                    <LazyLoadImage src={profile?.picture} alt='profile-images' className=' rounded-full cursor-pointer z-50'
+                      onClick={() => {
+                        setprofilepicture(profile.picture);
+                        handleProfileChange(profilepicture);
+                      }}
                     />
                   </div>
                 )
@@ -88,9 +113,11 @@ const UserProfile = () => {
             name="username"
             autoComplete='false'
             placeholder="Username"
-            defaultValue={data?.username}
+            defaultValue={username}
+            onChange={(e) => setNewUsername(e.target.value)}
           />
         </label>
+
 
         <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
           <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
@@ -105,7 +132,7 @@ const UserProfile = () => {
           />
         </label>
 
-        <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
+        {/* <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
           <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
           <input
             className="form-input block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 bg-black/20 focus:bg-black/25 text-[#333] focus:text-gray-900"
@@ -113,10 +140,15 @@ const UserProfile = () => {
             name="username"
             autoComplete='false'
             placeholder="Password"
-          />
-        </label>
 
-        <button className='hidden w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700 mb-3'>Update</button>
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+        </label> */}
+        {newUsername && (
+          <button className=' w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700 mb-3' onClick={handleUserNameChange}>Update</button>
+        )}
+
         <button onClick={logout} className='form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700 flex items-center gap-3 justify-center'>
           <LogoutIcon />
           Logout</button>
