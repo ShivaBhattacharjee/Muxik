@@ -12,7 +12,7 @@ import { ErrorNotify, SuccessNotify } from '../Utils/toast';
 
 const UserProfile = () => {
   const { username, loggedIn, logout } = useLoginContext()
-  const { data, UpdateUserProfile,error } = useUserDetailsContext()
+  const { data, UpdateUserProfile,error,profileData } = useUserDetailsContext()
   const navigate = useNavigate()
   const [profilepicture, setprofilepicture] = useState("")
   const [openModel, setOpenModel] = useState(false)
@@ -46,13 +46,13 @@ const UserProfile = () => {
     await UpdateUserProfile(profile)
   }
 
-  if (data?.message === "Records updated") {
+  if (profileData?.message === "Records updated") {
     window.location.reload()
   }
 
   return (
     <div className='p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen'>
-      {data && <SuccessNotify message={"Profile updated"} />}
+      {profileData && <SuccessNotify message={"Profile updated"} />}
       {error && <ErrorNotify message={"Error updating profile"} />}
       <div className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10 relative" ref={modelRef}>
         <div className='w-32 h-32 border-solid border-2 border-blue-200 hover:grayscale duration-200  cursor-pointer rounded-full absolute -top-20 translate-x-1/2' onClick={() => setOpenModel(true)}>

@@ -7,6 +7,7 @@ const profileContext = createContext()
 const ProfileProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState(null)
+    const[profileData,setProfileData] = useState(null)
     const [error, setError] = useState(false)
     const { loggedIn, username } = useLoginContext()
     useEffect(() => {
@@ -29,7 +30,7 @@ const ProfileProvider = ({ children }) => {
     const UpdateUserProfile = async(profile)=>{
         try{
             const response = await BackEndService.put(`/update-user?username=${username}`, profile)
-            setData(response.data)
+            setProfileData(response.data)
             console.log(response.data.message)
         }catch(error){
             setError(error.message||"Error updating profile picture")
@@ -38,7 +39,7 @@ const ProfileProvider = ({ children }) => {
     }
 
     return (
-        <profileContext.Provider value={{ data, error, fetchUserDetails, loading, UpdateUserProfile }}>
+        <profileContext.Provider value={{ data, error, fetchUserDetails, loading, UpdateUserProfile,profileData }}>
             {children}
         </profileContext.Provider>
     )
