@@ -12,13 +12,13 @@ import HistoryIcon from '@mui/icons-material/History';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useLoginContext } from "../Context/LoginContext";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { useUserDetailsContext } from "../Context/UserDetailsContext";
 const SideNav = () => {
   const { HandleSideNav, side_navbar_show } = usePlayerContext();
-  const {loggedIn , logout, username} = useLoginContext()
-  const handleLogout = () => {
-    logout(); // Call the logout function to log out the user
-  };
+  const {loggedIn , username} = useLoginContext()
+  const {data} = useUserDetailsContext()
   
   return (
     <div className={"float-left w-52 h-[26rem] max-md:w-0 select-none"}>
@@ -92,14 +92,26 @@ const SideNav = () => {
                 History
               </NavLink>
               <hr className="bg-white" />
+              <h3 className="uppercase font-Rubik font-medium tracking-wider max-md:text-lg text-sm">
+                FAQ
+              </h3>
+              <NavLink
+                onClick={HandleSideNav}
+                to={"/faq"}
+                className="flex items-center gap-4 text-sm max-md:text-base font-medium"
+              >
+                <QuestionMarkIcon/>
+                Questions
+              </NavLink>
+              <hr className="bg-white" />
               {loggedIn ? (
                 <div
                 className="bg-blue-500 cursor-pointer text-white p-3  gap-2  text-lg  rounded-full drop-shadow-2xl hover:translate-x-2 duration-150 transition-all "
                 onClick={HandleSideNav}
               >
                 <Link to={"/profile"} className="flex items-center justify-center gap-2 ">
-               <AccountCircleIcon/>
-                {username}
+               <img src={data?.profile} alt="user-profile" className="w-12 lg:w-8 rounded-full" />
+                <span className="text-sm">{username}</span>
                 <ArrowOutwardIcon/>
                 </Link>
               </div>
@@ -126,7 +138,7 @@ const SideNav = () => {
           (side_navbar_show ? "visible opacity-100" : "invisible opacity-0")
         }
         onClick={HandleSideNav}
-      ></div>
+></div>
     </div>
   );
 };

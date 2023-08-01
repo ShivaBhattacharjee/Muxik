@@ -65,6 +65,13 @@ const UserProfile = () => {
     useEffect(()=>{
       if (profileData?.message === "Records updated") {
       fetchUserDetails(username)
+      toast.success("Profie updated",{
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      })
     }
     },[profileData])
 
@@ -77,6 +84,7 @@ const UserProfile = () => {
 
   return (
     <div className='p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen'>
+      
       {profileData && <SuccessNotify message={"Profile updated"} />}
       {error && <ErrorNotify message={"Error updating profile"} />}
       <div className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10 relative" ref={modelRef}>
@@ -104,7 +112,7 @@ const UserProfile = () => {
             }
           </div>
         </div>
-        <h1 className='font-bold text-gray text-xl mb-4 mt-7 text-center'>Hello,{username}</h1>
+        <h1 className='font-bold text-gray text-xl mb-4 mt-7 text-center'>Ohayo,{username}</h1>
         <label htmlFor="username" className="relative block mb-4 text-black/50 focus-within:text-black">
           <AlternateEmailIcon className='transition pointer-events-none w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2' />
           <input
