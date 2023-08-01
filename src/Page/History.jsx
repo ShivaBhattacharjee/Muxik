@@ -8,7 +8,7 @@ const History = () => {
   const { songHistory, loading, error,fetchSongHistory,addSongToHistory } = useHistoryContext();
   const { HandlePlaySong } = usePlayerContext();
   useEffect(() => {
-    if (loggedIn && username && addSongToHistory) {
+    if (loggedIn && username) {
       fetchSongHistory(username);
     }
   }, [username, loggedIn]);

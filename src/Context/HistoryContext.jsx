@@ -29,7 +29,7 @@ const HistoryProvider = ({ children }) => {
 
   const addSongToHistory = async (songId, songName, banner) => {
     try {
-      const response = await BackEndService.post("/add-song-history", {
+        await BackEndService.post("/add-song-history", {
         username: username,
         songId: songId,
         songName: songName,

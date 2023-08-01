@@ -20,4 +20,8 @@ export const ProfilePicture = [
         "title": "Nft by thor",
         "picture": "https://cdn.discordapp.com/attachments/1079039236302446705/1135194990172188813/images_14.jpeg",
     }
+    ,{
+        "title" : "limited editon",
+        "picture" : "https://cdn.discordapp.com/attachments/1079039236302446705/1135501061176688720/immashiva_-31-07-2023-0002.jpg"
+    }
 ]

@@ -26,8 +26,19 @@ const ProfileProvider = ({ children }) => {
         }
     }
 
+    const UpdateUserProfile = async(profile)=>{
+        try{
+            const response = await BackEndService.put(`/update-user?username=${username}`, profile)
+            setData(response.data)
+            console.log(response.data.message)
+        }catch(error){
+            setError(error.message||"Error updating profile picture")
+            console.error(error.message||"Error updating profile picture")
+        }
+    }
+
     return (
-        <profileContext.Provider value={{ data, error, fetchUserDetails, loading }}>
+        <profileContext.Provider value={{ data, error, fetchUserDetails, loading, UpdateUserProfile }}>
             {children}
         </profileContext.Provider>
     )
