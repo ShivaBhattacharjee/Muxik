@@ -54,8 +54,8 @@ const UserProfile = () => {
     const profile = {
       username: newUsername
     };
+    try{
     await UpdateUserProfile(profile);
-    setUsername(newUsername);
     logout();
     navigate("/login"); // Redirect the user to the login page
     toast("Please login back",{
@@ -65,6 +65,15 @@ const UserProfile = () => {
         color: '#fff',
       },
     })
+  }catch(error){
+    toast.error("Error updating profile",{
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
+  }
   };
   
 
