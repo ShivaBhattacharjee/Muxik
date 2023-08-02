@@ -86,6 +86,7 @@ const ForgotPassword = () => {
             <button
               className="bg-blue-800 hover:bg-blue-700 duration-100 p-2 w-24 text-white rounded-lg"
               onClick={handleGetForgotPasswordOtp}
+              disabled={!email || !newPassword}
             >
               {loading ? <ClipLoader size={30} color="#fff" speedMultiplier={3} /> : "Get OTP"}
             </button>
@@ -95,6 +96,7 @@ const ForgotPassword = () => {
         <button
           className="form-input w-full rounded-lg font-bold text-white focus:outline-none p-3 md:p-4 lg:p-4 transition-colors duration-500 bg-blue-800 hover:bg-blue-700"
           onClick={handleResetPassowrd}
+          disabled={!email || !newPassword || !otp}
         >
           {verifyLoading ?<ClipLoader size={30} color="#fff" speedMultiplier={3} /> : "Continue" }
         </button>
