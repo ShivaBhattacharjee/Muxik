@@ -58,13 +58,13 @@ const UserProfile = () => {
     setUsername(newUsername);
     logout();
     navigate("/login"); // Redirect the user to the login page
-    toast.promise("Please login back", {
+    toast("Please login back",{
       style: {
         borderRadius: '10px',
         background: '#333',
         color: '#fff',
       },
-    });
+    })
   };
   
 
