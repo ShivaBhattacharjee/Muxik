@@ -15,7 +15,8 @@ import {
   ForgotPassword,
   LikedSongs,
   History,
-  UserProfile
+  UserProfile,
+  Faq
 } from "./Page";
 import {
   HindiPlaylist,
@@ -49,6 +50,7 @@ const AnimateRoutes = () => {
         <Route path="/liked-songs" element={<LikedSongs/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/profile" element={<UserProfile/>}/>
+        <Route path="/faq" element={<Faq/>}/>
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
   );

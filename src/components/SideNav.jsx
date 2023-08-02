@@ -109,10 +109,9 @@ const SideNav = () => {
                 className="bg-blue-500 cursor-pointer text-white p-3  gap-2  text-lg  rounded-full drop-shadow-2xl hover:translate-x-2 duration-150 transition-all "
                 onClick={HandleSideNav}
               >
-                <Link to={"/profile"} className="flex items-center justify-center gap-2 ">
+                <Link to={"/profile"} className="flex items-center justify-start gap-5 ">
                <img src={data?.profile} alt="user-profile" className="w-12 lg:w-8 rounded-full" />
-                <span className="text-sm">{username}</span>
-                <ArrowOutwardIcon/>
+                <span className="text-2xl lg:text-xl">{username}</span>
                 </Link>
               </div>
               ):(

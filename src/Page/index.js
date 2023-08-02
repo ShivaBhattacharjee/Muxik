@@ -14,6 +14,7 @@ import ForgotPassword from "./ForgotPassword";
 import LikedSongs from "./LikedSongs";
 import  History  from "./History";
 import UserProfile from "./UserProfile"
+import Faq from "./Faq"
 export {
   Home,
   SingleAlbum,
@@ -30,5 +31,6 @@ export {
   ForgotPassword,
   LikedSongs,
   History,
-  UserProfile
+  UserProfile,
+  Faq
 };
