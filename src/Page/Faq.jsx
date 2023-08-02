@@ -166,7 +166,7 @@ export default function Faq(){
         </div>
 
         <div className=" rounded-lg mt-7">
-          <h2 className="mb-0" id="headingThree">
+          <h2 className="mb-0" id="headingFour">
             <button
               className={`${
                 activeElement === "element4" &&
@@ -180,7 +180,7 @@ export default function Faq(){
               Disclaimer
               <span
                 className={`${
-                  activeElement === "element3"
+                  activeElement === "element4"
                     ? `rotate-[-180deg] -mr-1`
                     : `rotate-0 dark:fill-white`
                 } ml-auto h-5 w-5 shrink-0 transition-transform duration-200 ease-in-out motion-reduce:transition-none dark:fill-blue-300`}

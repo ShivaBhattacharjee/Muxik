@@ -12,8 +12,8 @@ import { ErrorNotify, SuccessNotify } from '../Utils/toast';
 import { toast } from 'react-hot-toast';
 
 const UserProfile = () => {
-  const { username, loggedIn, logout } = useLoginContext()
-  const { data, UpdateUserProfile, error, profileData,fetchUserDetails } = useUserDetailsContext()
+  const { username, loggedIn, logout, setUsername } = useLoginContext()
+  const { data, UpdateUserProfile, error, profileData, fetchUserDetails } = useUserDetailsContext()
   const navigate = useNavigate()
   const [profilepicture, setprofilepicture] = useState("")
   const [openModel, setOpenModel] = useState(false)
@@ -50,22 +50,29 @@ const UserProfile = () => {
     }
   }
 
-  const handleUserNameChange = async()=>{
+  const handleUserNameChange = async () => {
     const profile = {
-      username : newUsername
-    }
-    const change = await UpdateUserProfile(profile)
-    if(change){
-      logout()
-      useEffect(()=>{
-        navigate("/login")
-      })
-    }
-  }
-    useEffect(()=>{
-      if (profileData?.message === "Records updated") {
+      username: newUsername
+    };
+    await UpdateUserProfile(profile);
+    setUsername(newUsername);
+    logout();
+    navigate("/login"); // Redirect the user to the login page
+    toast.promise("Please login back", {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    });
+  };
+  
+
+
+  useEffect(() => {
+    if (profileData?.message === "Records updated") {
       fetchUserDetails(username)
-      toast.success("Profie updated",{
+      toast.success("Profie updated", {
         style: {
           borderRadius: '10px',
           background: '#333',
@@ -73,7 +80,7 @@ const UserProfile = () => {
         },
       })
     }
-    },[profileData])
+  }, [profileData])
 
 
   useEffect(() => {
@@ -84,7 +91,7 @@ const UserProfile = () => {
 
   return (
     <div className='p-4 md:p-6 lg:p-8 flex justify-center items-center bg-[#2d1b69] h-screen'>
-      
+
       {profileData && <SuccessNotify message={"Profile updated"} />}
       {error && <ErrorNotify message={"Error updating profile"} />}
       <div className="max-w-sm rounded-2xl text-[#1A2421] lg:backdrop-blur-lg  p-8 md:p-10 lg:p-10 bg-gradient-to-b from-white/60 to-white/30 border-[1px] border-solid border-white border-opacity-30 shadow-black/70 shadow-2xl -translate-y-10 relative" ref={modelRef}>

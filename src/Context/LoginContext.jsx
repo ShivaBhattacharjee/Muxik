@@ -62,6 +62,8 @@ export const LoginProvider = ({ children }) => {
     }
   }, []);
 
+  
+
   const contextValue = {
     loggedIn,
     error,
@@ -72,6 +74,7 @@ export const LoginProvider = ({ children }) => {
     axiosInstance: BackEndService,
     rememberMe,
     loading,
+    setUsername
   };
 
   return (
