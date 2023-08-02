@@ -155,11 +155,11 @@ export default function Faq(){
           >
             <div className="px-5 py-4 bg-[#1b103f] rounded-b-lg ">
                 Frontend : <br />
-                <a href="https://github.com/ShivaBhattacharjee/Muxik" target="_blank" className=" border-b-2 text-blue-300">https://github.com/ShivaBhattacharjee/Muxik</a>
+                <a href="https://github.com/ShivaBhattacharjee/Muxik" target="_blank" className=" border-b-2 text-blue-300 max-w-xs break-words">https://github.com/ShivaBhattacharjee/Muxik</a>
                 <br />
                 Backend:
                 <br />
-                <a href="https://github.com/ShivaBhattacharjee/Muxik-backend" target="_blank" className=" border-b-2 text-blue-300">https://github.com/ShivaBhattacharjee/Muxik-backend</a> 
+                <a href="https://github.com/ShivaBhattacharjee/Muxik-backend" target="_blank" className=" border-b-2 text-blue-300 break-words">https://github.com/ShivaBhattacharjee/Muxik-backend</a> 
                 <br />
               </div>
           </TECollapse>
