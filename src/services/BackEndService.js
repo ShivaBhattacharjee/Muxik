@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie'; 
 const BackEndService = axios.create({
-  baseURL: 'http://localhost:8080/api', 
+  baseURL: 'https://muxik-backend.vercel.app/api', 
 });
 
 
