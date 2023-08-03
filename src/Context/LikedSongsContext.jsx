@@ -10,6 +10,7 @@ export const useLikedSongs = () => {
 
 export const LikedSongsProvider = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState([]);
+  const [loading , setLoading] = useState(true)
   const [error, setError] = useState('');
   const { username } = useLoginContext();
 
@@ -20,6 +21,7 @@ export const LikedSongsProvider = ({ children }) => {
       const response = await BackEndService.get(`/liked-songs/${username}?page=1`);
       const data = response?.data;
       setLikedSongs(data?.songs);
+      setLoading(false)
       setError('');
     } catch (error) {
       console.error('Error fetching liked songs:', error);
@@ -62,7 +64,8 @@ export const LikedSongsProvider = ({ children }) => {
     likedSongs: likedSongs,
     error: error,
     addSongToLikedSongs: addSongToLikedSongs,
-    deleteLikedSong: deleteLikedSong, // Expose the deleteLikedSong function in the context
+    deleteLikedSong: deleteLikedSong,
+    loading : loading
   };
 
   return (
