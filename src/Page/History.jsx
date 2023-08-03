@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLoginContext } from '../Context/LoginContext';
 import { useHistoryContext } from '../Context/HistoryContext';
 import { usePlayerContext } from '../Context/PlayerContext';
+import { LoadingSpinner } from '../components';
 const History = () => {
   const { loggedIn, username } = useLoginContext();
   const { songHistory, loading, error,fetchSongHistory,addSongToHistory } = useHistoryContext();
@@ -15,17 +16,13 @@ const History = () => {
   
   return (
     <div className='text-white bg-[#2d1b69] h-screen'>
-      <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>Songs History</h1>
-      <p className=' text-sm text-center mt-2 opacity-80'>Refresh the page if history doesnt load</p>
-      {
-        loggedIn&&(
-          <p className='text-center p-4 text-xl font-bold'>Total :  {songHistory?.songs?.length}</p>
-        )
-      }
+      <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>History</h1>
       <div className={`lg:flex ${loggedIn && songHistory?.songs?.length !== 0 ?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
         {loggedIn ? (
           loading ? (
-            <h1>Loading</h1>
+            <div className='w-screen flex justify-center items-center h-[60vh]'>
+            <LoadingSpinner size={80}/>
+            </div>
           ) : error ? (
             <p>Error fetching liked songs: {error}</p>
           ) : (

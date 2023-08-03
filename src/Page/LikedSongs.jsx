@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLikedSongs } from '../Context/LikedSongsContext';
 import { useLoginContext } from "../Context/LoginContext";
 import { usePlayerContext } from '../Context/PlayerContext';
-import { LoadingSpinner } from '../components';
+import {LoadingSpinner} from "../components"
 const LikedSongs = () => {
   const { likedSongs, error, loading, fetchLikedSongs } = useLikedSongs();
   const { loggedIn, username } = useLoginContext();
@@ -16,15 +16,12 @@ const LikedSongs = () => {
   return (
     <div className='text-white bg-[#2d1b69] h-screen'>
       <h1 className='text-3xl font-bold text-center p-2 underline underline-offset-4'>Liked Songs</h1>
-      {loggedIn &&(
-      <p className='text-center'>Liked songs {likedSongs.length}</p>
-      )}
       <div className={`lg:flex  ${loggedIn && likedSongs.length !== 0 ?"grid":"flex"} grid-cols-3 items-center gap-1 flex-wrap p-2`}>
         {loggedIn ? (
           loading ? (
-            <div>
-              <h1 className='text-center'>Loading</h1>
-              </div>
+            <div className='w-screen flex justify-center items-center h-[60vh]'>
+            <LoadingSpinner size={80}/>
+            </div>
           ) : error ? (
             <p>Error fetching liked songs: {error}</p>
           ) : (
