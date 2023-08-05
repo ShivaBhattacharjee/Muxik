@@ -30,6 +30,7 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Hosting](#host-your-own)
+* [Backend](#backend)
 * [Contributing](#contributing)
 * [Issue Template](#raising-an-issue)
 * [License](#license)
@@ -96,12 +97,20 @@ git clone https://github.com/ShivaBhattacharjee/Muxik.git
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ShivaBhattacharjee/Muxik)
 
+
+### Backend
+
+<b>Backed logic for registration and other curd related function can be found here </b>
+* [Backend Made in NodeJs](https://github.com/ShivaBhattacharjee/Muxik-backend)
+
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 * If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/ShivaBhattacharjee/Muxik/issues) to discuss it
 
 * Please make sure you check your spelling and grammar.
+
 
 ### Creating A Pull Request
 
