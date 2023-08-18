@@ -98,10 +98,10 @@ git clone https://github.com/ShivaBhattacharjee/Muxik.git
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ShivaBhattacharjee/Muxik)
 
 
-### Backend
+### Backend 
 
 <b>Backed logic for registration and other curd related function can be found here </b>
-* [Backend Made in NodeJs](https://github.com/ShivaBhattacharjee/Muxik-backend)
+* [Backend in NodeJs](https://github.com/ShivaBhattacharjee/Muxik-backend)
 
 
 ## Contributing
