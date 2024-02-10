@@ -1,7 +1,7 @@
 import axios from "axios";
 import EndPoints from "./EndPoints";
 
-const SAVAN_BASE_URL = "https://saavn.me";
+const SAVAN_BASE_URL = "https://saavn.dev";
 
 const api = axios.create({ baseURL: SAVAN_BASE_URL });
 
